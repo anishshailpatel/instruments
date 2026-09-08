@@ -51,7 +51,7 @@ The floors are the tallest measured render, a 375px phone, with headroom.
 
 ## What each one models
 
-**Five shapes** plots five rows of a stylised pack against limits drawn from their own first eight months. The rows are new bookings, revenue, gross margin, overheads and debtor days, chosen because none is arithmetically derived from another, so each can carry one shape on its own. An earlier version used cost of sales and EBITDA, and a reader who added the P&L up found it did not tie. Favourable direction is per row: a cost or a debtor day falling is green.
+**Five shapes** plots five rows of a stylised pack against limits drawn from their own first eight months. The rows are new bookings, revenue, gross margin, overheads and debtor days, chosen because none is arithmetically derived from another, so each can carry one shape on its own. The tabs name the row rather than the shape, in the order the rows sit in the pack, and the note's prose and the readout supply the shape word; gross margin is the default because it is the row a variance table waves through. An earlier version used cost of sales and EBITDA, and a reader who added the P&L up found it did not tie. Favourable direction is per row: a cost or a debtor day falling is green.
 
 **What a slip costs** is a five-year undiscounted cash line for a build whose benefit only starts at the first buying window at or after it is ready, with a 40 / 75 / 100 adoption ramp.
 

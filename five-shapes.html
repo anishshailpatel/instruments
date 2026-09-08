@@ -160,7 +160,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
     <div class="layer"><p class="layer-label">What the pack says</p><div class="card c3" id="bandCard"></div></div>
     <div class="layer"><p class="layer-label">What is actually happening</p>
       <div class="tool">
-        <p class="stage-note">Five shapes a monthly number takes, one per row of the pack above. Flick between them.</p>
+        <p class="stage-note">Each row of the pack above takes a different shape. Flick between them.</p>
         <div class="seg" role="radiogroup" aria-label="Which shape" id="bandSeriesSeg"></div>
         <div class="case" id="bandCase"></div>
         <div id="bandSvg"></div>
@@ -186,26 +186,26 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 
     band:   { baseline: 8, run: 6, xmrK: 2.66,
               series: [
-                { key: "steady", tab: "Steady", name: "Overheads", unit: "£000", unitWord: "k", dp: 0, pts: false, down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
-                  vals: [1725, 1755, 1730, 1750, 1738, 1762, 1728, 1748, 1732, 1758, 1742, 1735, 1752, 1740],
-                  base: [1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743],
-                  guide: "This number is stable, and every move the pack coloured was noise. There is nothing here worth a question, which is worth knowing before someone spends ten minutes of a meeting on it." },
-                { key: "drift", tab: "Drifting", name: "Gross margin", unit: "%", unitWord: " points", dp: 1, pts: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
-                  vals: [63.1, 62.8, 63.0, 62.7, 62.9, 62.6, 62.4, 62.5, 62.2, 62.3, 62.0, 61.8, 61.5, 61.6],
-                  base: [63.0, 62.9, 62.79, 62.69, 62.58, 62.48, 62.37, 62.27, 62.16, 62.06, 61.95, 61.85, 61.74, 61.64],
-                  guide: "The fall is real and it arrived slowly. No single month was ever big enough to trigger a question, which is how a slow decline survives a year of packs." },
-                { key: "lumpy", tab: "Lumpy", name: "Revenue", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
-                  vals: [4090, 4380, 3980, 4310, 4020, 4290, 4160, 3960, 4340, 4070, 4250, 3990, 4300, 4130],
-                  base: [4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170],
-                  guide: "This number swings hard and means very little month to month. The limits are wide because the baseline is bumpy, and that width is what stops you chasing every red cell in the pack." },
-                { key: "step", tab: "Stepped", name: "Debtor days", unit: "", unitWord: " days", dp: 0, pts: false, abs: true, dUnit: " days", down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
-                  vals: [43, 45, 44, 46, 43, 44, 45, 44, 51, 53, 52, 51, 53, 52],
-                  base: [44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 52, 52, 52, 52, 52, 52],
-                  guide: "The level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find out what changed, then draw the limits again from where the number now sits." },
-                { key: "spike", tab: "One-off", name: "New bookings", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                { key: "spike", tab: "New bookings", name: "New bookings", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [840, 1195, 855, 870, 845, 860, 875, 835, 865, 850, 880, 845, 870, 847],
                   base: [857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857],
-                  guide: "The year-on-year fall is measured against one big month rather than a level, and that same month sits inside the baseline, dragging the centre up until every ordinary month since looks low. Both readings come from one deal twelve months ago." }
+                  guide: "A one-off, twelve months back. The year-on-year fall is measured against one big month rather than a level, and that same month sits inside the baseline, dragging the centre up until every ordinary month since looks low." },
+                { key: "lumpy", tab: "Revenue", name: "Revenue", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                  vals: [4090, 4380, 3980, 4310, 4020, 4290, 4160, 3960, 4340, 4070, 4250, 3990, 4300, 4130],
+                  base: [4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170],
+                  guide: "A lumpy line that swings hard and means very little month to month. The limits are wide because the baseline is bumpy, and that width is what stops you chasing every red cell in the pack." },
+                { key: "drift", tab: "Gross margin", name: "Gross margin", unit: "%", unitWord: " points", dp: 1, pts: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                  vals: [63.1, 62.8, 63.0, 62.7, 62.9, 62.6, 62.4, 62.5, 62.2, 62.3, 62.0, 61.8, 61.5, 61.6],
+                  base: [63.0, 62.9, 62.79, 62.69, 62.58, 62.48, 62.37, 62.27, 62.16, 62.06, 61.95, 61.85, 61.74, 61.64],
+                  guide: "A slow drift, and the fall in it is real. No single month was ever big enough to trigger a question, which is how a decline like this survives a year of packs." },
+                { key: "steady", tab: "Overheads", name: "Overheads", unit: "£000", unitWord: "k", dp: 0, pts: false, down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                  vals: [1725, 1755, 1730, 1750, 1738, 1762, 1728, 1748, 1732, 1758, 1742, 1735, 1752, 1740],
+                  base: [1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743],
+                  guide: "A steady line, and every move the pack coloured this year was noise. There is nothing here worth a question, which is worth knowing before someone spends ten minutes of a meeting on it." },
+                { key: "step", tab: "Debtor days", name: "Debtor days", unit: "", unitWord: " days", dp: 0, pts: false, abs: true, dUnit: " days", down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                  vals: [43, 45, 44, 46, 43, 44, 45, 44, 51, 53, 52, 51, 53, 52],
+                  base: [44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 52, 52, 52, 52, 52, 52],
+                  guide: "A step: the level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find out what changed, then draw the limits again from where the number now sits." }
               ],
               essay: "Five rows of a stylised pack, arranged so each shows one shape. None is derived from another, so each can move on its own." },
   };
@@ -263,7 +263,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   /* ================= 4. The band ================= */
   (function () {
     var C = CASE.band, S_ALL = {}; C.series.forEach(function (s) { S_ALL[s.key] = s; });
-    seg("bandSeriesSeg", "bseries", C.series.map(function (s) { return [s.key, s.tab]; }), C.series[1].key);
+    seg("bandSeriesSeg", "bseries", C.series.map(function (s) { return [s.key, s.tab]; }), "drift");
     var CU = caseUI("bandCase", [{ k: "base", label: "Baseline months", v: C.baseline, min: 3, max: 12, step: 1 }, { k: "run", label: "Run that counts as a shift", suffix: "months", v: C.run, min: 3, max: 10, step: 1 }], function () { render(); });
     function render() {
       var S = S_ALL[radio("bseries")] || C.series[0], mode = radio("bband"), k = +$("bWig").value / 100, dp = S.dp, n = S.vals.length, last = n - 1, uw = S.unitWord, RUN = CU.get("run");
