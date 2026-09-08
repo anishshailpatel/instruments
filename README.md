@@ -10,22 +10,13 @@ Three standalone interactive exhibits, one per note on anishpatel.co. They are e
 
 ## Getting them live
 
-Nothing serves these yet, which is why the notes currently show a DNS error. This folder is already a git repo with one commit, so publishing is two steps.
+The repo exists and `main` is pushed. One step remains: **turn on GitHub Pages**, at Settings, Pages, source Deploy from a branch, branch `main`, folder `/ (root)`. It takes about a minute to go live.
 
-**Option A, no DNS.** Create a public repo called `instruments` under `anishshailpatel`, push, and turn on Pages from the `main` branch root.
+The files then serve at `https://anishshailpatel.github.io/instruments/five-shapes.html`, which is the base URL the three notes already point at. Nothing else needs changing.
 
-```bash
-cd "C:/Users/anish/Dropbox/Code/instruments"
-git remote add origin https://github.com/anishshailpatel/instruments.git
-git branch -M main
-git push -u origin main
-```
+Neither `raw.githubusercontent.com` nor jsDelivr works as a stopgap: both serve `.html` as `text/plain`, so an iframe shows source rather than a page.
 
-The files then serve at `https://anishshailpatel.github.io/instruments/five-shapes.html`. This is the fastest route and needs no Cloudflare work.
-
-**Option B, custom subdomain.** As above, then add a `CNAME` file containing `instruments.anishpatel.co`, and point that name at `anishshailpatel.github.io` in Cloudflare with the proxy off.
-
-Either way, replace `https://instruments.anishpatel.co/` in the three notes with whichever base URL you chose, and change the `location.replace` target at the top of each file if the note paths differ.
+**Later, if a custom subdomain is wanted.** Add a `CNAME` file containing `instruments.anishpatel.co`, point that name at `anishshailpatel.github.io` in Cloudflare with the proxy off, then swap the base URL in the three notes and the `location.replace` target at the top of each file.
 
 ## Why not the vault repo
 
