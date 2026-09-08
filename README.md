@@ -25,7 +25,8 @@ Neither `raw.githubusercontent.com` nor jsDelivr works as an alternative: both s
 - `noindex, nofollow`, so they never appear in search results on their own.
 - A top-level redirect: opened directly over https rather than in a frame, each one sends the visitor to its note on anishpatel.co. It deliberately does not fire on `file://` or `localhost`, so you can open these locally to check them.
 - Inter at 16px, matching the host site, so an exhibit reads as part of the page rather than an imported object. Only two families load: Inter and a mono for the working panel.
-- Light and dark palettes, chosen in that order of preference: whatever the host page says, then `prefers-color-scheme`, then light.
+- Light and dark palettes, taken from the host page where it says, and from `prefers-color-scheme` where it does not.
+- A conditional ground. Sitting on the host's own background is what makes an exhibit read as part of the page, and it is only safe once the host has named its theme. Until then the frame paints its own ground and stands as a card. Without that, a frame following a dark machine on a light page puts dark panels and near-white figures on white, which is the one failure mode that makes an exhibit unreadable rather than merely unblended.
 - A `postMessage` pair with the host, handled by `AP_Notes/publish.js` in the vault. The frame announces itself on load and accepts `{publishTheme}` back; it reports its own height as `{instrument, height}` and the host sets the frame to match.
 
 ## The embed, as used in the notes

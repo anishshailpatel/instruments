@@ -152,7 +152,7 @@ details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>body { background: transparent; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } }</style>
 </head>
 <body>
 <div class="sheet">
@@ -172,7 +172,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
     <details class="working"><summary>The working</summary><div class="w" id="windowW"></div></details>
   </section>
 </div>
-<script>(function () { function apply(t) { if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } addEventListener("message", function (e) { if (e.data && e.data.publishTheme) apply(e.data.publishTheme); }); try { var m = /[?&]theme=(dark|light)/.exec(location.search); if (m) apply(m[1]); } catch (e) {} try { parent.postMessage({ instrumentReady: true }, "*"); } catch (e) {}})();</script>
+<script>(function () { var root = document.documentElement; function apply(t) {  if (t !== "dark" && t !== "light") return;  root.setAttribute("data-theme", t);  root.classList.add("hosted"); } addEventListener("message", function (e) { if (e.data && e.data.publishTheme) apply(e.data.publishTheme); }); try { var m = /[?&]theme=(dark|light)/.exec(location.search); if (m) apply(m[1]); } catch (e) {} try { parent.postMessage({ instrumentReady: true }, "*"); } catch (e) {}})();</script>
 <script>
 (function () {
   var CASE = {
