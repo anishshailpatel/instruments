@@ -8,13 +8,11 @@ Three standalone interactive exhibits, one per note on anishpatel.co. They are e
 | `what-a-slip-costs.html` | What a slip costs |
 | `margin-or-growth.html` | Margin or growth |
 
-## Getting them live
+## Where they serve from
 
-The repo exists and `main` is pushed. One step remains: **turn on GitHub Pages**, at Settings, Pages, source Deploy from a branch, branch `main`, folder `/ (root)`. It takes about a minute to go live.
+GitHub Pages, from `main` at the repository root: `https://anishshailpatel.github.io/instruments/five-shapes.html`. That is the base URL the three notes point at.
 
-The files then serve at `https://anishshailpatel.github.io/instruments/five-shapes.html`, which is the base URL the three notes already point at. Nothing else needs changing.
-
-Neither `raw.githubusercontent.com` nor jsDelivr works as a stopgap: both serve `.html` as `text/plain`, so an iframe shows source rather than a page.
+Neither `raw.githubusercontent.com` nor jsDelivr works as an alternative: both serve `.html` as `text/plain`, so an iframe shows source rather than a page.
 
 **Later, if a custom subdomain is wanted.** Add a `CNAME` file containing `instruments.anishpatel.co`, point that name at `anishshailpatel.github.io` in Cloudflare with the proxy off, then swap the base URL in the three notes and the `location.replace` target at the top of each file.
 
@@ -27,8 +25,8 @@ Neither `raw.githubusercontent.com` nor jsDelivr works as a stopgap: both serve 
 - `noindex, nofollow`, so they never appear in search results on their own.
 - A top-level redirect: opened directly over https rather than in a frame, each one sends the visitor to its note on anishpatel.co. It deliberately does not fire on `file://` or `localhost`, so you can open these locally to check them.
 - Inter at 16px, matching the host site, so an exhibit reads as part of the page rather than an imported object. Only two families load: Inter and a mono for the working panel.
-- Light and dark palettes from `prefers-color-scheme`, so they follow the reader's theme with Publish set to adapt to system.
-- A `postMessage` height report, which nothing currently listens to. The notes use fixed heights instead, per the version-one embed contract. It is there if a `publish.js` height shim is ever wanted.
+- Light and dark palettes, chosen in that order of preference: whatever the host page says, then `prefers-color-scheme`, then light.
+- A `postMessage` pair with the host, handled by `AP_Notes/publish.js` in the vault. The frame announces itself on load and accepts `{publishTheme}` back; it reports its own height as `{instrument, height}` and the host sets the frame to match.
 
 ## The embed, as used in the notes
 
@@ -40,14 +38,26 @@ Neither `raw.githubusercontent.com` nor jsDelivr works as a stopgap: both serve 
         loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
 ```
 
-Heights are set from the tallest measured render, a 375px phone, with headroom: measured 1199, 1151 and 1355, set to 1260, 1215 and 1420. Measure again after any edit that adds a row or a control.
+Once `publish.js` is live the host sets the height from what the frame reports, so the attribute is only a floor for the first paint and for Obsidian's own reading view, where `publish.js` does not run. Err tall: a frame short by a row clips the exhibit, where one long by a row leaves a gap.
+
+The floors are the tallest measured render, a 375px phone, with headroom.
+
+| File | 375px | 700px | Attribute |
+|---|---|---|---|
+| `five-shapes.html` | 1098 | 1025 | 1140 |
+| `what-a-slip-costs.html` | 1076 | 956 | 1120 |
+| `margin-or-growth.html` | 1374 | 1192 | 1420 |
+
+## Sized for the note column, not the phone
+
+Cards, tables, controls and readouts take the full width of the column they are given. Only the drawing itself is capped, at 560px, and the cap is not arbitrary: the charts are laid out on a 345-unit grid with 10.5-unit type, so 560px renders that type at 16px, which is exactly the body size on the host site. A wider drawing would make the chart labels larger than the prose around them.
 
 ## Checked
 
-At 375px and at 760px, in light and in dark, embedded in a host page by iframe. No console errors, no inner scrollbar, no sideways scroll, every control reachable. Both `html` and `body` are transparent in all three, so each widget composites onto the host's own background and follows the reader's theme.
+At 375px and at 700px, in light and in dark, embedded in a host page by iframe, with the theme flipped live from the host after load. No console errors, no inner scrollbar, no sideways scroll, every control reachable. Both `html` and `body` are transparent, so each exhibit composites onto the host's own background.
 
-The live site has now shown that Obsidian Publish's sanitiser keeps the iframe and renders it, which was the open question. Only the origin was missing.
+The live site has shown that Obsidian Publish's sanitiser keeps the iframe and renders it, which was the open question.
 
 ## Still outstanding before a real publish
 
-A static SVG fallback inside each note, so a CSP change degrades to a picture rather than a hole. The plumbing proof on iOS Safari at phone width, through a live theme flip, and in Obsidian desktop and mobile reading view.
+A static SVG fallback inside each note, so a CSP change degrades to a picture rather than a hole. The plumbing proof on iOS Safari at phone width and in Obsidian desktop and mobile reading view. `publish.js` uploaded from the vault root, without which the theme falls back to the reader's operating system and the heights stay at their floors.
