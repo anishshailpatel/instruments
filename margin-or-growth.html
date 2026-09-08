@@ -273,8 +273,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         ["Profit a year", poundsM1(profit), poundsM1(profit2), poundsM1(profit)],
         ["Growing at", pct1(g0 * 100), pct1(g0 * 100), pct1(g2 * 100)],
         ["New capital earns", pct1(roic * 100), pct1(roic2 * 100), pct1(rn * 100)],
-        ["Investors need", pct1(r * 100), pct1(r * 100), pct1(r * 100)],
-        ["Faster growth lasts", "", "", N ? N + " years, then " + pct1(g0 * 100) : "for ever"]
+        ["Investors need", pct1(r * 100), pct1(r * 100), pct1(r * 100)]
       ];
       var best = Vg > Vm + 0.5 ? 3 : Vm > Vg + 0.5 ? 2 : 0;
       var bd = '<table><thead><tr><th></th><th>As is</th><th' + (best === 2 ? ' class="on"' : '') + '>Cost programme</th><th' + (best === 3 ? ' class="on"' : '') + '>Expansion</th></tr></thead><tbody>';
