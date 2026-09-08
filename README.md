@@ -35,6 +35,7 @@ Either way, replace `https://instruments.anishpatel.co/` in the three notes with
 
 - `noindex, nofollow`, so they never appear in search results on their own.
 - A top-level redirect: opened directly over https rather than in a frame, each one sends the visitor to its note on anishpatel.co. It deliberately does not fire on `file://` or `localhost`, so you can open these locally to check them.
+- Inter at 16px, matching the host site, so an exhibit reads as part of the page rather than an imported object. Only two families load: Inter and a mono for the working panel.
 - Light and dark palettes from `prefers-color-scheme`, so they follow the reader's theme with Publish set to adapt to system.
 - A `postMessage` height report, which nothing currently listens to. The notes use fixed heights instead, per the version-one embed contract. It is there if a `publish.js` height shim is ever wanted.
 
@@ -43,12 +44,12 @@ Either way, replace `https://instruments.anishpatel.co/` in the three notes with
 ```html
 <iframe src="https://instruments.anishpatel.co/five-shapes.html"
         title="Five shapes a monthly number takes"
-        width="100%" height="1200"
+        width="100%" height="1260"
         style="width:100%;border:0;display:block;margin:1.2em 0;"
         loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
 ```
 
-Heights are set from the tallest measured render, a 375px phone, with headroom: measured 1149, 1132 and 1357, set to 1200, 1180 and 1400. Measure again after any edit that adds a row or a control.
+Heights are set from the tallest measured render, a 375px phone, with headroom: measured 1199, 1151 and 1355, set to 1260, 1215 and 1420. Measure again after any edit that adds a row or a control.
 
 ## Checked
 
