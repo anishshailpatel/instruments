@@ -160,7 +160,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
     <div class="layer"><p class="layer-label">What the pack says</p><div class="card c3" id="bandCard"></div></div>
     <div class="layer"><p class="layer-label">What is actually happening</p>
       <div class="tool">
-        <p class="stage-note">These are five shapes a monthly number takes. Flick between them and see how fast each one gives itself away.</p>
+        <p class="stage-note">Five shapes a monthly number takes, one per row of the pack above. Flick between them.</p>
         <div class="seg" role="radiogroup" aria-label="Which shape" id="bandSeriesSeg"></div>
         <div class="case" id="bandCase"></div>
         <div id="bandSvg"></div>
@@ -186,7 +186,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 
     band:   { baseline: 8, run: 6, xmrK: 2.66,
               series: [
-                { key: "steady", tab: "Steady", name: "Overheads", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                { key: "steady", tab: "Steady", name: "Overheads", unit: "£000", unitWord: "k", dp: 0, pts: false, down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [1725, 1755, 1730, 1750, 1738, 1762, 1728, 1748, 1732, 1758, 1742, 1735, 1752, 1740],
                   base: [1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743],
                   guide: "This number is stable, and every move the pack coloured was noise. There is nothing here worth a question, which is worth knowing before someone spends ten minutes of a meeting on it." },
@@ -198,16 +198,16 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
                   vals: [4090, 4380, 3980, 4310, 4020, 4290, 4160, 3960, 4340, 4070, 4250, 3990, 4300, 4130],
                   base: [4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170],
                   guide: "This number swings hard and means very little month to month. The limits are wide because the baseline is bumpy, and that width is what stops you chasing every red cell in the pack." },
-                { key: "step", tab: "Stepped", name: "Cost of sales", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
-                  vals: [1552, 1566, 1548, 1560, 1571, 1554, 1564, 1557, 1612, 1606, 1620, 1609, 1604, 1613],
-                  base: [1559, 1559, 1559, 1559, 1559, 1559, 1559, 1559, 1611, 1611, 1611, 1611, 1611, 1611],
-                  guide: "The level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find what changed, then re-baseline on where it sits now." },
-                { key: "spike", tab: "One-off", name: "EBITDA", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                { key: "step", tab: "Stepped", name: "Debtor days", unit: "", unitWord: " days", dp: 0, pts: false, abs: true, dUnit: " days", down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
+                  vals: [43, 45, 44, 46, 43, 44, 45, 44, 51, 53, 52, 51, 53, 52],
+                  base: [44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 52, 52, 52, 52, 52, 52],
+                  guide: "The level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find out what changed, then draw the limits again from where the number now sits." },
+                { key: "spike", tab: "One-off", name: "New bookings", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [840, 1195, 855, 870, 845, 860, 875, 835, 865, 850, 880, 845, 870, 847],
                   base: [857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857, 857],
-                  guide: "The year-on-year fall is measured against an event rather than a level, and that same event sits inside the baseline, dragging the centre up until every ordinary month since looks low. Both readings come from one month." }
+                  guide: "The year-on-year fall is measured against one big month rather than a level, and that same month sits inside the baseline, dragging the centre up until every ordinary month since looks low. Both readings come from one deal twelve months ago." }
               ],
-              essay: "Five lines of the same stylised pack. Gross margin is the essay's own fourteen months; the other four are what the same pack's other rows would look like plotted." },
+              essay: "Five rows of a stylised pack, arranged so each shows one shape. None is derived from another, so each can move on its own." },
   };
 
   /* ---------- helpers ---------- */
@@ -273,7 +273,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var pow = Math.pow(10, dp), rnd = function (v) { return Math.round(v * pow) / pow; };
       var nums = S.vals.map(function (v, i) { return rnd(und[i] + k * (v - und[i])); });
       function fmt(v) { return fmtNum(v, dp); }
-      function delta(a, b2) { var d = a - b2, v = S.pts ? d : d / b2 * 100, u = S.pts ? " pts" : "%"; var plain = fmtNum(Math.abs(v), 1) + u; if (Math.abs(Math.round(v * 10) / 10) < 0.05) return { txt: "level", cls: "flat", plain: "level" }; return { txt: (v > 0 ? "▲ " : "▼ ") + plain, cls: v > 0 ? "good" : "bad", plain: plain }; }
+      function delta(a, b2) { var d = a - b2, abs = S.pts || S.abs, v = abs ? d : d / b2 * 100, u = S.dUnit || (S.pts ? " pts" : "%"); if (S.dUnit === " days" && Math.abs(Math.round(v)) === 1) u = " day"; var plain = fmtNum(Math.abs(v), S.abs && !S.pts ? dp : 1) + u; if (Math.abs(Math.round(v * 10) / 10) < 0.05) return { txt: "level", cls: "flat", plain: "level", up: false, level: true }; /* a cost or a debtor day is good when it falls */ var good = S.down ? v < 0 : v > 0; return { txt: (v > 0 ? "▲ " : "▼ ") + plain, cls: good ? "good" : "bad", plain: plain, up: v > 0, level: false }; }
       var dm = delta(nums[last], nums[last - 1]), dy = n >= 13 ? delta(nums[last], nums[last - 12]) : null;
       var row = '<div class="row"><table><tr>' + S.months.map(function (m) { return "<th>" + m + "</th>"; }).join("") + "</tr><tr>" + nums.map(function (v) { return "<td>" + fmt(v) + "</td>"; }).join("") + "</tr></table></div>";
       $("bandCard").innerHTML = row + tile(S.name + (S.unit ? ", " + S.unit : "") + " · " + S.months[last], fmt(nums[last])) + tile(S.months[last - 1] + " was", fmt(nums[last - 1]), dm.txt, dm.cls) + (dy ? tile(S.months[last - 12] + " was", fmt(nums[last - 12]), dy.txt, dy.cls) : "<div></div>");
@@ -299,7 +299,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         s += '<line x1="' + X0 + '" y1="' + Y(upl).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(upl).toFixed(1) + '" stroke="currentColor" stroke-width="0.6" opacity="0.5"/><line x1="' + X0 + '" y1="' + Y(lpl).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(lpl).toFixed(1) + '" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>';
         s += '<line x1="' + X0 + '" y1="' + Y(mean).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(mean).toFixed(1) + '" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.45"/>';
         var xb = (X(b - 1) + X(b)) / 2; s += '<line x1="' + xb.toFixed(1) + '" y1="' + Y0 + '" x2="' + xb.toFixed(1) + '" y2="' + Y1 + '" stroke="currentColor" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.35"/>';
-        s += txt(X1, Y(upl) - 4 < 30 ? Math.max(Y(upl) + 12, 32) : Y(upl) - 4, "band ±" + fmt(half) + (S.pts ? " pts" : ""), 10, { opacity: 0.6, anchor: "end" });
+        s += txt(X1, Y(upl) - 4 < 30 ? Math.max(Y(upl) + 12, 32) : Y(upl) - 4, "band ±" + fmt(half) + (S.pts ? " pts" : (S.dUnit || "")), 10, { opacity: 0.6, anchor: "end" });
       }
       s += '<polyline points="' + nums.map(function (v, i) { return X(i).toFixed(1) + "," + Y(v).toFixed(1); }).join(" ") + '" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.85"/>';
       for (var j = 0; j < n; j++) {
@@ -312,7 +312,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       s += "</svg>"; $("bandSvg").innerHTML = s;
       var dir = side[last] > 0 ? "above" : "below", r, sub, d0 = nums[last] - centre;
       var driftTxt = Math.abs(d0) < Math.pow(10, -dp) / 2 ? null : (d0 < 0 ? "down " : "up ") + fmt(Math.abs(d0)) + uw + " on the first " + b + " months' average of " + fmt(centre);
-      var dirWord = function (d) { return d.cls === "good" ? "up" : d.cls === "bad" ? "down" : "level"; };
+      var dirWord = function (d) { return d.level ? "level" : d.up ? "up" : "down"; };
       if (mode === "none") {
         r = "The pack says " + S.months[last] + " is " + dirWord(dm) + " on " + S.months[last - 1] + (dy ? " and " + dirWord(dy) + " on " + S.months[last - 12] : "") + ". Plotted, the same numbers show " + (trail >= 3 ? "<span class=\"n\">" + trail + " months in a row " + dir + " the level of the first " + b + "</span>" : "<span class=\"n\">a line that wanders</span>") + (driftTxt ? ", " + driftTxt : "") + ".";
         sub = "Add a band to see which months, if any, are worth a question.";

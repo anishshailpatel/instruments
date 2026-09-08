@@ -45,9 +45,17 @@ The floors are the tallest measured render, a 375px phone, with headroom.
 
 | File | 375px | 700px | Attribute |
 |---|---|---|---|
-| `five-shapes.html` | 1098 | 1025 | 1140 |
+| `five-shapes.html` | 1113 | 1025 | 1140 |
 | `what-a-slip-costs.html` | 1076 | 956 | 1120 |
-| `margin-or-growth.html` | 1374 | 1192 | 1420 |
+| `margin-or-growth.html` | 1514 | 1256 | 1560 |
+
+## What each one models
+
+**Five shapes** plots five rows of a stylised pack against limits drawn from their own first eight months. The rows are new bookings, revenue, gross margin, overheads and debtor days, chosen because none is arithmetically derived from another, so each can carry one shape on its own. An earlier version used cost of sales and EBITDA, and a reader who added the P&L up found it did not tie. Favourable direction is per row: a cost or a debtor day falling is green.
+
+**What a slip costs** is a five-year undiscounted cash line for a build whose benefit only starts at the first buying window at or after it is ready, with a 40 / 75 / 100 adoption ramp.
+
+**Margin or growth** compares a cost programme with an expansion on a Gordon-growth perpetuity, and carries a third control for how long the faster growth lasts. For ever is the perpetuity; the finite settings run the faster growth and the new-market return for that many years, then fall back to today's growth at the core's return and discount the rest. On the defaults the expansion is worth £250m for ever and £144m if 8% lasts five years, against a £162m cost programme, and it takes about sixteen years of 8% to draw level.
 
 ## Sized for the note column, not the phone
 
