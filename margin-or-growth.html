@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Margin or growth</title>
+<script>if (window.top === window.self && location.protocol === "https:" && !/^(localhost$|127\.|\[?::1)/.test(location.hostname)) location.replace('https://anishpatel.co/Notes/Margin+or+growth');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f3f4f6; --panel: #ffffff; --ink: #1b1d21; --ink-soft: #545963; --ink-faint: #61666f; --ink-mute: #6b707b; --rule: #d9dce2; --rule-firm: #c3c8d1; --field: #ffffff;
+  --accent: #c8503a; --accent-text: #b4452f; --accent-soft: rgba(200, 80, 58, 0.12); --thumb-ring: #f3f4f6;
+  /* the pack's own colours: duller than the accent so they read as quoted, not endorsed */
+  --good: #4a7a5c; --bad: #96604f; --warn: #7d6220; --good-bg: rgba(74, 122, 92, 0.09); --bad-bg: rgba(150, 96, 79, 0.09); --warn-bg: rgba(190, 150, 50, 0.14);
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15171b; --panel: #1c1f25; --ink: #e6e7ea; --ink-soft: #a6abb4; --ink-faint: #979da6; --ink-mute: #8d939c; --rule: #2c3037; --rule-firm: #3a4150; --field: #1d2026;
+    --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #15171b;
+    --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #15171b; --panel: #1c1f25; --ink: #e6e7ea; --ink-soft: #a6abb4; --ink-faint: #979da6; --ink-mute: #8d939c; --rule: #2c3037; --rule-firm: #3a4150; --field: #1d2026;
+  --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #15171b;
+  --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.sheet { max-width: 42rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
+h1 { font-weight: 600; font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.6rem; text-wrap: balance; }
+.standfirst { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+nav.contents { margin-top: 1.4rem; font-family: var(--sans); font-size: 0.9rem; }
+nav.contents ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
+nav.contents li { margin: 0.15rem 0; break-inside: avoid; }
+nav.contents a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+nav.contents a:hover { color: var(--accent-text); border-color: var(--accent); }
+nav.contents small { color: var(--ink-mute); }
+@media (max-width: 480px) { nav.contents ol { columns: 1; } }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+section { display: flex; flex-direction: column; gap: 1rem; }
+.eyebrow { margin: 0; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.eyebrow b { color: var(--ink-soft); font-weight: 600; }
+h2 { margin: 0; font-weight: 600; font-size: 1.32rem; line-height: 1.25; text-wrap: balance; }
+p { margin: 0; }
+.claim { color: var(--ink); font-size: 1.05rem; }
+.close { color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+
+/* the three layers */
+.layer { display: flex; flex-direction: column; gap: 0.6rem; }
+.layer-label { margin: 0; font-family: var(--sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+
+/* layer one: the pack, quoted rather than endorsed */
+.card { position: relative; display: grid; gap: 0.6rem 1rem; padding: 1.5rem 1rem 0.9rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
+.card::before { content: "as reported"; position: absolute; top: 0.45rem; left: 1rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.card.c2 { grid-template-columns: 1fr 1fr; } .card.c3 { grid-template-columns: 1fr 1fr 1fr; } .card.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+@media (max-width: 480px) { .card.c4 { grid-template-columns: 1fr 1fr; } }
+.card .k { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.15rem; }
+.card .v { display: block; font-size: 1.35rem; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; color: var(--ink); }
+.card .d { display: inline-block; margin-top: 0.25rem; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.card .d.good { color: var(--good); background: var(--good-bg); } .card .d.bad { color: var(--bad); background: var(--bad-bg); } .card .d.flat { color: var(--ink-soft); background: var(--rule); }
+.card .tag { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; }
+.card .tag.good { color: var(--good); background: var(--good-bg); } .card .tag.warn { color: var(--warn); background: var(--warn-bg); } .card .tag.bad { color: var(--bad); background: var(--bad-bg); }
+.card .row { grid-column: 1 / -1; overflow-x: auto; }
+.card table { border-collapse: collapse; font-size: 0.78rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card table th { font-weight: 500; color: var(--ink-mute); padding: 0 0.45rem 0.15rem 0; text-align: right; }
+.card table td { padding: 0 0.45rem 0 0; text-align: right; color: var(--ink); }
+.card table th:first-child, .card table td:first-child { text-align: left; }
+.card .note { display: block; margin-top: 0.25rem; font-size: 0.78rem; color: var(--ink-soft); }
+
+/* layer two: the instrument. The case strip carries the tool's own parameters, essay figures as defaults */
+.case { display: flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; align-items: flex-end; font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); padding: 0.6rem 0.75rem 0.65rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+.case .case-label { flex-basis: 100%; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.case .cf { display: flex; flex-direction: column; gap: 0.15rem; }
+.case .cf > span:first-child { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-mute); line-height: 1.2; }
+.case .in { display: flex; align-items: center; gap: 0.2rem; }
+.case .in b { font-weight: 500; color: var(--ink-mute); }
+.case input, .stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 5.6em; min-height: 36px; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.case input::-webkit-inner-spin-button, .stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.case input:focus-visible, .stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.case .reset { margin-left: auto; align-self: flex-end; font: inherit; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; color: var(--ink-soft); background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 0.35rem 0.7rem; min-height: 36px; cursor: pointer; }
+.case .reset:hover { color: var(--accent-text); border-color: var(--accent); }
+.case .derived { flex-basis: 100%; font-size: 0.78rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.stage input { width: 100%; text-align: center; padding: 0.3rem 0.2rem; }
+@media (max-width: 480px) { .case input, .stage input { font-size: 16px; } .stage input { text-align: right; } }
+.tool { display: flex; flex-direction: column; gap: 0.9rem; max-width: 430px; }
+.tool svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: hidden; }
+.tool svg text { font-family: var(--sans); }
+button:focus-visible, nav.contents a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.controls { display: flex; flex-direction: column; gap: 0.4rem; }
+.control { display: flex; flex-direction: column; gap: 0.3rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); }
+.control label output, .control label b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.control .aside { color: var(--ink-mute); }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; margin-top: -11.5px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible { outline: none; }
+input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+.seg { display: flex; flex-wrap: wrap; gap: 0.35rem; font-family: var(--sans); font-size: 0.85rem; }
+.seg label { border: 1px solid var(--rule); border-radius: 4px; padding: 0.5rem 0.75rem; cursor: pointer; color: var(--ink-soft); min-height: 44px; display: flex; align-items: center; background: var(--field); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg input:checked + span { color: var(--ink); font-weight: 600; }
+.seg label:has(input:checked) { border-color: var(--accent); color: var(--ink); box-shadow: inset 0 0 0 1px var(--accent); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+.readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
+.readout .n { font-weight: 600; }
+.readout .sub { display: block; color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.25rem; }
+.btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
+.btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
+/* funnel stages */
+.stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; font-family: var(--sans); font-size: 0.8rem; }
+.stage { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.5rem; align-items: end; min-width: 0; }
+.stage .nm { grid-column: 1 / -1; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stage .fld { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.stage .fld > span { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.25; color: var(--ink-mute); text-wrap: balance; }
+.stage .fld .in { display: flex; align-items: center; gap: 0.2rem; }
+.stage .fld b { font-size: 0.7rem; font-weight: 500; color: var(--ink-mute); white-space: nowrap; }
+.stage-note { margin: 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.45; color: var(--ink-soft); }
+.stage-note b { color: var(--ink); font-weight: 600; }
+.stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 100%; min-width: 0; min-height: 36px; font-variant-numeric: tabular-nums; text-align: right; -moz-appearance: textfield; }
+.stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media (max-width: 480px) { .stages { grid-template-columns: 1fr; gap: 0.7rem; } .stage input { font-size: 16px; } }
+.gate-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+
+.board { overflow-x: auto; font-family: var(--sans); font-size: 0.8rem; max-width: 430px; }
+.board table { border-collapse: collapse; width: 100%; min-width: 330px; font-variant-numeric: tabular-nums; }
+.board th, .board td { padding: 0.3rem 0.4rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--rule); }
+.board th:first-child, .board td:first-child { text-align: left; color: var(--ink-mute); font-weight: 500; padding-left: 0; }
+.board thead th { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-mute); border-bottom: 1px solid var(--rule-firm); }
+.board thead th.on { color: var(--accent-text); }
+.board tr.worth td { font-weight: 600; font-size: 0.95rem; border-bottom: 0; padding-top: 0.45rem; }
+.board td.on { color: var(--accent-text); }
+
+/* layer three: the working */
+details.working { border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); max-width: 430px; font-family: var(--sans); }
+details.working summary { cursor: pointer; padding: 0.7rem 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); list-style: none; }
+details.working summary::-webkit-details-marker { display: none; }
+details.working summary::before { content: "+"; display: inline-block; width: 1.2em; color: var(--accent-text); font-weight: 600; }
+details.working[open] summary::before { content: "−"; }
+details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
+details.working .w p { margin: 0 0 0.5rem; }
+details.working .w p:last-child { margin: 0; }
+details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<style>body { background: transparent; } .sheet { padding: 0.2rem 0 0.4rem; max-width: 34rem; } section { gap: 0.9rem; }</style>
+</head>
+<body>
+<div class="sheet">
+<section id="margin">
+    <div class="layer"><p class="layer-label">What the pack says</p><div class="card c3" id="marginCard"></div></div>
+    <div class="layer"><p class="layer-label">What is actually happening</p>
+      <div class="tool">
+        <div class="case" id="marginCase"></div>
+        <div class="board" id="marginBoard"></div>
+        <div id="marginSvg"></div>
+        <div class="controls">
+          <div class="control"><label for="g2">The expansion lifts growth from <span id="marginG0Note"></span> to <output id="g2Out" aria-live="off"></output></label><input type="range" id="g2" aria-label="Growth after the expansion"></div>
+          <div class="control"><label for="rn">The new market earns <output id="rnOut" aria-live="off"></output> on capital <span class="aside" id="marginCoreNote"></span></label><input type="range" id="rn" aria-label="Return on the new capital"></div>
+        </div>
+        <p class="readout" id="marginRead" aria-live="polite"></p>
+      </div>
+    </div>
+    <details class="working"><summary>The working</summary><div class="w" id="marginW"></div></details>
+  </section>
+</div>
+<script>
+(function () {
+  var CASE = {
+
+    margin: { profit: 10, roic: 0.16, r: 0.10, g0: 0.05, save: 1.25, g2: 0.08, g2Range: [5.5, 8.5, 0.25], rn: 0.16, rnRange: [10, 24, 0.5],
+              essay: "The curve assumes all reinvestment from here earns the second slider's rate, which is the essay's caution about new markets." },
+  };
+
+  /* ---------- helpers ---------- */
+  var ACCENT = "var(--accent)";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function txt(x, y, s, size, o) {
+    o = o || {}; size = Math.max(size, 10.5); if (o.opacity && o.opacity < 0.6) o.opacity = 0.6;
+    return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" font-size="' + size + '"' + (o.weight ? ' font-weight="' + o.weight + '"' : '') +
+      ' fill="' + (o.fill || 'currentColor') + '"' + (o.opacity ? ' opacity="' + o.opacity + '"' : '') + (o.anchor ? ' text-anchor="' + o.anchor + '"' : '') + '>' + esc(s) + '</text>';
+  }
+  function setRange(id, range, value) { var el = $(id); el.min = range[0]; el.max = range[1]; el.step = range[2]; el.value = value; }
+  function roundHalfEven(x) { x = Math.round(x * 1e6) / 1e6; var t = Math.trunc(x), f = Math.abs(x - t); if (Math.abs(f - 0.5) < 1e-9) return (t % 2 === 0) ? t : t + (x < 0 ? -1 : 1); return Math.round(x); }
+  function poundsM1(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; if (a >= 100) return "£" + Math.round(a) + "m"; return "£" + f1(a) + "m"; }
+  function poundsM(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; return "£" + roundHalfEven(a) + "m"; }
+  function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.abs(v); if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
+  function pct1(x) { var v = Math.round(x * 10) / 10; return (v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
+  function gbp(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
+  function f1(x) { var v = Math.round(x * 10) / 10; return v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1); }
+  var WORDS = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+  function word(n) { return n >= 0 && n <= 12 && n === Math.round(n) ? WORDS[n] || "no" : String(n); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function plural(n, one, many) { many = many || one + "s"; var w = word(n); return (n === 0 ? "no" : w) + " " + (n === 1 ? one : many); }
+  function months(x) { if (x > 40 * 12) return "over 40 years"; if (x >= 24) { var yv = Math.round(x / 6) / 2; return (yv === Math.round(yv) ? String(Math.round(yv)) : yv.toFixed(1)) + " years"; } if (x < 0.25) return "under a week"; if (x < 0.75) return "about a fortnight"; if (x < 1) return "under a month"; if (x >= 9.95) return Math.round(x) + " months"; var r = Math.round(x * 10) / 10; var s = Math.abs(r - Math.round(r)) < 1e-9 ? String(Math.round(r)) : r.toFixed(1); return s + (s === "1" ? " month" : " months"); }
+  function chance(p) { if (p >= 0.5) return "more often than not"; if (p < 0.005) return "less than one time in 200"; var d = 1 / p; d = d > 20 ? Math.round(d / 10) * 10 : Math.round(d); return "about one time in " + (d <= 12 ? WORDS[d] : d); }
+  function makeRng(seed) { var a = seed >>> 0; return function () { a += 0x6D2B79F5; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function normal(rng) { var u1 = rng() || 1e-12, u2 = rng(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+  var LF = [0, 0];
+  function lnfact(n) { while (LF.length <= n) LF.push(LF[LF.length - 1] + Math.log(LF.length)); return LF[n]; }
+  function binomPmf(n, k, p) { if (p <= 0) return k === 0 ? 1 : 0; if (p >= 1) return k === n ? 1 : 0; return Math.exp(lnfact(n) - lnfact(k) - lnfact(n - k) + k * Math.log(p) + (n - k) * Math.log(1 - p)); }
+  function fmtNum(x, dp) { var s = x.toFixed(dp); var parts = s.split("."); parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","); return parts.join("."); }
+  function on(ids, fn) { ids.forEach(function (id) { $(id).addEventListener("input", fn); }); }
+  function onRadios(name, fn) { document.querySelectorAll('input[name="' + name + '"]').forEach(function (el) { el.addEventListener("change", fn); }); }
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+  function seg(id, name, items, checked) { $(id).innerHTML = items.map(function (it) { return '<label><input type="radio" name="' + name + '" value="' + it[0] + '"' + (String(it[0]) === String(checked) ? " checked" : "") + '><span>' + it[1] + '</span></label>'; }).join(""); }
+  function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
+  function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
+  function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
+  function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  function caseUI(id, defs, onChange) {
+    var box = $(id), html = '<span class="case-label">The case</span>';
+    defs.forEach(function (d) { html += '<label class="cf"><span>' + d.label + '</span><span class="in">' + (d.prefix ? '<b>' + d.prefix + '</b>' : '') + '<input type="number" inputmode="decimal" data-k="' + d.k + '" value="' + d.v + '" min="' + d.min + '" max="' + d.max + '" step="' + (d.step || "any") + '" aria-label="' + d.label + '">' + (d.suffix ? '<b>' + d.suffix + '</b>' : '') + '</span></label>'; });
+    html += '<button type="button" class="reset">Reset</button><span class="derived" hidden></span>';
+    box.innerHTML = html;
+    var inputs = {}; box.querySelectorAll("input").forEach(function (el) { inputs[el.getAttribute("data-k")] = el; el.addEventListener("input", onChange); el.addEventListener("blur", function () { el.value = get(el.getAttribute("data-k")); onChange(); }); });
+    box.querySelector(".reset").addEventListener("click", function () { defs.forEach(function (d) { inputs[d.k].value = d.v; }); onChange(); });
+    function get(k) { var el = inputs[k], v = parseFloat(el.value); if (isNaN(v)) v = +el.defaultValue; return Math.min(+el.max, Math.max(+el.min, v)); }
+    return { get: get, derived: function (s) { var el = box.querySelector(".derived"); el.hidden = !s; el.textContent = s || ""; } };
+  }
+  function hatch(id, color) { return '<defs><pattern id="' + id + '" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="' + color + '" stroke-width="1" opacity="0.5"/></pattern></defs>'; }
+
+  /* ================= 9. Margin or growth ================= */
+  (function () {
+    var C = CASE.margin;
+    setRange("g2", C.g2Range, C.g2 * 100); setRange("rn", C.rnRange, C.rn * 100);
+    function value(P, g, R, rr) { return P * (1 - g / R) / (rr - g); }
+    function syncRange(id, lo, hi, step) { var el = $(id); if (+el.min !== lo || +el.max !== hi) { var v = +el.value; el.min = lo; el.max = hi; el.step = step; el.value = Math.min(hi, Math.max(lo, v)); } }
+    var CU = caseUI("marginCase", [{ k: "profit", label: "Profit", v: C.profit, min: 0.1, max: 100000, step: 0.5, prefix: "£", suffix: "m" }, { k: "roic", label: "Return on capital", v: C.roic * 100, min: 2, max: 80, step: 0.5, suffix: "%" }, { k: "r", label: "Investor hurdle", v: C.r * 100, min: 2, max: 40, step: 0.5, suffix: "%" }, { k: "g0", label: "Growth today", v: C.g0 * 100, min: 0, max: 38, step: 0.5, suffix: "%" }, { k: "save", label: "Cost programme saves, a year", v: C.save, min: 0, max: 100000, step: 0.05, prefix: "£", suffix: "m" }], function () { render(); });
+    function render() {
+      var profit = CU.get("profit"), r = CU.get("r") / 100, g0 = Math.min(CU.get("g0") / 100, r - 0.015), roic = Math.max(CU.get("roic") / 100, g0 + 0.01), save = CU.get("save"), profit2 = profit + save, roic2 = roic * profit2 / profit;
+      var Vas = value(profit, g0, roic, r), Vm = value(profit2, g0, roic2, r), ymax = Math.max(Vm, Vas) * 3;
+      var g2hi = Math.max(g0 * 100 + 1, Math.round((r * 100 - 1.5) * 4) / 4); syncRange("g2", Math.round((g0 * 100 + 0.5) * 4) / 4, g2hi, 0.25); syncRange("rn", Math.round(r * 100 * 2) / 2, Math.max(roic * 100 + 8, r * 100 + 4), 0.5);
+      $("marginG0Note").textContent = pct1(g0 * 100); $("marginCoreNote").textContent = "(the core earns " + pct1(roic * 100) + ")";
+      working("marginW", ["value = profit × (1 − g ÷ R) ÷ (r − g) <i>(Gordon growth; reinvestment = growth ÷ return on the new capital R; r = what investors need)</i>", "the cost programme keeps the capital where it is and takes " + poundsM1(save) + " a year out of the cost base, so profit becomes " + poundsM1(profit2) + " and the return on that capital becomes " + pct1(roic2 * 100), "the two are worth the same at g* = (V_cost × r − profit) ÷ (V_cost − profit ÷ R)", "the case: " + poundsM(profit) + " of profit, " + pct1(roic * 100) + " return on capital, investors needing " + pct1(r * 100) + ", growing " + pct1(g0 * 100) + " a year; as is " + poundsM(Vas) + ", cost programme " + poundsM(Vm)], C.essay);
+      var g2 = +$("g2").value / 100, rn = +$("rn").value / 100;
+      $("g2Out").textContent = pct1(g2 * 100); $("rnOut").textContent = pct1(rn * 100);
+      var Vg = value(profit, g2, rn, r), createdG = Vg - Vas, createdM = Vm - Vas;
+      $("marginCard").innerHTML = tile("Option A · cost programme", poundsM1(save) + " saved", "straight to profit, year one", "good") + tile("Option B · expansion", pct1(g0 * 100) + " → " + pct1(g2 * 100) + " growth", "£" + f1(profit * (g2 - g0) / roic) + "m a year more reinvested", "flat") + stamp("Board recommendation", "Option A", "good", "bankable, in the run rate; B unproven");
+      var denom = Vm - profit / rn, gStar = null; if (Math.abs(denom) > 1e-9) { gStar = (Vm * r - profit) / denom; if (!(gStar > 0 && gStar < r)) gStar = null; }
+      var flat = Math.abs(rn - r) < 1e-9;
+      var rows = [
+        ["Profit a year", poundsM1(profit), poundsM1(profit2), poundsM1(profit)],
+        ["Growing at", pct1(g0 * 100), pct1(g0 * 100), pct1(g2 * 100)],
+        ["New capital earns", pct1(roic * 100), pct1(roic2 * 100), pct1(rn * 100)],
+        ["Investors need", pct1(r * 100), pct1(r * 100), pct1(r * 100)]
+      ];
+      var best = Vg > Vm + 0.5 ? 3 : Vm > Vg + 0.5 ? 2 : 0;
+      var bd = '<table><thead><tr><th></th><th>As is</th><th' + (best === 2 ? ' class="on"' : '') + '>Cost programme</th><th' + (best === 3 ? ' class="on"' : '') + '>Expansion</th></tr></thead><tbody>';
+      rows.forEach(function (rw) { bd += "<tr><td>" + rw[0] + "</td><td>" + rw[1] + "</td><td>" + rw[2] + "</td><td>" + rw[3] + "</td></tr>"; });
+      bd += '<tr class="worth"><td>Worth</td><td>' + poundsM(Vas) + '</td><td' + (best === 2 ? ' class="on"' : '') + '>' + poundsM(Vm) + '</td><td' + (best === 3 ? ' class="on"' : '') + '>' + poundsM(Vg) + '</td></tr>';
+      bd += "</tbody></table>"; $("marginBoard").innerHTML = bd;
+      var X0 = 14, X1 = 330, Y0 = 22, Y1 = 128, gLo = g0, gHi = +$("g2").max / 100 + 0.005;
+      function X(g) { return X0 + (X1 - X0) * (g - gLo) / (gHi - gLo); } function Y(v) { return Y1 - (Y1 - Y0) * Math.min(v, ymax) / ymax; }
+      var s = '<svg viewBox="0 0 345 158" role="img" aria-label="Business value against growth, with the cost programme as a fixed line and the crossover marked">';
+      var vy = Y(Vg), right = (g2 - gLo) / (gHi - gLo) > 0.6, above = vy < Y(Vm), nearLine = Math.abs(vy - Y(Vm)) < 14, nearAsIs = X(g2) - X(g0) < 80, dotUp = vy <= Y(Vas) + 2, cpLeft = nearLine && X(g2) > X1 - 175;
+      var path = ""; for (var i = 0; i <= 120; i++) { var g = gLo + (gHi - gLo) * i / 120, vv = value(profit, g, rn, r); if (vv > ymax) { if (path) break; continue; } path += (path ? " L" : "M") + X(g).toFixed(1) + " " + Y(vv).toFixed(1); }
+      s += '<path d="' + path + '" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.7"/>';
+      s += '<line x1="' + X0 + '" y1="' + Y(Vm).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(Vm).toFixed(1) + '" stroke="currentColor" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.6"/>';
+      s += txt(cpLeft ? X0 + 2 : X1, Y(Vm) - 5, "cost programme " + poundsM(Vm), 10, { opacity: 0.75, anchor: cpLeft ? "start" : "end" });
+      s += '<circle cx="' + X(g0).toFixed(1) + '" cy="' + Y(Vas).toFixed(1) + '" r="3" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.7"/>'; s += txt(X(g0) + 7, (nearAsIs && !dotUp) ? Y(Vas) - 8 : Y(Vas) + 13, "as is " + poundsM(Vas), 10, { opacity: 0.65 });
+      var shiftRight = false, shiftLeft = false;
+      if (gStar !== null && gStar <= gHi) { s += '<line x1="' + X(gStar).toFixed(1) + '" y1="' + Y(Vm).toFixed(1) + '" x2="' + X(gStar).toFixed(1) + '" y2="' + (Y1 + 4) + '" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.5"/>'; shiftRight = X(gStar) > X1 - 175; shiftLeft = X(gStar) < X0 + 60; s += txt(shiftLeft ? X0 : X(gStar), Y1 + 14, "same value at " + pct1(gStar * 100), 10.5, { opacity: 0.8, anchor: shiftRight ? "end" : shiftLeft ? "start" : "middle", weight: 600 }); }
+      s += '<line x1="' + X(g2).toFixed(1) + '" y1="' + vy.toFixed(1) + '" x2="' + X(g2).toFixed(1) + '" y2="' + Y1 + '" stroke="' + ACCENT + '" stroke-width="0.8" opacity="0.5"/>';
+      s += '<circle cx="' + X(g2).toFixed(1) + '" cy="' + vy.toFixed(1) + '" r="4" fill="' + ACCENT + '"/>';
+      var valY = (nearAsIs ? !dotUp : !above) ? vy + 18 : vy - 8;
+      if (valY < 28) valY = vy + 18;
+      s += txt(X(g2) + (right ? -9 : 9), valY, poundsM(Vg), 11, { fill: ACCENT, weight: 600, anchor: right ? "end" : "start" });
+      if (!shiftLeft && (gStar === null || gStar > gHi || X(gStar) - X0 > 80)) s += txt(X0, Y1 + 14, pct1(g0 * 100), 9.5, { opacity: 0.6 });
+      if (!shiftRight && !(Math.abs(valY - (Y1 + 14)) < 18 && X(g2) > X1 - 130)) s += txt(X1, Y1 + 14, "growth → " + pct1(+$("g2").max), 10.5, { opacity: 0.6, anchor: "end" }); s += txt(X0, 13, "what the business is worth at each growth rate", 10.5, { opacity: 0.6 });
+      s += "</svg>"; $("marginSvg").innerHTML = s;
+      var diff = Vg - Vm, line1;
+      if (Math.abs(diff) < 0.5) line1 = "Growth to <span class=\"n\">" + pct1(g2 * 100) + "</span> and the cost programme are worth the same, <span class=\"n\">" + poundsM(Vg) + "</span>.";
+      else if (diff > 0) line1 = "The expansion, growth to <span class=\"n\">" + pct1(g2 * 100) + "</span>, creates <span class=\"n\">" + poundsM(createdG) + "</span> of value over the business as it is. The cost programme creates " + poundsM(createdM) + ". Growth wins by <span class=\"n\">" + poundsM(diff) + "</span>. The pack recommends the smaller one.";
+      else line1 = "The expansion, growth to <span class=\"n\">" + pct1(g2 * 100) + "</span>, " + (createdG < 0 ? "destroys " + poundsM(-createdG) + " of value" : "creates " + poundsM(createdG) + " of value") + " against the business as it is. The cost programme creates " + poundsM(createdM) + " and wins by <span class=\"n\">" + poundsM(-diff) + "</span>.";
+      var line2 = flat ? "New capital earning exactly what investors need adds nothing: the curve is flat at " + poundsM(profit / r) + " whatever the growth. Growth only pays through the spread above the hurdle." : gStar === null ? (Vg > Vm ? "Growth wins from today's rate onward at these returns." : "No growth rate on the slider beats the cost programme at these returns.") : gStar <= g0 ? "Growth wins from today's rate onward at these returns." : "The two are worth the same at " + pct1(gStar * 100) + " growth. Below that, the cost programme is the better call" + (rn < roic - 1e-9 ? ", with the new capital earning " + pct1(rn * 100) + " rather than the core's " + pct1(roic * 100) : "") + ".";
+      $("marginRead").innerHTML = line1 + "<span class=\"sub\">" + line2 + "</span>";
+    }
+    on(["g2", "rn"], render); render();
+  })();
+
+  /* tell the page that embeds this how tall to make the frame */
+  (function () {
+    var last = 0;
+    function report() {
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      if (h && Math.abs(h - last) > 2) { last = h; try { parent.postMessage({ instrument: "margin-or-growth", height: h }, "*"); } catch (e) {} }
+    }
+    window.addEventListener("load", report);
+    window.addEventListener("resize", report);
+    if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
+    setTimeout(report, 120); setTimeout(report, 600);
+  })();
+})();
+</script>
+</body>
+</html>

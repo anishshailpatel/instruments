@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>What a slip costs</title>
+<script>if (window.top === window.self && location.protocol === "https:" && !/^(localhost$|127\.|\[?::1)/.test(location.hostname)) location.replace('https://anishpatel.co/Notes/What+a+slip+costs');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #f3f4f6; --panel: #ffffff; --ink: #1b1d21; --ink-soft: #545963; --ink-faint: #61666f; --ink-mute: #6b707b; --rule: #d9dce2; --rule-firm: #c3c8d1; --field: #ffffff;
+  --accent: #c8503a; --accent-text: #b4452f; --accent-soft: rgba(200, 80, 58, 0.12); --thumb-ring: #f3f4f6;
+  /* the pack's own colours: duller than the accent so they read as quoted, not endorsed */
+  --good: #4a7a5c; --bad: #96604f; --warn: #7d6220; --good-bg: rgba(74, 122, 92, 0.09); --bad-bg: rgba(150, 96, 79, 0.09); --warn-bg: rgba(190, 150, 50, 0.14);
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #15171b; --panel: #1c1f25; --ink: #e6e7ea; --ink-soft: #a6abb4; --ink-faint: #979da6; --ink-mute: #8d939c; --rule: #2c3037; --rule-firm: #3a4150; --field: #1d2026;
+    --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #15171b;
+    --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #15171b; --panel: #1c1f25; --ink: #e6e7ea; --ink-soft: #a6abb4; --ink-faint: #979da6; --ink-mute: #8d939c; --rule: #2c3037; --rule-firm: #3a4150; --field: #1d2026;
+  --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #15171b;
+  --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.sheet { max-width: 42rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
+h1 { font-weight: 600; font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.6rem; text-wrap: balance; }
+.standfirst { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+nav.contents { margin-top: 1.4rem; font-family: var(--sans); font-size: 0.9rem; }
+nav.contents ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
+nav.contents li { margin: 0.15rem 0; break-inside: avoid; }
+nav.contents a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+nav.contents a:hover { color: var(--accent-text); border-color: var(--accent); }
+nav.contents small { color: var(--ink-mute); }
+@media (max-width: 480px) { nav.contents ol { columns: 1; } }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+section { display: flex; flex-direction: column; gap: 1rem; }
+.eyebrow { margin: 0; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.eyebrow b { color: var(--ink-soft); font-weight: 600; }
+h2 { margin: 0; font-weight: 600; font-size: 1.32rem; line-height: 1.25; text-wrap: balance; }
+p { margin: 0; }
+.claim { color: var(--ink); font-size: 1.05rem; }
+.close { color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+
+/* the three layers */
+.layer { display: flex; flex-direction: column; gap: 0.6rem; }
+.layer-label { margin: 0; font-family: var(--sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+
+/* layer one: the pack, quoted rather than endorsed */
+.card { position: relative; display: grid; gap: 0.6rem 1rem; padding: 1.5rem 1rem 0.9rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
+.card::before { content: "as reported"; position: absolute; top: 0.45rem; left: 1rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.card.c2 { grid-template-columns: 1fr 1fr; } .card.c3 { grid-template-columns: 1fr 1fr 1fr; } .card.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+@media (max-width: 480px) { .card.c4 { grid-template-columns: 1fr 1fr; } }
+.card .k { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.15rem; }
+.card .v { display: block; font-size: 1.35rem; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; color: var(--ink); }
+.card .d { display: inline-block; margin-top: 0.25rem; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.card .d.good { color: var(--good); background: var(--good-bg); } .card .d.bad { color: var(--bad); background: var(--bad-bg); } .card .d.flat { color: var(--ink-soft); background: var(--rule); }
+.card .tag { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; }
+.card .tag.good { color: var(--good); background: var(--good-bg); } .card .tag.warn { color: var(--warn); background: var(--warn-bg); } .card .tag.bad { color: var(--bad); background: var(--bad-bg); }
+.card .row { grid-column: 1 / -1; overflow-x: auto; }
+.card table { border-collapse: collapse; font-size: 0.78rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card table th { font-weight: 500; color: var(--ink-mute); padding: 0 0.45rem 0.15rem 0; text-align: right; }
+.card table td { padding: 0 0.45rem 0 0; text-align: right; color: var(--ink); }
+.card table th:first-child, .card table td:first-child { text-align: left; }
+.card .note { display: block; margin-top: 0.25rem; font-size: 0.78rem; color: var(--ink-soft); }
+
+/* layer two: the instrument. The case strip carries the tool's own parameters, essay figures as defaults */
+.case { display: flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; align-items: flex-end; font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); padding: 0.6rem 0.75rem 0.65rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+.case .case-label { flex-basis: 100%; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.case .cf { display: flex; flex-direction: column; gap: 0.15rem; }
+.case .cf > span:first-child { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-mute); line-height: 1.2; }
+.case .in { display: flex; align-items: center; gap: 0.2rem; }
+.case .in b { font-weight: 500; color: var(--ink-mute); }
+.case input, .stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 5.6em; min-height: 36px; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.case input::-webkit-inner-spin-button, .stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.case input:focus-visible, .stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.case .reset { margin-left: auto; align-self: flex-end; font: inherit; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; color: var(--ink-soft); background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 0.35rem 0.7rem; min-height: 36px; cursor: pointer; }
+.case .reset:hover { color: var(--accent-text); border-color: var(--accent); }
+.case .derived { flex-basis: 100%; font-size: 0.78rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.stage input { width: 100%; text-align: center; padding: 0.3rem 0.2rem; }
+@media (max-width: 480px) { .case input, .stage input { font-size: 16px; } .stage input { text-align: right; } }
+.tool { display: flex; flex-direction: column; gap: 0.9rem; max-width: 430px; }
+.tool svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: hidden; }
+.tool svg text { font-family: var(--sans); }
+button:focus-visible, nav.contents a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.controls { display: flex; flex-direction: column; gap: 0.4rem; }
+.control { display: flex; flex-direction: column; gap: 0.3rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); }
+.control label output, .control label b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.control .aside { color: var(--ink-mute); }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; margin-top: -11.5px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible { outline: none; }
+input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+.seg { display: flex; flex-wrap: wrap; gap: 0.35rem; font-family: var(--sans); font-size: 0.85rem; }
+.seg label { border: 1px solid var(--rule); border-radius: 4px; padding: 0.5rem 0.75rem; cursor: pointer; color: var(--ink-soft); min-height: 44px; display: flex; align-items: center; background: var(--field); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg input:checked + span { color: var(--ink); font-weight: 600; }
+.seg label:has(input:checked) { border-color: var(--accent); color: var(--ink); box-shadow: inset 0 0 0 1px var(--accent); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+.readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
+.readout .n { font-weight: 600; }
+.readout .sub { display: block; color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.25rem; }
+.btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
+.btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
+/* funnel stages */
+.stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; font-family: var(--sans); font-size: 0.8rem; }
+.stage { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.5rem; align-items: end; min-width: 0; }
+.stage .nm { grid-column: 1 / -1; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stage .fld { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.stage .fld > span { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.25; color: var(--ink-mute); text-wrap: balance; }
+.stage .fld .in { display: flex; align-items: center; gap: 0.2rem; }
+.stage .fld b { font-size: 0.7rem; font-weight: 500; color: var(--ink-mute); white-space: nowrap; }
+.stage-note { margin: 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.45; color: var(--ink-soft); }
+.stage-note b { color: var(--ink); font-weight: 600; }
+.stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 100%; min-width: 0; min-height: 36px; font-variant-numeric: tabular-nums; text-align: right; -moz-appearance: textfield; }
+.stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media (max-width: 480px) { .stages { grid-template-columns: 1fr; gap: 0.7rem; } .stage input { font-size: 16px; } }
+.gate-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+
+.board { overflow-x: auto; font-family: var(--sans); font-size: 0.8rem; max-width: 430px; }
+.board table { border-collapse: collapse; width: 100%; min-width: 330px; font-variant-numeric: tabular-nums; }
+.board th, .board td { padding: 0.3rem 0.4rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--rule); }
+.board th:first-child, .board td:first-child { text-align: left; color: var(--ink-mute); font-weight: 500; padding-left: 0; }
+.board thead th { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-mute); border-bottom: 1px solid var(--rule-firm); }
+.board thead th.on { color: var(--accent-text); }
+.board tr.worth td { font-weight: 600; font-size: 0.95rem; border-bottom: 0; padding-top: 0.45rem; }
+.board td.on { color: var(--accent-text); }
+
+/* layer three: the working */
+details.working { border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); max-width: 430px; font-family: var(--sans); }
+details.working summary { cursor: pointer; padding: 0.7rem 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); list-style: none; }
+details.working summary::-webkit-details-marker { display: none; }
+details.working summary::before { content: "+"; display: inline-block; width: 1.2em; color: var(--accent-text); font-weight: 600; }
+details.working[open] summary::before { content: "−"; }
+details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
+details.working .w p { margin: 0 0 0.5rem; }
+details.working .w p:last-child { margin: 0; }
+details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<style>body { background: transparent; } .sheet { padding: 0.2rem 0 0.4rem; max-width: 34rem; } section { gap: 0.9rem; }</style>
+</head>
+<body>
+<div class="sheet">
+<section id="window">
+    <div class="layer"><p class="layer-label">What the pack says</p><div class="card c3" id="windowCard"></div></div>
+    <div class="layer"><p class="layer-label">What is actually happening</p>
+      <div class="tool">
+        <div class="case" id="windowCase"></div>
+        <div id="windowSvg"></div>
+        <div class="controls">
+          <div class="control"><label id="cCycLbl">How often customers can buy</label><div class="seg" role="radiogroup" aria-labelledby="cCycLbl" id="cCycSeg"></div></div>
+          <div class="control"><label for="cSlip">The build slips by <output id="cSlipOut" aria-live="off"></output></label><input type="range" id="cSlip" aria-label="Months the build slips"></div>
+        </div>
+        <p class="readout" id="windowRead" aria-live="polite"></p>
+      </div>
+    </div>
+    <details class="working"><summary>The working</summary><div class="w" id="windowW"></div></details>
+  </section>
+</div>
+<script>
+(function () {
+  var CASE = {
+
+    window: { cost: 1200, build: 9, benefit: 900, slip: 4, slipRange: [0, 12, 1], ramp: [0.4, 0.75, 1], horizon: 60,
+              cycles: [["1", "Monthly"], ["3", "Quarterly"], ["12", "Yearly"], ["36", "Every 3 years"]], cycleDefault: "12",
+              essay: "The essay's case was an annual budget round. A maintenance contract, a school year, a licence renewal and a fleet replacement are the same mechanism at four different lengths." },
+  };
+
+  /* ---------- helpers ---------- */
+  var ACCENT = "var(--accent)";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function txt(x, y, s, size, o) {
+    o = o || {}; size = Math.max(size, 10.5); if (o.opacity && o.opacity < 0.6) o.opacity = 0.6;
+    return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" font-size="' + size + '"' + (o.weight ? ' font-weight="' + o.weight + '"' : '') +
+      ' fill="' + (o.fill || 'currentColor') + '"' + (o.opacity ? ' opacity="' + o.opacity + '"' : '') + (o.anchor ? ' text-anchor="' + o.anchor + '"' : '') + '>' + esc(s) + '</text>';
+  }
+  function setRange(id, range, value) { var el = $(id); el.min = range[0]; el.max = range[1]; el.step = range[2]; el.value = value; }
+  function roundHalfEven(x) { x = Math.round(x * 1e6) / 1e6; var t = Math.trunc(x), f = Math.abs(x - t); if (Math.abs(f - 0.5) < 1e-9) return (t % 2 === 0) ? t : t + (x < 0 ? -1 : 1); return Math.round(x); }
+  function poundsM1(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; if (a >= 100) return "£" + Math.round(a) + "m"; return "£" + f1(a) + "m"; }
+  function poundsM(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; return "£" + roundHalfEven(a) + "m"; }
+  function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.abs(v); if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
+  function pct1(x) { var v = Math.round(x * 10) / 10; return (v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
+  function gbp(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
+  function f1(x) { var v = Math.round(x * 10) / 10; return v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1); }
+  var WORDS = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+  function word(n) { return n >= 0 && n <= 12 && n === Math.round(n) ? WORDS[n] || "no" : String(n); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function plural(n, one, many) { many = many || one + "s"; var w = word(n); return (n === 0 ? "no" : w) + " " + (n === 1 ? one : many); }
+  function months(x) { if (x > 40 * 12) return "over 40 years"; if (x >= 24) { var yv = Math.round(x / 6) / 2; return (yv === Math.round(yv) ? String(Math.round(yv)) : yv.toFixed(1)) + " years"; } if (x < 0.25) return "under a week"; if (x < 0.75) return "about a fortnight"; if (x < 1) return "under a month"; if (x >= 9.95) return Math.round(x) + " months"; var r = Math.round(x * 10) / 10; var s = Math.abs(r - Math.round(r)) < 1e-9 ? String(Math.round(r)) : r.toFixed(1); return s + (s === "1" ? " month" : " months"); }
+  function chance(p) { if (p >= 0.5) return "more often than not"; if (p < 0.005) return "less than one time in 200"; var d = 1 / p; d = d > 20 ? Math.round(d / 10) * 10 : Math.round(d); return "about one time in " + (d <= 12 ? WORDS[d] : d); }
+  function makeRng(seed) { var a = seed >>> 0; return function () { a += 0x6D2B79F5; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function normal(rng) { var u1 = rng() || 1e-12, u2 = rng(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+  var LF = [0, 0];
+  function lnfact(n) { while (LF.length <= n) LF.push(LF[LF.length - 1] + Math.log(LF.length)); return LF[n]; }
+  function binomPmf(n, k, p) { if (p <= 0) return k === 0 ? 1 : 0; if (p >= 1) return k === n ? 1 : 0; return Math.exp(lnfact(n) - lnfact(k) - lnfact(n - k) + k * Math.log(p) + (n - k) * Math.log(1 - p)); }
+  function fmtNum(x, dp) { var s = x.toFixed(dp); var parts = s.split("."); parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","); return parts.join("."); }
+  function on(ids, fn) { ids.forEach(function (id) { $(id).addEventListener("input", fn); }); }
+  function onRadios(name, fn) { document.querySelectorAll('input[name="' + name + '"]').forEach(function (el) { el.addEventListener("change", fn); }); }
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+  function seg(id, name, items, checked) { $(id).innerHTML = items.map(function (it) { return '<label><input type="radio" name="' + name + '" value="' + it[0] + '"' + (String(it[0]) === String(checked) ? " checked" : "") + '><span>' + it[1] + '</span></label>'; }).join(""); }
+  function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
+  function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
+  function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
+  function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  function caseUI(id, defs, onChange) {
+    var box = $(id), html = '<span class="case-label">The case</span>';
+    defs.forEach(function (d) { html += '<label class="cf"><span>' + d.label + '</span><span class="in">' + (d.prefix ? '<b>' + d.prefix + '</b>' : '') + '<input type="number" inputmode="decimal" data-k="' + d.k + '" value="' + d.v + '" min="' + d.min + '" max="' + d.max + '" step="' + (d.step || "any") + '" aria-label="' + d.label + '">' + (d.suffix ? '<b>' + d.suffix + '</b>' : '') + '</span></label>'; });
+    html += '<button type="button" class="reset">Reset</button><span class="derived" hidden></span>';
+    box.innerHTML = html;
+    var inputs = {}; box.querySelectorAll("input").forEach(function (el) { inputs[el.getAttribute("data-k")] = el; el.addEventListener("input", onChange); el.addEventListener("blur", function () { el.value = get(el.getAttribute("data-k")); onChange(); }); });
+    box.querySelector(".reset").addEventListener("click", function () { defs.forEach(function (d) { inputs[d.k].value = d.v; }); onChange(); });
+    function get(k) { var el = inputs[k], v = parseFloat(el.value); if (isNaN(v)) v = +el.defaultValue; return Math.min(+el.max, Math.max(+el.min, v)); }
+    return { get: get, derived: function (s) { var el = box.querySelector(".derived"); el.hidden = !s; el.textContent = s || ""; } };
+  }
+  function hatch(id, color) { return '<defs><pattern id="' + id + '" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="' + color + '" stroke-width="1" opacity="0.5"/></pattern></defs>'; }
+
+  /* ================= 7. The window ================= */
+  (function () {
+    var C = CASE.window, H = C.horizon, cost, build, ben;
+    setRange("cSlip", C.slipRange, C.slip);
+    seg("cCycSeg", "cCycle", C.cycles, C.cycleDefault);
+    var CU = caseUI("windowCase", [
+      { k: "cost", label: "Build cost", v: C.cost, min: 10, max: 10000000, step: 10, prefix: "£", suffix: "k" },
+      { k: "build", label: "Build time", v: C.build, min: 1, max: 36, step: 1, suffix: "months" },
+      { k: "ben", label: "Annual benefit", v: C.benefit, min: 10, max: 10000000, step: 10, prefix: "£", suffix: "k" }
+    ], function () { render(); });
+    function firstWindow(ready, cyc) { return Math.max(cyc, Math.ceil(ready / cyc) * cyc); }
+    function run(cyc, slip) {
+      var ready = build + slip, win = firstWindow(ready, cyc), cum = [0], c = 0, payback = null, spend = cost / ready;
+      for (var m = 1; m <= H; m++) { if (m <= ready) c -= spend; if (m > win) c += ben / 12 * (C.ramp[Math.floor((m - win - 1) / 12)] || 1); cum.push(c); if (payback === null && m > ready && c >= 0) payback = m; }
+      return { cum: cum, ready: ready, win: win, five: c, payback: payback };
+    }
+    function cycName(cyc) { return cyc === 1 ? "every month" : cyc === 3 ? "every quarter" : cyc === 12 ? "once a year" : "every " + (cyc / 12) + " years"; }
+    function render() {
+      cost = CU.get("cost"); build = CU.get("build"); ben = CU.get("ben");
+      var cyc = parseFloat(radio("cCycle")) || 12, slip = +$("cSlip").value, SMAX = C.slipRange[1];
+      $("cSlipOut").textContent = plural(slip, "month");
+      working("windowW", [
+        "the case: a " + gbpBig(cost * 1000) + " build over " + plural(build, "month") + ", worth " + gbpBig(ben * 1000) + " a year at full adoption",
+        "customers buy " + cycName(cyc) + ", so the build earns nothing until the first buying moment at or after it is ready",
+        "cash by month, undiscounted; build cost spread evenly over the build",
+        "adoption ramps " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → ") + " by year <i>(the essay's five-year curve, stylised)</i>",
+        "the chart keeps one scale across the whole slip slider, so the gap between the lines is the gap"
+      ], C.essay);
+      var P = run(cyc, 0), A = run(cyc, slip), Wst = run(cyc, SMAX), same = A.win === P.win;
+      $("windowCard").innerHTML = tile("Schedule", slip === 0 ? "On plan" : cap(plural(slip, "month")) + " late", slip === 0 ? "ready month " + A.ready : "ready month " + A.ready + ", plan " + P.ready, slip === 0 ? "good" : slip <= 2 ? "flat" : "bad") + tile("Budget", "On budget", gbpBig(cost * 1000) + ", no overrun", "good") + stamp("RAG", slip === 0 ? "Green" : "Amber", slip === 0 ? "good" : "warn", slip === 0 ? "delivery on track" : "schedule recovery plan in place");
+      var all = P.cum.concat(Wst.cum).concat(A.cum).concat([0]), lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.12 || 100; lo -= pad; hi += pad;
+      var X0 = 14, X1 = 262, Y0 = 24, Y1 = 132;
+      function X(m) { return X0 + (X1 - X0) * m / H; } function Y(v) { return Y1 - (Y1 - Y0) * (v - lo) / (hi - lo); }
+      var s = '<svg viewBox="0 0 345 160" role="img" aria-label="Cumulative cash over five years for the plan, this slip and the worst slip on the slider">';
+      s += txt(X0, 13, "cash in the bank; each line is one slip", 10, { opacity: 0.6 });
+      for (var w = cyc; w <= H; w += cyc) s += '<line x1="' + X(w).toFixed(1) + '" y1="' + Y0 + '" x2="' + X(w).toFixed(1) + '" y2="' + Y1 + '" stroke="currentColor" stroke-width="0.7" stroke-dasharray="2 3" opacity="' + (cyc < 6 ? 0.16 : 0.35) + '"/>';
+      s += txt(X0, 150, "now", 9.5, { opacity: 0.6 }); s += txt(X1, 150, "five years", 9.5, { opacity: 0.6, anchor: "end" });
+      s += '<line x1="' + X0 + '" y1="' + Y(0).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(0).toFixed(1) + '" stroke="currentColor" stroke-width="0.8" opacity="0.45"/>';
+      function line(R, color, width, op, dash) { return '<polyline points="' + R.cum.map(function (v, i) { return X(i).toFixed(1) + "," + Y(v).toFixed(1); }).join(" ") + '" fill="none" stroke="' + color + '" stroke-width="' + width + '" opacity="' + op + '"' + (dash ? ' stroke-dasharray="' + dash + '"' : '') + '/>'; }
+      var refs = [{ R: P, slip: 0 }, { R: Wst, slip: SMAX }].filter(function (o) { return o.slip !== slip; });
+      refs.forEach(function (o) { s += line(o.R, "currentColor", 1, 0.3, "3 3"); });
+      s += line(A, ACCENT, 1.7, 1);
+      s += '<circle cx="' + X(A.ready).toFixed(1) + '" cy="' + Y(A.cum[A.ready]).toFixed(1) + '" r="3" fill="' + ACCENT + '"/>';
+      s += txt(X(A.ready), Y(A.cum[A.ready]) + 13, "ready", 9.5, { fill: ACCENT, anchor: X(A.ready) < X0 + 20 ? "start" : "middle" });
+      /* one label per line: which slip it is, and what it leaves after five years */
+      function slipLbl(sl) { return sl === 0 ? "on plan" : sl + (sl === 1 ? " month late" : " months late"); }
+      var marks = refs.filter(function (o) { return Math.abs(o.R.five - A.five) > 1; })
+        .map(function (o) { return { y: Y(o.R.five), val: poundsK(o.R.five), band: slipLbl(o.slip), accent: false }; });
+      marks.push({ y: Y(A.five), val: poundsK(A.five), band: slipLbl(slip), accent: true });
+      var used = [];
+      marks.slice().sort(function (a, b) { return (b.accent ? 1 : 0) - (a.accent ? 1 : 0); }).forEach(function (mk) {
+        var cands = [mk.y, mk.y - 30, mk.y + 30, mk.y - 60, mk.y + 60, mk.y - 90, mk.y + 90];
+        for (var ci = 0; ci < cands.length; ci++) {
+          var yy = Math.min(Y1 - 18, Math.max(Y0 + 8, cands[ci]));
+          if (used.some(function (u) { return Math.abs(u - yy) < 30; })) continue;
+          used.push(yy);
+          s += txt(X1 + 5, yy, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
+          s += txt(X1 + 5, yy + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
+          return;
+        }
+      });
+      s += "</svg>"; $("windowSvg").innerHTML = s;
+      function pb(R) { return R.payback === null ? "not inside five years" : "month " + R.payback; }
+      var slack = P.win - A.ready, lost = A.win - P.win;
+      var r, sub;
+      if (slip === 0) { r = "Customers buy <span class=\"n\">" + cycName(cyc) + "</span>. The build is ready in month " + A.ready + " and the first chance to sell it is month <span class=\"n\">" + P.win + "</span>, worth " + poundsK(P.five) + " over five years."; sub = "Slide the slip. Nothing changes at all until the build crosses that window, and then it changes a great deal."; }
+      else if (same) { r = "A " + word(slip) + "-month slip and the build still makes the same window in month <span class=\"n\">" + P.win + "</span>. Five-year cash unchanged at <span class=\"n\">" + poundsK(P.five) + "</span>."; sub = "The pack calls this late. It has cost nothing yet. " + (slack === 0 ? "One more month and it drops to the line below." : "There " + (slack === 1 ? "is" : "are") + " " + plural(slack, "month") + " of slack left, then it drops to the line below."); }
+      else if (cyc === 1) { r = "Customers can buy in any month, so the build starts earning the month after it is ready. A " + word(slip) + "-month slip costs " + plural(slip, "month") + " of benefit and no more: five-year cash falls from " + poundsK(P.five) + " to <span class=\"n\">" + poundsK(A.five) + "</span>."; sub = "The pack says " + plural(slip, "month") + " late and on budget, and for once the pack has it about right. " + (A.payback === null ? "Payback still does not arrive inside five years." : "Payback moves from " + pb(P) + " to " + pb(A) + ".") + " Nothing here compounds, because there is never a wait for the next chance to sell."; }
+      else { r = "The " + word(slip) + "-month slip misses the window in month " + P.win + ", so customers commit in month <span class=\"n\">" + A.win + "</span> instead, " + (lost === 12 ? "a year" : lost >= 24 ? f1(lost / 12) + " years" : plural(lost, "month")) + " later. Five-year cash falls from " + poundsK(P.five) + " to <span class=\"n\">" + poundsK(A.five) + "</span>."; sub = "The pack says " + plural(slip, "month") + " late and on budget. " + (P.payback === null && A.payback === null ? "Neither version pays back inside five years." : A.payback === null ? "Payback moves from month " + P.payback + " to beyond five years." : "Payback moves from " + pb(P) + " to " + pb(A) + ".") + " The build landed " + plural(A.ready - P.win, "month") + " past the window."; }
+      if (cyc > 1 && slip > 0) {
+        var m1 = run(1, slip), p1 = run(1, 0), monthlyCost = Math.max(0, p1.five - m1.five), hereCost = Math.max(0, P.five - A.five);
+        if (hereCost < 5) sub += " On a monthly cycle the same slip would have cost " + gbpBig(monthlyCost * 1000) + " by now. Here the cost is nothing, and then all of it at once.";
+        else sub += " If the same customers could buy every month, the same slip would cost " + (monthlyCost < 5 ? "almost nothing" : gbpBig(monthlyCost * 1000)) + " rather than " + gbpBig(hereCost * 1000) + ".";
+      } else if (cyc === 1) sub += " The shorter the gap between buying moments, the less a month of delay can cost you.";
+      $("windowRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
+    }
+    on(["cSlip"], render); onRadios("cCycle", render); render();
+  })();
+
+  /* tell the page that embeds this how tall to make the frame */
+  (function () {
+    var last = 0;
+    function report() {
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      if (h && Math.abs(h - last) > 2) { last = h; try { parent.postMessage({ instrument: "what-a-slip-costs", height: h }, "*"); } catch (e) {} }
+    }
+    window.addEventListener("load", report);
+    window.addEventListener("resize", report);
+    if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
+    setTimeout(report, 120); setTimeout(report, 600);
+  })();
+})();
+</script>
+</body>
+</html>
