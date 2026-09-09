@@ -1,12 +1,14 @@
 # Instruments
 
-Three standalone interactive exhibits, one per note on anishpatel.co. They are embedded by iframe and are the only files that ever go to the public origin.
+Five standalone interactive exhibits, one per note on anishpatel.co. They are embedded by iframe and are the only files that ever go to the public origin.
 
 | File | Note it belongs to |
 |---|---|
-| `five-shapes.html` | Five shapes |
+| `five-shapes.html` | Noise (the file keeps its first name so the URL is stable) |
 | `what-a-slip-costs.html` | What a slip costs |
 | `margin-or-growth.html` | Margin or growth |
+| `road-by-road.html` | Building density (Cintas) |
+| `the-cycle.html` | Waiting |
 
 ## Where they serve from
 
@@ -47,7 +49,9 @@ The floors are the tallest measured render, a 375px phone, with headroom.
 |---|---|---|---|
 | `five-shapes.html` | 1113 | 1025 | 1140 |
 | `what-a-slip-costs.html` | 1076 | 956 | 1120 |
-| `margin-or-growth.html` | 1514 | 1256 | 1560 |
+| `margin-or-growth.html` | 1540 | 1251 | 1560 |
+| `road-by-road.html` | 850 | 847 | 900 |
+| `the-cycle.html` | 995 | 878 | 1040 |
 
 ## What each one models
 
@@ -56,6 +60,10 @@ The floors are the tallest measured render, a 375px phone, with headroom.
 **What a slip costs** is a five-year undiscounted cash line for a build whose benefit only starts at the first buying window at or after it is ready, with a 40 / 75 / 100 adoption ramp.
 
 **Margin or growth** compares a cost programme with an expansion on a Gordon-growth perpetuity, and carries a third control for how long the faster growth lasts. For ever is the perpetuity; the finite settings run the faster growth and the new-market return for that many years, then fall back to today's growth at the core's return and discount the rest. On the defaults the expansion is worth £250m for ever and £144m if 8% lasts five years, against a £162m cost programme, and it takes about sixteen years of 8% to draw level.
+
+**Road by road** keeps your total stops fixed and spreads them across one to ten equal patches against a rival who keeps twenty stops on one. Road per door in a patch scales with the square root of area over stops, so your road per door against the rival's is the square root of (rival's stops ÷ your stops per patch): 0.45 at one patch, 1.0 at five, 1.41 at ten. The total never enters except through how thinly it is spread.
+
+**The cycle** charges one cost of a slow sales process: a live deal has a fixed chance of dying each month it waits (15% by default), so survival to decision is (1 − d)^N. Won a month = leads × survival × win rate; deals in flight = leads × (1 + (1 − d) + …) over N months; the line is cumulative revenue from month N + 1 over two years against a fixed one-month reference. Defaults: 100 leads, 25% win rate, £20k a deal. At three months that is 39% of deals lost, 15 won a month against 21, £6.4m against £9.8m over two years, and 257 in flight against 100.
 
 ## Sized for the note column, not the phone
 
