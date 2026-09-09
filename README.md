@@ -4,11 +4,13 @@ Five standalone interactive exhibits, one per note on anishpatel.co. They are em
 
 | File | Note it belongs to |
 |---|---|
-| `five-shapes.html` | Noise (the file keeps its first name so the URL is stable) |
-| `what-a-slip-costs.html` | What a slip costs |
-| `margin-or-growth.html` | Margin or growth |
-| `road-by-road.html` | Building density (Cintas) |
+| `five-shapes.html` | Reading the numbers |
+| `margin-or-growth.html` | Facing into M&A |
 | `the-cycle.html` | Waiting |
+| `what-a-slip-costs.html` | Waiting |
+| `road-by-road.html` | Building density (Cintas) |
+
+Filenames are stable and no longer match their notes' titles, because the notes were merged and renamed while the embed URLs had to keep working. The `location.replace` target at the top of each file is the thing that tracks the note, and it is set in `extract.py`.
 
 ## Where they serve from
 
