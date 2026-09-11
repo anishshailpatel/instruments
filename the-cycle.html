@@ -289,7 +289,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         sub = "Stretch the cycle and watch the pipeline swell while the line flattens. The leads, the win rate and the sellers are all the same.";
       } else {
         r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting, so you win " + f1(A.perMonth) + " a month against " + f1(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
-        sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", so the sales review sees a fuller funnel from a slower process. Nobody sold any worse; the deals died waiting.";
+        sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", so the sales review sees a fuller funnel from a slower process, with the same sellers and the same win rate.";
       }
       $("cycleRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }

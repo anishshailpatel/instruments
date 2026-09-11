@@ -312,7 +312,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var driftTxt = Math.abs(d0) < Math.pow(10, -dp) / 2 ? null : (d0 < 0 ? "down " : "up ") + fmt(Math.abs(d0)) + uw + " on the first " + b + " months' average of " + fmt(centre);
       var dirWord = function (d) { return d.level ? "level" : d.up ? "up" : "down"; };
       if (mode === "none") {
-        r = "The pack says " + S.months[last] + " is " + dirWord(dm) + " on " + S.months[last - 1] + (dy ? " and " + dirWord(dy) + " on " + S.months[last - 12] : "") + ". Plotted, the same numbers show " + (trail >= 3 ? "<span class=\"n\">" + trail + " months in a row " + dir + " the level of the first " + b + "</span>" : "<span class=\"n\">a line that wanders</span>") + (driftTxt ? ", " + driftTxt : "") + ".";
+        r = S.months[last] + " is " + dirWord(dm) + " on " + S.months[last - 1] + (dy ? " and " + dirWord(dy) + " on " + S.months[last - 12] : "") + ". Over " + n + " months the line shows " + (trail >= 3 ? "<span class=\"n\">" + trail + " months in a row " + dir + " the level of the first " + b + "</span>" : "<span class=\"n\">a line that wanders</span>") + (driftTxt ? ", " + driftTxt : "") + ".";
         sub = "Add a band to see which months, if any, are worth a question.";
       } else {
         var how = mode === "sd1" ? "one standard deviation" : mode === "sd2" ? "two standard deviations" : C.xmrK + " times the average month-to-month move";
