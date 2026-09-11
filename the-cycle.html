@@ -175,7 +175,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   var CASE = {
 
     cycle:  { leads: 100, win: 25, deal: 20, decay: 15, len: 3, horizon: 24,
-              essay: "The book's claim is that elapsed time is mostly waiting and that waiting costs more than it looks. The instrument charges one cost only, deals dying in the queue. The book adds faster learning and earlier cash, which are real and not modelled here." }
+              essay: "The book's claim is that elapsed time is mostly waiting and that waiting costs more than it looks. The instrument charges only one cost, the deals that die in the queue. The book adds faster learning and earlier cash, which are real and not modelled here." }
   };
 
   /* ---------- helpers ---------- */
@@ -252,7 +252,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         "each month a live deal has a " + pct1(A.d * 100) + " chance of dying while it waits: the champion moves on, the budget goes elsewhere, a rival gets there first; survival to decision = (1 − " + pct1(A.d * 100) + ")^" + N + " = " + pct1(A.surv * 100),
         "won a month = leads × survival × win rate = " + fmtNum(A.L, 0) + " × " + pct1(A.surv * 100) + " × " + pct1(A.w * 100) + " = " + f1(A.perMonth),
         "deals in flight = leads × (1 + (1 − d) + (1 − d)² …) over the " + plural(N, "month") + " = " + Math.round(A.wip) + " <i>(Little's law, with the leak)</i>",
-        "the line adds won × " + gbpBig(A.deal) + " from month " + (N + 1) + ", when the first cohort reaches a decision; the one-month line is the fixed reference and the frame does not rescale"
+        "the line adds won × " + gbpBig(A.deal) + " from month " + (N + 1) + ", when the first cohort reaches a decision; the one-month line is the fixed reference and the frame doesn't rescale"
       ], C.essay);
       $("cycleCard").innerHTML = tile("New leads a month", fmtNum(A.L, 0), "unchanged", "flat") + tile("Pipeline", Math.round(A.wip) + " deals", gbpBig(A.wip * A.deal) + " in flight", N > 1 ? "good" : "flat") + stamp("Sales review", N >= 3 ? "Strong pipeline" : "On track", "good", N >= 3 ? "coverage up, decisions slow" : "decisions coming through");
       var lo = 0, hi = Math.max(P.total, 1) * 1.06;
@@ -286,10 +286,10 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var lost = 1 - A.surv, r, sub;
       if (N === 1) {
         r = "A one-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting and wins " + f1(A.perMonth) + " a month, <span class=\"n\">" + gbpBig(A.total) + "</span> over two years.";
-        sub = "Stretch the cycle and the pipeline grows while the revenue line flattens, with the leads, the win rate and the sellers unchanged.";
+        sub = "";
       } else {
         r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting, so you win " + f1(A.perMonth) + " a month against " + f1(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
-        sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", so the sales review sees a fuller funnel from a slower process, with the same sellers and the same win rate.";
+        sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", from the same sellers at the same win rate.";
       }
       $("cycleRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }

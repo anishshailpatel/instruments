@@ -158,12 +158,12 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
     <div class="layer"><div class="card c3" id="bandCard"></div></div>
     <div class="layer">
       <div class="tool">
-        <p class="stage-note">Each row of the pack above takes a different shape. Flick between them.</p>
+        <p class="stage-note">Each row of the pack above takes a different shape, so flick between them.</p>
         <div class="seg" role="radiogroup" aria-label="Which shape" id="bandSeriesSeg"></div>
         <div class="case" id="bandCase"></div>
         <div id="bandSvg"></div>
         <div class="controls">
-          <div class="control"><label for="bWig">How much this line bounces about, month to month: <output id="bWigOut" aria-live="off"></output></label><input type="range" id="bWig" min="0" max="300" step="25" value="100" aria-label="How much the line bounces about month to month"></div>
+          <div class="control"><label for="bWig">Month-to-month bounce: <output id="bWigOut" aria-live="off"></output></label><input type="range" id="bWig" min="0" max="300" step="25" value="100" aria-label="How much the line bounces about month to month"></div>
           <div class="seg" role="radiogroup" aria-label="Which band">
             <label><input type="radio" name="bband" value="none" checked><span>No band</span></label>
             <label><input type="radio" name="bband" value="sd1"><span>±1 sd</span></label>
@@ -187,23 +187,23 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
                 { key: "spike", tab: "New bookings", name: "New bookings", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [1260, 1790, 1280, 1305, 1270, 1290, 1310, 1255, 1300, 1275, 1320, 1270, 1305, 1270],
                   base: [1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285],
-                  guide: "One big month, twelve months back. The year-on-year fall is measured against it rather than against a level, and it sits inside the baseline as well, dragging the centre up so that every ordinary month since looks low." },
+                  guide: "One big month sits twelve months back. The year-on-year fall is measured against it rather than against a level, and it sits inside the baseline too, dragging the centre up so that every ordinary month since looks low." },
                 { key: "lumpy", tab: "Revenue", name: "Revenue", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [4090, 4380, 3980, 4310, 4020, 4290, 4160, 3960, 4340, 4070, 4250, 3990, 4300, 4130],
                   base: [4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170],
-                  guide: "A lumpy line that swings hard and means very little month to month. The limits are wide because the baseline is bumpy, and that width is what stops you chasing every red cell in the pack." },
+                  guide: "This line swings hard and means very little month to month. The band is wide because the baseline was bumpy, so most of the red cells in the pack sit inside it." },
                 { key: "drift", tab: "Gross margin", name: "Gross margin", unit: "%", unitWord: " points", dp: 1, pts: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [63.1, 62.8, 63.0, 62.7, 62.9, 62.6, 62.4, 62.5, 62.2, 62.3, 62.0, 61.8, 61.5, 61.6],
                   base: [63.0, 62.9, 62.79, 62.69, 62.58, 62.48, 62.37, 62.27, 62.16, 62.06, 61.95, 61.85, 61.74, 61.64],
-                  guide: "A slow drift, and the fall in it is real. No single month was ever big enough to trigger a question, which is how a decline like this survives a year of packs." },
+                  guide: "The fall here is real and slow. No single month was big enough to trigger a question, so it went through a year of packs without one." },
                 { key: "steady", tab: "Overheads", name: "Overheads", unit: "£000", unitWord: "k", dp: 0, pts: false, down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [1725, 1755, 1730, 1750, 1738, 1762, 1728, 1748, 1732, 1758, 1742, 1735, 1752, 1740],
                   base: [1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743, 1743],
-                  guide: "A steady line, and every move the pack coloured this year was noise. There is nothing here worth a question, which is worth knowing before someone spends ten minutes of a meeting on it." },
+                  guide: "The line is steady, and every move the pack coloured this year was noise. Nothing here is worth ten minutes of a meeting." },
                 { key: "step", tab: "Debtor days", name: "Debtor days", unit: "", unitWord: " days", dp: 0, pts: false, abs: true, dUnit: " days", down: true, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [43, 45, 44, 46, 43, 44, 45, 44, 51, 53, 52, 51, 53, 52],
                   base: [44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 44.25, 52, 52, 52, 52, 52, 52],
-                  guide: "A step: the level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find out what changed, then draw the limits again from where the number now sits." }
+                  guide: "The level changed once, in month nine, and has held there since. Limits set before the change flag every month after it and go on saying the same thing. Find out what changed, then draw the limits again from where the number now sits." }
               ],
               essay: "Five rows of a stylised pack, arranged so each shows one shape. None is derived from another, so each can move on its own." },
   };
@@ -262,7 +262,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   (function () {
     var C = CASE.band, S_ALL = {}; C.series.forEach(function (s) { S_ALL[s.key] = s; });
     seg("bandSeriesSeg", "bseries", C.series.map(function (s) { return [s.key, s.tab]; }), "drift");
-    var CU = caseUI("bandCase", [{ k: "base", label: "Baseline months", v: C.baseline, min: 3, max: 12, step: 1 }, { k: "run", label: "Run that counts as a shift", suffix: "months", v: C.run, min: 3, max: 10, step: 1 }], function () { render(); });
+    var CU = caseUI("bandCase", [{ k: "base", label: "Baseline months", v: C.baseline, min: 3, max: 12, step: 1 }, { k: "run", label: "Months on one side that count as a shift", v: C.run, min: 3, max: 10, step: 1 }], function () { render(); });
     function render() {
       var S = S_ALL[radio("bseries")] || C.series[0], mode = radio("bband"), k = +$("bWig").value / 100, dp = S.dp, n = S.vals.length, last = n - 1, uw = S.unitWord, RUN = CU.get("run");
       working("bandW", ["centre and band are set on the first " + CU.get("base") + " months and tested on the rest", "±1 sd, ±2 sd: standard deviation of those first months", "process limits: centre ± " + C.xmrK + " × mean |month − previous month| <i>(the XmR chart; the " + C.xmrK + " turns an average move into a three-sigma band)</i>", "a shift is reported when the last " + RUN + " months all sit on one side of the centre <i>(the essay's shorthand is three months trending one way)</i>", "each shape is an underlying level or trend plus what is left over; the bounce slider scales only what is left over, so the underlying never moves"], C.essay);
@@ -309,26 +309,26 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       s += txt(X0, 140, S.months[0], 10, { opacity: 0.6 }); s += txt(X1, 140, S.months[last], 10, { opacity: 0.6, anchor: "end" });
       s += "</svg>"; $("bandSvg").innerHTML = s;
       var dir = side[last] > 0 ? "above" : "below", r, sub, d0 = nums[last] - centre;
-      var driftTxt = Math.abs(d0) < Math.pow(10, -dp) / 2 ? null : (d0 < 0 ? "down " : "up ") + fmt(Math.abs(d0)) + uw + " on the first " + b + " months' average of " + fmt(centre);
+      var driftTxt = Math.abs(d0) < Math.pow(10, -dp) / 2 ? null : (d0 < 0 ? "down " : "up ") + fmt(Math.abs(d0)) + uw + " on the first " + word(b) + " months' average of " + fmt(centre);
       var dirWord = function (d) { return d.level ? "level" : d.up ? "up" : "down"; };
       if (mode === "none") {
-        r = S.months[last] + " is " + dirWord(dm) + " on " + S.months[last - 1] + (dy ? " and " + dirWord(dy) + " on " + S.months[last - 12] : "") + ". Over " + n + " months the line shows " + (trail >= 3 ? "<span class=\"n\">" + trail + " months in a row " + dir + " the level of the first " + b + "</span>" : "<span class=\"n\">a line that wanders</span>") + (driftTxt ? ", " + driftTxt : "") + ".";
+        r = S.months[last] + " is " + dirWord(dm) + " on " + S.months[last - 1] + (dy ? " and " + dirWord(dy) + " on " + S.months[last - 12] : "") + ". Over " + n + " months the line shows " + (trail >= 3 ? "<span class=\"n\">" + plural(trail, "month") + " in a row " + dir + " the level of the first " + word(b) + "</span>" : "<span class=\"n\">a line that wanders</span>") + (driftTxt ? ", " + driftTxt : "") + ".";
         sub = "Add a band to see which months, if any, are worth a question.";
       } else {
         var how = mode === "sd1" ? "one standard deviation" : mode === "sd2" ? "two standard deviations" : C.xmrK + " times the average month-to-month move";
         var verdict;
-        if (nOut === 0 && !shift) verdict = "Nothing outside the limits and no run: nothing to investigate.";
+        if (nOut === 0 && !shift) verdict = "Nothing outside the limits and no run, so there's nothing to chase.";
         else if (nOut === 0) verdict = cap(plural(trail, "month")) + " in a row " + dir + " the centre.";
         else if (nOut === 1 && !shift) verdict = "One month outside the limits, and nothing since.";
         else if (!shift) verdict = cap(plural(nOut, "month")) + " outside the limits.";
         else verdict = cap(plural(nOut, "month")) + " outside, and " + plural(trail, "month") + " in a row " + dir + " the centre.";
         var flatBase = Math.abs(half) < Math.pow(10, -dp) / 2;
         r = "<span class=\"n\">" + verdict + "</span> " + (flatBase
-          ? "Centre " + fmt(centre) + ", and a band that collapses onto the line: with no bounce at all in the first " + b + " months there is nothing for the limits to allow for."
-          : "Centre " + fmt(centre) + " and a band of ±" + fmt(half) + uw + ", set by the first " + b + " months: " + how + ", and this series moves about " + fmt(mmr) + uw + " a month.");
+          ? "Centre " + fmt(centre) + ", and a band that collapses onto the line: with no bounce at all in the first " + word(b) + " months there's nothing for the limits to allow for."
+          : "Centre " + fmt(centre) + " and a band of ±" + fmt(half) + uw + ", set by the first " + word(b) + " months: " + how + ", and this series moves about " + fmt(mmr) + uw + " a month.");
         var quiet = trail >= 3 && trailOut === 0;
         sub = S.guide;
-        if (Math.abs(k - 1) > 1e-9) sub += k < 0.6 ? " With the bounce turned down the shape underneath is easy to see, and it is the same shape at every setting." : " With the bounce turned up the noise starts to hide the shape, and it is the same shape at every setting.";
+        if (Math.abs(k - 1) > 1e-9) sub += k < 0.6 ? " With the bounce turned down the shape underneath is easy to see." : " With the bounce turned up the noise starts to hide a shape that hasn't moved.";
         else if (mode === "sd1") sub += " A band this narrow flags about a third of ordinary months for nothing.";
         else if (mode === "sd2") sub += " Nineteen ordinary months in twenty fall inside two standard deviations, so a month outside it is worth a question.";
       }

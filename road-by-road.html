@@ -250,11 +250,11 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         "cost to reach a customer in a patch ∝ √(area ÷ customers in that patch) <i>(the travelling-salesman result: the shortest route through n stops in an area grows with √(n × area), so the distance per stop falls with the square root of density)</i>",
         "patches are equal in size; your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + fmtNum(per, per < 10 ? 1 : 0) + ", the rival's " + fmtNum(R, 0) + " in one patch",
         "your cost per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + fmtNum(per, per < 10 ? 1 : 0) + ") = " + ratio.toFixed(2),
-        "your total of " + fmtNum(S, 0) + " enters the arithmetic only through how thinly it is spread"
+        "your total of " + fmtNum(S, 0) + " enters the arithmetic only through how thinly it's spread"
       ], C.essay);
       $("densityCard").innerHTML = tile("Customers", fmtNum(S, 0), mult >= 1.05 ? f1(mult) + "× the rival" : mult <= 0.95 ? f1(1 / mult) + "× fewer than the rival" : "level with the rival", mult >= 1.05 ? "good" : mult <= 0.95 ? "bad" : "flat")
         + tile("Markets served", String(k), k === 1 ? "one patch" : k + " patches", k > 1 ? "good" : "flat")
-        + stamp("Board view", mult > 1 ? "Market leader" : "Challenger", mult > 1 ? "good" : "warn", k === 1 ? "expand into new patches" : "national footprint the rival lacks");
+        + stamp("Position", mult > 1 ? "Market leader" : "Challenger", mult > 1 ? "good" : "warn", k === 1 ? "expand into new patches" : "national footprint the rival lacks");
       var sq = 24, gap = 4, x0 = 10, yTop = 30, s2 = '<svg viewBox="0 0 345 172" role="img" aria-label="Your customers spread across patches against a rival who keeps all of theirs in one, and what each of you spends reaching a customer">';
       s2 += txt(x0, 18, "you: " + fmtNum(S, 0) + " customers", 10.5, { opacity: 0.7 }); s2 += txt(335, 18, "rival: " + fmtNum(R, 0), 10.5, { opacity: 0.7, anchor: "end" });
       for (var i = 0; i < k; i++) { var px = x0 + i * (sq + gap); s2 += dots(px, yTop, sq, Math.round(per)); s2 += txt(px + sq / 2, yTop + sq + 12, fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0), 10.5, { opacity: 0.6, anchor: "middle" }); }
@@ -275,12 +275,12 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       if (k === 1) {
         /* what the slider will show, said in advance: where you draw level, and where ten patches leaves you */
         var kL = S / R, exact = kL >= 2 && kL <= 10 && Math.abs(kL - Math.round(kL)) < 1e-9, r10 = Math.sqrt(R / (S / 10));
-        sub = "Your total only enters through how thinly it is spread.";
-        if (exact && kL === 10) sub += " Across ten patches you would be level with them in each.";
-        else if (exact) sub += " Across " + word(kL) + " patches you would be level with them in each, and across ten " + costTxt(r10, true) + ".";
-        else sub += " Across ten patches " + costTxt(r10, true) + ".";
+        sub = "Spread the same " + fmtNum(S, 0) + " across more patches and each of them costs more to reach: ";
+        if (exact && kL === 10) sub += "across ten you would be level with the rival in each.";
+        else if (exact) sub += "across " + word(kL) + " you would be level with the rival in each, and across ten " + costTxt(r10, true) + ".";
+        else sub += "across ten " + costTxt(r10, true) + ".";
       } else {
-        sub = "The cost is set by the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only enters through how thinly it is spread." + (mult > 1 ? " Having " + f1(mult) + " times their customers overall does nothing for you inside any one patch." : "");
+        sub = "The cost is set by the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only sets how thinly that's spread." + (mult > 1 ? " " + cap(f1(mult)) + " times their customers overall changes nothing inside any one patch." : "");
       }
       $("densityRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
