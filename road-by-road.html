@@ -269,9 +269,19 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       s2 += txt(bx, 160, "equal patches; the number under each square is the customers in it", 10.5, { opacity: 0.6 });
       s2 += "</svg>"; $("densitySvg").innerHTML = s2;
       var perTxt = fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0);
-      var verdict = level ? "each of your customers costs the same to reach as each of the rival's" : ratio < 1 ? "each of your customers costs " + pct + "% less to reach than each of the rival's" : ratio < 2 ? "each of your customers costs " + pct + "% more to reach than each of the rival's" : "each of your customers costs " + f1(ratio) + " times as much to reach as each of the rival's";
-      var r = (k === 1 ? "All " + fmtNum(S, 0) + " of your customers in one patch, against the rival's " + fmtNum(R, 0) : "Spread across " + plural(k, "patch", "patches") + " you have " + perTxt + " customers in each, against the rival's " + fmtNum(R, 0) + " in one") + ": <span class=\"n\">" + verdict + "</span>.";
-      var sub = (mult > 1 ? "You have " + f1(mult) + " times their customers, and the total never comes into it. " : "Your total never comes into it. ") + "What sets the cost is how many of your customers share a patch" + (k > 1 ? ", and spreading them across " + word(k) + " has thinned that from " + fmtNum(S, 0) + " to " + perTxt + "." : ", which for now is all of them. Spread them and the cost rises in every patch at once.");
+      function costTxt(rt, would) { var pc = Math.round(Math.abs(1 - rt) * 100), v = would ? "would cost" : "costs"; return Math.abs(rt - 1) < 0.005 ? "each of yours " + v + " the same to reach as each of theirs" : rt < 1 ? "each of yours " + v + " " + pc + "% less to reach than each of theirs" : rt < 2 ? "each of yours " + v + " " + pc + "% more to reach than each of theirs" : "each of yours " + v + " " + f1(rt) + " times as much to reach as each of theirs"; }
+      var r = (k === 1 ? "All " + fmtNum(S, 0) + " of your customers are in one patch against the rival's " + fmtNum(R, 0) + ", so " : "Across " + plural(k, "patch", "patches") + " you have " + perTxt + " customers in each against the rival's " + fmtNum(R, 0) + " in one, so ") + "<span class=\"n\">" + costTxt(ratio, false) + "</span>.";
+      var sub;
+      if (k === 1) {
+        /* what the slider will show, said in advance: where you draw level, and where ten patches leaves you */
+        var kL = S / R, exact = kL >= 2 && kL <= 10 && Math.abs(kL - Math.round(kL)) < 1e-9, r10 = Math.sqrt(R / (S / 10));
+        sub = "Your total only enters through how thinly it is spread.";
+        if (exact && kL === 10) sub += " Across ten patches you would be level with them in each.";
+        else if (exact) sub += " Across " + word(kL) + " patches you would be level with them in each, and across ten " + costTxt(r10, true) + ".";
+        else sub += " Across ten patches " + costTxt(r10, true) + ".";
+      } else {
+        sub = "The cost is set by the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only enters through how thinly it is spread." + (mult > 1 ? " Having " + f1(mult) + " times their customers overall does nothing for you inside any one patch." : "");
+      }
       $("densityRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
     on(["dPatches"], render); render();

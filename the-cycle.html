@@ -286,7 +286,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var lost = 1 - A.surv, r, sub;
       if (N === 1) {
         r = "A one-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting and wins " + f1(A.perMonth) + " a month, <span class=\"n\">" + gbpBig(A.total) + "</span> over two years.";
-        sub = "Stretch the cycle and watch the pipeline swell while the line flattens. The leads, the win rate and the sellers are all the same.";
+        sub = "Stretch the cycle and the pipeline grows while the revenue line flattens, with the leads, the win rate and the sellers unchanged.";
       } else {
         r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting, so you win " + f1(A.perMonth) + " a month against " + f1(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
         sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", so the sales review sees a fuller funnel from a slower process, with the same sellers and the same win rate.";

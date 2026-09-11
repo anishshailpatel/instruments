@@ -187,7 +187,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
                 { key: "spike", tab: "New bookings", name: "New bookings", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [1260, 1790, 1280, 1305, 1270, 1290, 1310, 1255, 1300, 1275, 1320, 1270, 1305, 1270],
                   base: [1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285, 1285],
-                  guide: "A one-off, twelve months back. The year-on-year fall is measured against one big month rather than a level, and that same month sits inside the baseline, dragging the centre up until every ordinary month since looks low." },
+                  guide: "One big month, twelve months back. The year-on-year fall is measured against it rather than against a level, and it sits inside the baseline as well, dragging the centre up so that every ordinary month since looks low." },
                 { key: "lumpy", tab: "Revenue", name: "Revenue", unit: "£000", unitWord: "k", dp: 0, pts: false, months: ["Apr 25", "May 25", "Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
                   vals: [4090, 4380, 3980, 4310, 4020, 4290, 4160, 3960, 4340, 4070, 4250, 3990, 4300, 4130],
                   base: [4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170, 4170],
@@ -328,9 +328,9 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
           : "Centre " + fmt(centre) + " and a band of ±" + fmt(half) + uw + ", set by the first " + b + " months: " + how + ", and this series moves about " + fmt(mmr) + uw + " a month.");
         var quiet = trail >= 3 && trailOut === 0;
         sub = S.guide;
-        if (Math.abs(k - 1) > 1e-9) sub += k < 0.6 ? " With the bounce turned down, the same underlying shape is unmistakable." : " Turn the bounce up and the noise starts to swallow the shape, without the shape having changed at all.";
+        if (Math.abs(k - 1) > 1e-9) sub += k < 0.6 ? " With the bounce turned down the shape underneath is easy to see, and it is the same shape at every setting." : " With the bounce turned up the noise starts to hide the shape, and it is the same shape at every setting.";
         else if (mode === "sd1") sub += " A band this narrow flags about a third of ordinary months for nothing.";
-        else if (mode === "sd2") sub += " Nineteen ordinary months in twenty fall inside two standard deviations, so what falls outside has earned a question.";
+        else if (mode === "sd2") sub += " Nineteen ordinary months in twenty fall inside two standard deviations, so a month outside it is worth a question.";
       }
       $("bandRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
