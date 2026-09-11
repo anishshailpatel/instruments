@@ -51,12 +51,11 @@ p { margin: 0; }
 .claim { color: var(--ink); font-size: 1.05rem; }
 .close { color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
 
-/* the three layers: the card, the tool, the working. No labels; the card's corner stamp is the only marker */
+/* the three layers: the card, the tool, the working. No labels and no stamp; the dashed border and the duller colours are what say quoted */
 .layer { display: flex; flex-direction: column; gap: 0.6rem; }
 
 /* layer one: the pack, quoted rather than endorsed */
-.card { position: relative; display: grid; gap: 0.6rem 1rem; padding: 1.5rem 1rem 0.9rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
-.card::before { content: "as reported"; position: absolute; top: 0.45rem; left: 1rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.card { display: grid; gap: 0.6rem 1rem; padding: 0.9rem 1rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
 .card.c2 { grid-template-columns: 1fr 1fr; } .card.c3 { grid-template-columns: 1fr 1fr 1fr; } .card.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
 @media (max-width: 480px) { .card.c4 { grid-template-columns: 1fr 1fr; } }
 .card .k { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.15rem; }
