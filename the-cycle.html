@@ -51,9 +51,8 @@ p { margin: 0; }
 .claim { color: var(--ink); font-size: 1.05rem; }
 .close { color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
 
-/* the three layers */
+/* the three layers: the card, the tool, the working. No labels; the card's corner stamp is the only marker */
 .layer { display: flex; flex-direction: column; gap: 0.6rem; }
-.layer-label { margin: 0; font-family: var(--sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
 
 /* layer one: the pack, quoted rather than endorsed */
 .card { position: relative; display: grid; gap: 0.6rem 1rem; padding: 1.5rem 1rem 0.9rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
@@ -157,8 +156,8 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 <body>
 <div class="sheet">
 <section id="cycle">
-    <div class="layer"><p class="layer-label">The pack</p><div class="card c3" id="cycleCard"></div></div>
-    <div class="layer"><p class="layer-label">The instrument</p>
+    <div class="layer"><div class="card c3" id="cycleCard"></div></div>
+    <div class="layer">
       <div class="tool">
         <div class="case" id="cycleCase"></div>
         <div id="cycleSvg"></div>
