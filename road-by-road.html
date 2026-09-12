@@ -247,9 +247,10 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var S = CU.get("stops"), R = CU.get("rival"), k = +$("dPatches").value, per = S / k, ratio = Math.sqrt(R / per), mult = S / R;
       $("dPatchesOut").textContent = plural(k, "patch", "patches");
       working("densityW", [
-        "cost to reach a customer in a patch ∝ √(area ÷ customers in that patch) <i>(the travelling-salesman result: the shortest route through n stops in an area grows with √(n × area), so the distance per stop falls with the square root of density)</i>",
+        "ground covered per customer in a patch ∝ √(area ÷ customers in that patch) <i>(the travelling-salesman result: the shortest route through n stops in an area grows with √(n × area), so the distance per stop falls with the square root of density)</i>",
+        "it bounds the distance and nothing else; time at the customer is the same for everyone, so a patch where travel is a third of the day moves far less than the ratio below",
         "patches are equal in size; your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + fmtNum(per, per < 10 ? 1 : 0) + ", the rival's " + fmtNum(R, 0) + " in one patch",
-        "your cost per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + fmtNum(per, per < 10 ? 1 : 0) + ") = " + ratio.toFixed(2),
+        "your ground per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + fmtNum(per, per < 10 ? 1 : 0) + ") = " + ratio.toFixed(2),
         "your total of " + fmtNum(S, 0) + " enters the arithmetic only through how thinly it's spread"
       ], C.essay);
       $("densityCard").innerHTML = tile("Customers", fmtNum(S, 0), mult >= 1.05 ? f1(mult) + "× the rival" : mult <= 0.95 ? f1(1 / mult) + "× fewer than the rival" : "level with the rival", mult >= 1.05 ? "good" : mult <= 0.95 ? "bad" : "flat")
@@ -263,24 +264,24 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var pct = Math.round(Math.abs(1 - ratio) * 100), level = Math.abs(ratio - 1) < 0.005;
       var youLbl = level ? "you, level" : ratio < 1 ? "you −" + pct + "%" : ratio < 2 ? "you +" + pct + "%" : "you ×" + f1(ratio);
       var bx = 10, by = 108, bh = 9, bw = Math.min(100, 250 / Math.max(ratio, 1)), yw = bw * ratio;
-      s2 += txt(bx, 96, "what it costs to reach one customer", 10.5, { opacity: 0.7 });
+      s2 += txt(bx, 96, "ground covered per customer", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + by + '" width="' + bw.toFixed(1) + '" height="' + bh + '" fill="currentColor" opacity="0.3"/>'; s2 += txt(bx + bw + 6, by + bh - 1, "rival", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + (by + 18) + '" width="' + yw.toFixed(1) + '" height="' + bh + '" fill="' + ACCENT + '"/>'; s2 += txt(bx + yw + 6, by + 18 + bh - 1, youLbl, 10.5, { fill: ACCENT, weight: 600 });
       s2 += txt(bx, 160, "equal patches; the number under each square is the customers in it", 10.5, { opacity: 0.6 });
       s2 += "</svg>"; $("densitySvg").innerHTML = s2;
       var perTxt = fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0);
-      function costTxt(rt, would) { var pc = Math.round(Math.abs(1 - rt) * 100), v = would ? "would cost" : "costs"; return Math.abs(rt - 1) < 0.005 ? "each of yours " + v + " the same to reach as each of theirs" : rt < 1 ? "each of yours " + v + " " + pc + "% less to reach than each of theirs" : rt < 2 ? "each of yours " + v + " " + pc + "% more to reach than each of theirs" : "each of yours " + v + " " + f1(rt) + " times as much to reach as each of theirs"; }
+      function costTxt(rt, would) { var pc = Math.round(Math.abs(1 - rt) * 100), v = would ? "would cover" : "cover"; return Math.abs(rt - 1) < 0.005 ? "you " + v + " the same ground per customer as the rival" : rt < 1 ? "you " + v + " " + pc + "% less ground per customer than the rival" : rt < 2 ? "you " + v + " " + pc + "% more ground per customer than the rival" : "you " + v + " " + f1(rt) + " times the ground per customer the rival does"; }
       var r = (k === 1 ? "All " + fmtNum(S, 0) + " of your customers are in one patch against the rival's " + fmtNum(R, 0) + ", so " : "Across " + plural(k, "patch", "patches") + " you have " + perTxt + " customers in each against the rival's " + fmtNum(R, 0) + " in one, so ") + "<span class=\"n\">" + costTxt(ratio, false) + "</span>.";
       var sub;
       if (k === 1) {
         /* what the slider will show, said in advance: where you draw level, and where ten patches leaves you */
         var kL = S / R, exact = kL >= 2 && kL <= 10 && Math.abs(kL - Math.round(kL)) < 1e-9, r10 = Math.sqrt(R / (S / 10));
-        sub = "Spread the same " + fmtNum(S, 0) + " across more patches and each of them costs more to reach: ";
+        sub = "Spread the same " + fmtNum(S, 0) + " across more patches and the ground per customer grows: ";
         if (exact && kL === 10) sub += "across ten you would be level with the rival in each.";
         else if (exact) sub += "across " + word(kL) + " you would be level with the rival in each, and across ten " + costTxt(r10, true) + ".";
         else sub += "across ten " + costTxt(r10, true) + ".";
       } else {
-        sub = "The cost is set by the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only sets how thinly that's spread." + (mult > 1 ? " " + cap(f1(mult)) + " times their customers overall changes nothing inside any one patch." : "");
+        sub = "What sets it is the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only decides how thinly that's spread." + (mult > 1 ? " " + cap(f1(mult)) + " times their customers overall changes nothing inside any one patch." : "");
       }
       $("densityRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
