@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Waiting</title>
-<script>if (window.top === window.self && location.protocol === "https:" && !/^(localhost$|127\.|\[?::1)/.test(location.hostname)) location.replace('https://anishpatel.co/Notes/Waiting');</script>
+<title>What a slip costs</title>
+<meta name="description" content="What a late build costs depends less on how late it is than on when your customers can next buy. Change how often they buy and how far the build slips.">
+<script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
@@ -150,10 +151,11 @@ details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
 </head>
 <body>
 <div class="sheet">
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>What a slip costs</h1><p class="standfirst">What a late build costs depends less on how late it is than on when your customers can next buy. Change how often they buy and how far the build slips.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Waiting" target="_top">Waiting</a>.</p></header>
 <section id="window">
     <div class="layer"><div class="card c3" id="windowCard"></div></div>
     <div class="layer">
@@ -177,7 +179,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 
     window: { cost: 1200, build: 9, benefit: 900, slip: 4, slipRange: [0, 12, 1], ramp: [0.4, 0.75, 1], horizon: 60,
               cycles: [["1", "Monthly"], ["3", "Quarterly"], ["12", "Yearly"], ["36", "Every 3 years"]], cycleDefault: "12",
-              essay: "The essay's case was an annual budget round. A maintenance contract, a school year, a licence renewal and a fleet replacement are the same mechanism at four different lengths." },
+              essay: "The example is an annual budget round. A maintenance contract, a school year, a licence renewal and a fleet replacement are the same mechanism at four different lengths." },
   };
 
   /* ---------- helpers ---------- */
@@ -255,7 +257,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         "the case: a " + gbpBig(cost * 1000) + " build over " + plural(build, "month") + ", worth " + gbpBig(ben * 1000) + " a year at full adoption",
         "customers buy " + cycName(cyc) + ", so the build earns nothing until the first buying moment at or after it's ready",
         "cash by month, undiscounted; build cost spread evenly over the build",
-        "adoption ramps " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → ") + " by year <i>(the essay's five-year curve, stylised)</i>",
+        "adoption ramps " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → ") + " by year <i>(a five-year curve, stylised)</i>",
         "the chart keeps one scale across the whole slip slider"
       ], C.essay);
       var P = run(cyc, 0), A = run(cyc, slip), Wst = run(cyc, SMAX), same = A.win === P.win;

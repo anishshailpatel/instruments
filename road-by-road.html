@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Building density</title>
-<script>if (window.top === window.self && location.protocol === "https:" && !/^(localhost$|127\.|\[?::1)/.test(location.hostname)) location.replace('https://anishpatel.co/Notes/Building+density');</script>
+<title>Spread thin</title>
+<meta name="description" content="Spread your customers across more patches while a rival keeps theirs in one, and see what it costs you. Switch between a shared route, where the cost per customer falls with the square root of how many share it, and a shared fixed cost, where it falls one for one.">
+<script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
@@ -150,10 +151,11 @@ details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
 </head>
 <body>
 <div class="sheet">
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Spread thin</h1><p class="standfirst">Spread your customers across more patches while a rival keeps theirs in one, and see what it costs you. Switch between a shared route, where the cost per customer falls with the square root of how many share it, and a shared fixed cost, where it falls one for one.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Building+density" target="_top">Building density</a>.</p></header>
 <section id="density">
     <div class="layer"><div class="card c3" id="densityCard"></div></div>
     <div class="layer">
@@ -162,6 +164,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         <div id="densitySvg"></div>
         <div class="controls">
           <div class="control"><label for="dPatches">Your customers are spread across <output id="dPatchesOut" aria-live="off"></output></label><input type="range" id="dPatches" min="1" max="10" step="1" value="1" aria-label="How many patches your customers are spread across"></div>
+          <div class="control"><label id="dModeLbl">What the customers in a patch share</label><div class="seg" role="radiogroup" aria-labelledby="dModeLbl" id="dModeSeg"></div></div>
         </div>
         <p class="readout" id="densityRead" aria-live="polite"></p>
       </div>
@@ -175,7 +178,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   var CASE = {
 
     density: { stops: 100, rival: 20, patches: 1,
-              essay: "The rival never moves: twenty customers in one patch throughout. Patches are the same size, so the only thing that changes when you spread is how many of your customers share one. The square root is the travelling-salesman result the piece leans on." },
+              essay: "The rival never moves: twenty customers in one patch throughout. Patches are the same size, so the only thing that changes when you spread is how many of your customers share one. On a route the cost of reaching each customer falls with the square root of how many share the patch, which is the travelling-salesman result. On a fixed cost it falls one for one, so the same spread costs you more." },
   };
 
   /* ---------- helpers ---------- */
@@ -236,6 +239,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       { k: "rival", label: "Rival's customers, one patch", v: C.rival, min: 5, max: 100000, step: 5 }
     ], function () { render(); });
     $("dPatches").value = C.patches;
+    seg("dModeSeg", "dMode", [["route", "A route"], ["fixed", "A fixed cost"]], "route");
     function dots(x0, y0, size, n) {
       /* a square patch with up to 400 stops drawn as dots; past that the count under the square carries it */
       var shown = Math.min(n, 400), g = Math.max(1, Math.ceil(Math.sqrt(shown))), step = size / g, r = Math.min(1.8, step * 0.32), out = "";
@@ -244,13 +248,20 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       return out;
     }
     function render() {
-      var S = CU.get("stops"), R = CU.get("rival"), k = +$("dPatches").value, per = S / k, ratio = Math.sqrt(R / per), mult = S / R;
+      var S = CU.get("stops"), R = CU.get("rival"), k = +$("dPatches").value, per = S / k, fixedMode = radio("dMode") === "fixed", ratio = fixedMode ? R / per : Math.sqrt(R / per), mult = S / R;
       $("dPatchesOut").textContent = plural(k, "patch", "patches");
-      working("densityW", [
+      var perW = fmtNum(per, per < 10 ? 1 : 0);
+      working("densityW", fixedMode ? [
+        "cost carried per customer in a patch ∝ 1 ÷ customers in that patch <i>(a fixed cost shared by whoever is in the patch, so every doubling halves it)</i>",
+        "a patch is whatever the cost is shared across: an area for a route, a sector or a product line for a fixed cost",
+        "patches are equal; your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + perW + ", the rival's " + fmtNum(R, 0) + " in one patch",
+        "your cost per customer against the rival's = " + fmtNum(R, 0) + " ÷ " + perW + " = " + ratio.toFixed(2),
+        "your total of " + fmtNum(S, 0) + " enters the arithmetic only through how thinly it's spread"
+      ] : [
         "ground covered per customer in a patch ∝ √(area ÷ customers in that patch) <i>(the travelling-salesman result: the shortest route through n stops in an area grows with √(n × area), so the distance per stop falls with the square root of density)</i>",
         "it bounds the distance and nothing else; time at the customer is the same for everyone, so a patch where travel is a third of the day moves far less than the ratio below",
-        "patches are equal in size; your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + fmtNum(per, per < 10 ? 1 : 0) + ", the rival's " + fmtNum(R, 0) + " in one patch",
-        "your ground per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + fmtNum(per, per < 10 ? 1 : 0) + ") = " + ratio.toFixed(2),
+        "patches are equal in size; your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + perW + ", the rival's " + fmtNum(R, 0) + " in one patch",
+        "your ground per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + perW + ") = " + ratio.toFixed(2),
         "your total of " + fmtNum(S, 0) + " enters the arithmetic only through how thinly it's spread"
       ], C.essay);
       $("densityCard").innerHTML = tile("Customers", fmtNum(S, 0), mult >= 1.05 ? f1(mult) + "× the rival" : mult <= 0.95 ? f1(1 / mult) + "× fewer than the rival" : "level with the rival", mult >= 1.05 ? "good" : mult <= 0.95 ? "bad" : "flat")
@@ -264,28 +275,28 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var pct = Math.round(Math.abs(1 - ratio) * 100), level = Math.abs(ratio - 1) < 0.005;
       var youLbl = level ? "you, level" : ratio < 1 ? "you −" + pct + "%" : ratio < 2 ? "you +" + pct + "%" : "you ×" + f1(ratio);
       var bx = 10, by = 108, bh = 9, bw = Math.min(100, 250 / Math.max(ratio, 1)), yw = bw * ratio;
-      s2 += txt(bx, 96, "ground covered per customer", 10.5, { opacity: 0.7 });
+      s2 += txt(bx, 96, fixedMode ? "fixed cost carried per customer" : "ground covered per customer", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + by + '" width="' + bw.toFixed(1) + '" height="' + bh + '" fill="currentColor" opacity="0.3"/>'; s2 += txt(bx + bw + 6, by + bh - 1, "rival", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + (by + 18) + '" width="' + yw.toFixed(1) + '" height="' + bh + '" fill="' + ACCENT + '"/>'; s2 += txt(bx + yw + 6, by + 18 + bh - 1, youLbl, 10.5, { fill: ACCENT, weight: 600 });
-      s2 += txt(bx, 160, "equal patches; the number under each square is the customers in it", 10.5, { opacity: 0.6 });
+      s2 += txt(bx, 160, "equal patches; the number under each is its customers", 10.5, { opacity: 0.6 });
       s2 += "</svg>"; $("densitySvg").innerHTML = s2;
       var perTxt = fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0);
-      function costTxt(rt, would) { var pc = Math.round(Math.abs(1 - rt) * 100), v = would ? "would cover" : "cover"; return Math.abs(rt - 1) < 0.005 ? "you " + v + " the same ground per customer as the rival" : rt < 1 ? "you " + v + " " + pc + "% less ground per customer than the rival" : rt < 2 ? "you " + v + " " + pc + "% more ground per customer than the rival" : "you " + v + " " + f1(rt) + " times the ground per customer the rival does"; }
+      function costTxt(rt, would) { var pc = Math.round(Math.abs(1 - rt) * 100), v = fixedMode ? (would ? "would carry" : "carry") : (would ? "would cover" : "cover"), noun = fixedMode ? "cost" : "ground"; if (Math.abs(rt - 1) < 0.005) return "you " + v + " the same " + noun + " per customer as the rival"; if (rt < 1) return "you " + v + " " + pc + "% less " + noun + " per customer than the rival"; if (rt < 1.995) return "you " + v + " " + pc + "% more " + noun + " per customer than the rival"; if (rt < 2.005) return "you " + v + " twice the " + noun + " per customer the rival does"; return "you " + v + " " + f1(rt) + " times the " + noun + " per customer the rival does"; }
       var r = (k === 1 ? "All " + fmtNum(S, 0) + " of your customers are in one patch against the rival's " + fmtNum(R, 0) + ", so " : "Across " + plural(k, "patch", "patches") + " you have " + perTxt + " customers in each against the rival's " + fmtNum(R, 0) + " in one, so ") + "<span class=\"n\">" + costTxt(ratio, false) + "</span>.";
       var sub;
       if (k === 1) {
         /* what the slider will show, said in advance: where you draw level, and where ten patches leaves you */
-        var kL = S / R, exact = kL >= 2 && kL <= 10 && Math.abs(kL - Math.round(kL)) < 1e-9, r10 = Math.sqrt(R / (S / 10));
-        sub = "Spread the same " + fmtNum(S, 0) + " across more patches and the ground per customer grows: ";
+        var kL = S / R, exact = kL >= 2 && kL <= 10 && Math.abs(kL - Math.round(kL)) < 1e-9, r10 = fixedMode ? R / (S / 10) : Math.sqrt(R / (S / 10));
+        sub = "Spread the same " + fmtNum(S, 0) + " across more patches and the " + (fixedMode ? "cost each customer carries" : "ground per customer") + " grows: ";
         if (exact && kL === 10) sub += "across ten you would be level with the rival in each.";
         else if (exact) sub += "across " + word(kL) + " you would be level with the rival in each, and across ten " + costTxt(r10, true) + ".";
         else sub += "across ten " + costTxt(r10, true) + ".";
       } else {
-        sub = "What sets it is the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only decides how thinly that's spread." + (mult > 1 ? " " + cap(f1(mult)) + " times their customers overall changes nothing inside any one patch." : "");
+        sub = "What sets it is the " + perTxt + " in each patch, and your total of " + fmtNum(S, 0) + " only decides how thinly that's spread." + (mult > 1 ? " " + (mult === Math.round(mult) && mult <= 12 ? cap(word(mult)) : f1(mult)) + " times their customers overall changes nothing inside any one patch." : "");
       }
       $("densityRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
-    on(["dPatches"], render); render();
+    on(["dPatches"], render); onRadios("dMode", render); render();
   })();
 
   /* tell the page that embeds this how tall to make the frame */

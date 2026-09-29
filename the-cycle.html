@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Waiting</title>
-<script>if (window.top === window.self && location.protocol === "https:" && !/^(localhost$|127\.|\[?::1)/.test(location.hostname)) location.replace('https://anishpatel.co/Notes/Waiting');</script>
+<title>What a slow cycle costs</title>
+<meta name="description" content="Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate and losses.">
+<script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
@@ -150,10 +151,11 @@ details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
 </head>
 <body>
 <div class="sheet">
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>What a slow cycle costs</h1><p class="standfirst">Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate and losses.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Waiting" target="_top">Waiting</a>.</p></header>
 <section id="cycle">
     <div class="layer"><div class="card c3" id="cycleCard"></div></div>
     <div class="layer">
@@ -175,7 +177,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   var CASE = {
 
     cycle:  { leads: 100, win: 25, deal: 20, decay: 15, len: 3, horizon: 24,
-              essay: "The book's claim is that elapsed time is mostly waiting and that waiting costs more than it looks. The instrument charges only one cost, the deals that die in the queue. The book adds faster learning and earlier cash, which are real and not modelled here." }
+              essay: "Stalk and Hout's claim, in Competing Against Time, is that elapsed time is mostly waiting and that waiting costs more than it looks. This charges only one cost, the deals that die in the queue. They add faster learning and earlier cash, which are real and not modelled here." }
   };
 
   /* ---------- helpers ---------- */
@@ -284,11 +286,12 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       });
       s += "</svg>"; $("cycleSvg").innerHTML = s;
       var lost = 1 - A.surv, r, sub;
+      function deals(x) { return x >= 10 ? String(Math.round(x)) : f1(x); }
       if (N === 1) {
-        r = "A one-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting and wins " + f1(A.perMonth) + " a month, <span class=\"n\">" + gbpBig(A.total) + "</span> over two years.";
+        r = "A one-month cycle loses <span class=\"n\">" + Math.round(lost * 100) + "%</span> of deals to waiting and wins about " + deals(A.perMonth) + " a month, <span class=\"n\">" + gbpBig(A.total) + "</span> over two years.";
         sub = "";
       } else {
-        r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + pct1(lost * 100) + "</span> of deals to waiting, so you win " + f1(A.perMonth) + " a month against " + f1(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
+        r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + Math.round(lost * 100) + "%</span> of deals to waiting, so you win about " + deals(A.perMonth) + " a month against " + deals(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
         sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", from the same sellers at the same win rate.";
       }
       $("cycleRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
