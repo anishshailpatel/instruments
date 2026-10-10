@@ -149,9 +149,49 @@ details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size
 details.working .w p { margin: 0 0 0.5rem; }
 details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
+/* the spine: the one line of arithmetic the tool turns on, kept in the open rather
+   than folded into the working. Every term is named in words and carries its live
+   number, so a reader who never opens the drawer still sees what drives the answer.
+   Taken from john.fun/elevators, whose scoring panel does the same for its optimiser. */
+.spine { max-width: 430px; font-family: var(--sans); border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); padding: 0.7rem 0.85rem 0.75rem; }
+.spine .lbl { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.5rem; }
+.spine .row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.3rem; }
+.spine .term { display: flex; flex-direction: column; justify-content: center; gap: 0.1rem; padding: 0.3rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); min-width: 0; }
+.spine .term .t { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.03em; line-height: 1.2; color: var(--ink-mute); }
+.spine .term .v { font-size: 0.92rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spine .op { align-self: center; font-size: 0.9rem; font-weight: 500; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.spine .term.out { border-color: var(--accent); background: var(--accent-soft); }
+.spine .term.out .t, .spine .term.out .v { color: var(--accent-text); }
+
+/* the ticker: counters that move while the clock runs, so a figure arrives as
+   something the reader watched accumulate rather than a number already on the page */
+.ticker { display: flex; flex-wrap: wrap; gap: 0.55rem 1.2rem; max-width: 430px; font-family: var(--sans); }
+.ticker > div { display: flex; flex-direction: column; gap: 0.05rem; min-width: 0; }
+.ticker .k { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+.ticker .v { font-size: 1.05rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ticker .v.acc { color: var(--accent-text); }
+.ticker .v .was { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); }
+
+/* the clock: user-started, never autoplaying, because these sit inside somebody's reading */
+.runbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; max-width: 430px; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+.runbar .btn { min-height: 40px; padding: 0.45rem 0.9rem; }
+.runbar .seg label { min-height: 40px; padding: 0.4rem 0.6rem; }
+.runbar .clock { margin-left: auto; font-variant-numeric: tabular-nums; }
+@media (max-width: 430px) {
+  .spine { padding: 0.6rem 0.65rem 0.65rem; }
+  .spine .lbl { margin-bottom: 0.4rem; }
+  .spine .row { gap: 0.25rem; }
+  .spine .term { padding: 0.25rem 0.4rem; }
+  .spine .term .t { font-size: 0.6rem; }
+  .spine .term .v { font-size: 0.86rem; }
+  .ticker { gap: 0.45rem 0.9rem; }
+  .ticker .v { font-size: 0.98rem; }
+  .runbar { gap: 0.35rem; }
+  .runbar .btn { padding: 0.45rem 0.7rem; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout, .spine, .ticker, .runbar { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
 </head>
 <body>
 <div class="sheet">
@@ -166,6 +206,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
           <div class="control"><label id="cCycLbl">How often customers can buy</label><div class="seg" role="radiogroup" aria-labelledby="cCycLbl" id="cCycSeg"></div></div>
           <div class="control"><label for="cSlip">The build slips by <output id="cSlipOut" aria-live="off"></output></label><input type="range" id="cSlip" aria-label="Months the build slips"></div>
         </div>
+        <div class="spine" id="windowSpine"></div>
         <p class="readout" id="windowRead" aria-live="polite"></p>
       </div>
     </div>
@@ -220,6 +261,22 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
   function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
   function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
+     a third member is a class, and "out" marks the answer the equation arrives at.
+     Labels and numbers only: the argument belongs in the Note, not in the tool. */
+  function spine(id, label, terms) {
+    var h = '<p class="lbl">' + label + '</p><div class="row">';
+    terms.forEach(function (t) {
+      if (typeof t === "string") { h += '<span class="op">' + t + '</span>'; return; }
+      h += '<span class="term' + (t[2] ? " " + t[2] : "") + '"><span class="t">' + t[0] + '</span><span class="v">' + t[1] + '</span></span>';
+    });
+    $(id).innerHTML = h + '</div>';
+  }
+  function ticker(id, items) {
+    $(id).innerHTML = items.map(function (it) {
+      return '<div><span class="k">' + it[0] + '</span><span class="v' + (it[2] ? " " + it[2] : "") + '">' + it[1] + '</span></div>';
+    }).join("");
+  }
   function caseUI(id, defs, onChange) {
     var box = $(id), html = '<span class="case-label">The case</span>';
     defs.forEach(function (d) { html += '<label class="cf"><span>' + d.label + '</span><span class="in">' + (d.prefix ? '<b>' + d.prefix + '</b>' : '') + '<input type="number" inputmode="decimal" data-k="' + d.k + '" value="' + d.v + '" min="' + d.min + '" max="' + d.max + '" step="' + (d.step || "any") + '" aria-label="' + d.label + '">' + (d.suffix ? '<b>' + d.suffix + '</b>' : '') + '</span></label>'; });
@@ -306,6 +363,13 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         if (hereCost < 5) sub += " On a monthly cycle the same slip would have cost " + gbpBig(monthlyCost * 1000) + " already; here nothing is lost until the window is missed.";
         else sub += " If the same customers could buy every month, the same slip would cost " + (monthlyCost < 5 ? "almost nothing" : gbpBig(monthlyCost * 1000)) + " rather than " + gbpBig(hereCost * 1000) + ".";
       }
+      spine("windowSpine", "When the money actually starts", [
+        ["Build takes", plural(build, "month")], "+",
+        ["Slip", slip === 0 ? "none" : plural(slip, "month")], "=",
+        ["Ready in", "month " + A.ready], "→",
+        ["Customers can buy", "month " + A.win], "=",
+        ["Five-year cash", poundsK(A.five), "out"]
+      ]);
       $("windowRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
     on(["cSlip"], render); onRadios("cCycle", render); render();

@@ -12,11 +12,11 @@ Five thinking tools. Each one works two ways: embedded by iframe inside the note
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
-**These files are the source.** The earlier master (`the-instruments.html`) and its `extract.py` lived in a session's temporary folder and no longer exist, so edit the five files directly. The shared styles and helpers are duplicated in each; change them in all five. Before any push, dump every reader-facing string with the vault's `_tools/widget-copy.py <file>`, lint it with `preflight.ps1`, and read the header copy too, which the dump does not see.
+**These files are the source.** The earlier master (`the-instruments.html`) and its `extract.py` lived in a session's temporary folder and no longer exist, so edit the five files directly. The shared styles and helpers are duplicated in each; change them in all five. Before any push, dump every reader-facing string with the vault's `_tools/copy-dump.py <file>` (it reads the header and meta description as well as the script copy), lint the dump with `preflight.ps1`, then read it as prose.
 
 ## Where they serve from
 
-GitHub Pages, from `main` at the repository root: `https://anishshailpatel.github.io/instruments/five-shapes.html`. That is the base URL the three notes point at.
+GitHub Pages, from `main` at the repository root: `https://anishshailpatel.github.io/instruments/five-shapes.html`. That is the base URL the four notes point at.
 
 Neither `raw.githubusercontent.com` nor jsDelivr works as an alternative: both serve `.html` as `text/plain`, so an iframe shows source rather than a page.
 
@@ -38,24 +38,38 @@ Neither `raw.githubusercontent.com` nor jsDelivr works as an alternative: both s
 ## The embed, as used in the notes
 
 ```html
-<iframe src="https://instruments.anishpatel.co/five-shapes.html"
-        title="Five shapes a monthly number takes"
-        width="100%" height="1260"
+<iframe src="https://anishshailpatel.github.io/instruments/five-shapes.html"
+        title="The same five rows plotted: two of noise, two signals and a contaminated baseline"
+        width="100%" height="1240"
         style="width:100%;border:0;display:block;margin:1.2em 0;"
         loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
 ```
 
 Once `publish.js` is live the host sets the height from what the frame reports, so the attribute is only a floor for the first paint and for Obsidian's own reading view, where `publish.js` does not run. Err tall: a frame short by a row clips the exhibit, where one long by a row leaves a gap.
 
-The floors are the tallest measured embedded render, a 351px column on a phone, with headroom (remeasured 2026-09-29 after the new controls).
+The floors are the tallest measured embedded render, a 351px column on a phone, with headroom. Remeasure any file whose rows change before pushing, and update this table and the note's `height` together.
+
+Remeasured 2026-10-10 after the spine, ticker and run clock, in a 351px iframe on the build machine, sweeping every tab, band, segment and slider end. Those renders come out a few per cent under a real phone's, which is why the attribute carries about 12% over the figure beside it.
 
 | File | 351px | Attribute |
 |---|---|---|
-| `five-shapes.html` | 1201 | 1240 |
-| `what-a-slip-costs.html` | 1177 | 1220 |
-| `margin-or-growth.html` | 1615 | 1660 |
-| `road-by-road.html` | 983 | 1020 |
-| `the-cycle.html` | 984 | 1040 |
+| `five-shapes.html` | 1325 | 1500 |
+| `what-a-slip-costs.html` | 1241 | 1400 |
+| `margin-or-growth.html` | 1664 | 1880 |
+| `road-by-road.html` | 1111 | 1260 |
+| `the-cycle.html` | 1268 | 1440 |
+
+## The spine, the ticker and the clock (2026-10-10)
+
+Taken from [john.fun/elevators](https://john.fun/elevators), which AP liked: it puts its optimiser's scoring formula on the page as named boxes rather than hiding it, and it lets the reader run the simulation and watch the statistics accumulate.
+
+**The spine** is in all five. It is the one line of arithmetic the tool turns on, sitting between the controls and the readout: each term named in two or three words with its live value beside it, operators between, and the answer in the accent box. `spine(id, label, terms)`, where a string in `terms` is an operator and a pair is `[name, value]`, with a third member `"out"` marking the answer. It carries labels and numbers only. An earlier draft gave it a sentence of explanation underneath; that was cut on the day under AP's rule that text inside the tools is a cost to justify, and the working panel already carried the same explanation where it was worth keeping.
+
+The terms have to multiply out to the answer at the precision shown. `five-shapes` prints its spread one decimal finer than the series itself for exactly this reason: at the series' own precision, 2.66 × 0.2 lands a rounding short of the band it draws.
+
+**The ticker** and **the clock** are in `the-cycle.html` only, because it is the one tool whose subject is time passing. The clock advances a horizon counter `T` from a standing start to twenty-four months, redrawing the cumulative lines clipped to it, while the ticker counts revenue won, deals in flight and deals lost while waiting, for the chosen cycle against the one-month reference. The figures are expected values rather than a draw, so they tie to the working panel exactly.
+
+Three things it deliberately does not do. It never autoplays, because these sit inside something somebody is reading. It starts at the finish, so a reader who never touches the button sees exactly the picture the tool showed before any of this existed. And during a run it updates only the drawing, the ticker and the clock, leaving the readout alone: the readout is `aria-live="polite"`, and rewriting it sixty times a second would spam a screen reader with a sentence that has not changed.
 
 ## What each one models
 
@@ -65,7 +79,7 @@ The floors are the tallest measured embedded render, a 351px column on a phone, 
 
 **Margin or growth** compares a cost programme with an expansion on a Gordon-growth perpetuity. Its controls are the four numbers the note says the case rests on: the growth rate, the return the new capital earns, how long the faster growth lasts, and the hurdle the new market has to clear. The last discounts only the cash the expansion adds, over the business as it is, at the higher rate, so the core keeps its own value; it starts level with the core's hurdle, which is the kind case, and at 12% on the defaults the expansion is worth £164m against the cost programme's £162m. For ever is the perpetuity; the finite settings run the faster growth and the new-market return for that many years, then fall back to today's growth at the core's return and discount the rest. On the defaults the expansion is worth £250m for ever and £144m if 8% lasts five years, against a £162m cost programme, and it takes about sixteen years of 8% to draw level.
 
-**Spread thin** (`road-by-road.html`) keeps your total customers fixed and spreads them across one to ten equal patches against a rival who keeps twenty in one. A switch sets what the customers in a patch share. On a route, the default, the cost of reaching each one follows the square root, as below. On a fixed cost it falls one for one, so your cost per customer against the rival's is simply rival's customers ÷ yours per patch: 0.2 at one patch, level at five, twice at ten. The cost of reaching a customer in a patch scales with the square root of area over customers (the travelling-salesman result), so your cost per customer against the rival's is the square root of (rival's customers ÷ your customers per patch): 0.45 at one patch, 1.0 at five, 1.41 at ten. The total never enters except through how thinly it is spread. The wording is deliberately generic (customers, patches, cost to reach) rather than vans and roads, so the lesson travels; the filename keeps its old name for URL stability.
+**Spread thin** (`road-by-road.html`) keeps your total customers fixed and spreads them across one to ten equal patches against a rival who keeps twenty in one. A switch sets what the customers in a patch share. On a route, the default, it measures ground covered per customer, which scales with the square root of area over customers (the travelling-salesman result), so your ground per customer against the rival's is the square root of (rival's customers ÷ your customers per patch): 0.45 at one patch, 1.0 at five, 1.41 at ten. It bounds the driving and nothing else; time at the door is the same for everyone. On a fixed cost the cost per customer falls one for one, so yours against the rival's is simply rival's customers ÷ yours per patch: 0.2 at one patch, level at five, twice at ten. The total never enters except through how thinly it is spread. The wording is deliberately generic (customers, patches, ground or cost) rather than vans and roads, so the lesson travels; the filename keeps its old name for URL stability.
 
 **The cycle** charges one cost of a slow sales process: a live deal has a fixed chance of dying each month it waits (15% by default), so survival to decision is (1 − d)^N. Won a month = leads × survival × win rate; deals in flight = leads × (1 + (1 − d) + …) over N months; the line is cumulative revenue from month N + 1 over two years against a fixed one-month reference. Defaults: 100 leads, 25% win rate, £20k a deal. At three months that is 39% of deals lost, about 15 won a month against 21 (the readout rounds deal counts to whole numbers), £6.4m against £9.8m over two years, and 257 in flight against 100.
 

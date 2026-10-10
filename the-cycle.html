@@ -149,9 +149,49 @@ details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size
 details.working .w p { margin: 0 0 0.5rem; }
 details.working .w p:last-child { margin: 0; }
 details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
+/* the spine: the one line of arithmetic the tool turns on, kept in the open rather
+   than folded into the working. Every term is named in words and carries its live
+   number, so a reader who never opens the drawer still sees what drives the answer.
+   Taken from john.fun/elevators, whose scoring panel does the same for its optimiser. */
+.spine { max-width: 430px; font-family: var(--sans); border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); padding: 0.7rem 0.85rem 0.75rem; }
+.spine .lbl { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.5rem; }
+.spine .row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.3rem; }
+.spine .term { display: flex; flex-direction: column; justify-content: center; gap: 0.1rem; padding: 0.3rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); min-width: 0; }
+.spine .term .t { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.03em; line-height: 1.2; color: var(--ink-mute); }
+.spine .term .v { font-size: 0.92rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spine .op { align-self: center; font-size: 0.9rem; font-weight: 500; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.spine .term.out { border-color: var(--accent); background: var(--accent-soft); }
+.spine .term.out .t, .spine .term.out .v { color: var(--accent-text); }
+
+/* the ticker: counters that move while the clock runs, so a figure arrives as
+   something the reader watched accumulate rather than a number already on the page */
+.ticker { display: flex; flex-wrap: wrap; gap: 0.55rem 1.2rem; max-width: 430px; font-family: var(--sans); }
+.ticker > div { display: flex; flex-direction: column; gap: 0.05rem; min-width: 0; }
+.ticker .k { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+.ticker .v { font-size: 1.05rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ticker .v.acc { color: var(--accent-text); }
+.ticker .v .was { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); }
+
+/* the clock: user-started, never autoplaying, because these sit inside somebody's reading */
+.runbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; max-width: 430px; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+.runbar .btn { min-height: 40px; padding: 0.45rem 0.9rem; }
+.runbar .seg label { min-height: 40px; padding: 0.4rem 0.6rem; }
+.runbar .clock { margin-left: auto; font-variant-numeric: tabular-nums; }
+@media (max-width: 430px) {
+  .spine { padding: 0.6rem 0.65rem 0.65rem; }
+  .spine .lbl { margin-bottom: 0.4rem; }
+  .spine .row { gap: 0.25rem; }
+  .spine .term { padding: 0.25rem 0.4rem; }
+  .spine .term .t { font-size: 0.6rem; }
+  .spine .term .v { font-size: 0.86rem; }
+  .ticker { gap: 0.45rem 0.9rem; }
+  .ticker .v { font-size: 0.98rem; }
+  .runbar { gap: 0.35rem; }
+  .runbar .btn { padding: 0.45rem 0.7rem; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout, .spine, .ticker, .runbar { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
 </head>
 <body>
 <div class="sheet">
@@ -162,9 +202,17 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       <div class="tool">
         <div class="case" id="cycleCase"></div>
         <div id="cycleSvg"></div>
+        <div class="runbar">
+          <button type="button" class="btn" id="cyRun">Run the clock</button>
+          <button type="button" class="btn quiet" id="cyReset">Back to the start</button>
+          <div class="seg" id="cySpeedSeg" role="group" aria-label="How fast the clock runs"></div>
+          <span class="clock" id="cyClock" aria-live="off"></span>
+        </div>
+        <div class="ticker" id="cycleTick"></div>
         <div class="controls">
           <div class="control"><label for="cyLen">From first conversation to a decision takes <output id="cyLenOut" aria-live="off"></output></label><input type="range" id="cyLen" min="1" max="6" step="1" value="3" aria-label="Months from first conversation to a decision"></div>
         </div>
+        <div class="spine" id="cycleSpine"></div>
         <p class="readout" id="cycleRead" aria-live="polite"></p>
       </div>
     </div>
@@ -218,6 +266,22 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
   function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
   function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
+     a third member is a class, and "out" marks the answer the equation arrives at.
+     Labels and numbers only: the argument belongs in the Note, not in the tool. */
+  function spine(id, label, terms) {
+    var h = '<p class="lbl">' + label + '</p><div class="row">';
+    terms.forEach(function (t) {
+      if (typeof t === "string") { h += '<span class="op">' + t + '</span>'; return; }
+      h += '<span class="term' + (t[2] ? " " + t[2] : "") + '"><span class="t">' + t[0] + '</span><span class="v">' + t[1] + '</span></span>';
+    });
+    $(id).innerHTML = h + '</div>';
+  }
+  function ticker(id, items) {
+    $(id).innerHTML = items.map(function (it) {
+      return '<div><span class="k">' + it[0] + '</span><span class="v' + (it[2] ? " " + it[2] : "") + '">' + it[1] + '</span></div>';
+    }).join("");
+  }
   function caseUI(id, defs, onChange) {
     var box = $(id), html = '<span class="case-label">The case</span>';
     defs.forEach(function (d) { html += '<label class="cf"><span>' + d.label + '</span><span class="in">' + (d.prefix ? '<b>' + d.prefix + '</b>' : '') + '<input type="number" inputmode="decimal" data-k="' + d.k + '" value="' + d.v + '" min="' + d.min + '" max="' + d.max + '" step="' + (d.step || "any") + '" aria-label="' + d.label + '">' + (d.suffix ? '<b>' + d.suffix + '</b>' : '') + '</span></label>'; });
@@ -240,6 +304,15 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       { k: "decay", label: "Live deals lost a month while waiting", v: C.decay, min: 0, max: 60, step: 1, suffix: "%" }
     ], function () { render(); });
     $("cyLen").value = C.len;
+    seg("cySpeedSeg", "cySpeed", [[1, "1×"], [4, "4×"], [12, "12×"]], 4);
+
+    /* The clock. T is how many of the horizon's months have happened. It sits at the far
+       end until a reader starts it, so the picture on arrival is the finished one and
+       nothing has changed for a reader who never touches the button. Nothing autoplays:
+       these sit inside a page somebody is reading, and motion they did not ask for is rude. */
+    var T = H, playing = false, timer = null, lastTs = 0;
+    function speed() { return +radio("cySpeed") || 4; }
+
     function run(N) {
       var L = CU.get("leads"), w = CU.get("win") / 100, d = CU.get("decay") / 100, deal = CU.get("deal") * 1000;
       var surv = Math.pow(1 - d, N), perMonth = L * surv * w, wip = 0;
@@ -247,16 +320,26 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var cum = [0], c = 0; for (var m = 1; m <= H; m++) { if (m > N) c += perMonth * deal; cum.push(c); }
       return { surv: surv, perMonth: perMonth, wip: wip, cum: cum, total: c, deal: deal, w: w, d: d, L: L };
     }
-    function render() {
+
+    /* Where a cycle has got to m whole months from a standing start. Deals in flight is the
+       queue still waiting; lost is everything that entered and neither waits nor reached a
+       decision. Expected values, not a draw, so the running figures tie to the working. */
+    function whole(R, N, m) {
+      var flight = 0, cap = Math.min(m, N);
+      for (var a = 0; a < cap; a++) flight += R.L * Math.pow(1 - R.d, a);
+      var decided = R.L * R.surv * Math.max(0, m - N);
+      return { flight: flight, lost: Math.max(0, R.L * m - flight - decided), cum: R.cum[Math.min(m, H)] };
+    }
+    function stateAt(R, N, t) {
+      var k = Math.min(H, Math.floor(t)), fr = Math.max(0, Math.min(1, t - k));
+      var a = whole(R, N, k), b = whole(R, N, Math.min(H, k + 1));
+      return { flight: a.flight + (b.flight - a.flight) * fr, lost: a.lost + (b.lost - a.lost) * fr, cum: a.cum + (b.cum - a.cum) * fr };
+    }
+
+    function render(live) {
       var N = +$("cyLen").value, A = run(N), P = run(1), W = run(6);
-      $("cyLenOut").textContent = plural(N, "month");
-      working("cycleW", [
-        "each month a live deal has a " + pct1(A.d * 100) + " chance of dying while it waits: the champion moves on, the budget goes elsewhere, a rival gets there first; survival to decision = (1 − " + pct1(A.d * 100) + ")^" + N + " = " + pct1(A.surv * 100),
-        "won a month = leads × survival × win rate = " + fmtNum(A.L, 0) + " × " + pct1(A.surv * 100) + " × " + pct1(A.w * 100) + " = " + f1(A.perMonth),
-        "deals in flight = leads × (1 + (1 − d) + (1 − d)² …) over the " + plural(N, "month") + " = " + Math.round(A.wip) + " <i>(Little's law, with the leak)</i>",
-        "the line adds won × " + gbpBig(A.deal) + " from month " + (N + 1) + ", when the first cohort reaches a decision; the one-month line is the fixed reference and the frame doesn't rescale"
-      ], C.essay);
-      $("cycleCard").innerHTML = tile("New leads a month", fmtNum(A.L, 0), "unchanged", "flat") + tile("Pipeline", Math.round(A.wip) + " deals", gbpBig(A.wip * A.deal) + " in flight", N > 1 ? "good" : "flat") + stamp("Sales review", N >= 3 ? "Strong pipeline" : "On track", "good", N >= 3 ? "coverage up, decisions slow" : "decisions coming through");
+      var full = T >= H - 1e-9, same = N === 1;
+      var SA = stateAt(A, N, T), SP = stateAt(P, 1, T);
       var lo = 0, hi = Math.max(P.total, 1) * 1.06;
       var X0 = 14, X1 = 262, Y0 = 24, Y1 = 132;
       function X(m) { return X0 + (X1 - X0) * m / H; } function Y(v) { return Y1 - (Y1 - Y0) * (v - lo) / (hi - lo); }
@@ -264,27 +347,83 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       s += txt(X0, 13, "revenue won, cumulative; each line is one cycle length", 10, { opacity: 0.6 });
       s += txt(X0, 150, "now", 9.5, { opacity: 0.6 }); s += txt(X1, 150, "two years", 9.5, { opacity: 0.6, anchor: "end" });
       s += '<line x1="' + X0 + '" y1="' + Y(0).toFixed(1) + '" x2="' + X1 + '" y2="' + Y(0).toFixed(1) + '" stroke="currentColor" stroke-width="0.8" opacity="0.45"/>';
-      function line(R, color, width, op, dash) { return '<polyline points="' + R.cum.map(function (v, i) { return X(i).toFixed(1) + "," + Y(v).toFixed(1); }).join(" ") + '" fill="none" stroke="' + color + '" stroke-width="' + width + '" opacity="' + op + '"' + (dash ? ' stroke-dasharray="' + dash + '"' : '') + '/>'; }
+      function pts(R) {
+        var out = [], k = Math.min(H, Math.floor(T));
+        for (var i = 0; i <= k; i++) out.push([i, R.cum[i]]);
+        if (T > k && k < H) { var fr = T - k; out.push([T, R.cum[k] + (R.cum[k + 1] - R.cum[k]) * fr]); }
+        return out;
+      }
+      function line(R, color, width, op, dash) {
+        var q = pts(R); if (q.length < 2) return "";
+        return '<polyline points="' + q.map(function (o) { return X(o[0]).toFixed(1) + "," + Y(o[1]).toFixed(1); }).join(" ") + '" fill="none" stroke="' + color + '" stroke-width="' + width + '" opacity="' + op + '"' + (dash ? ' stroke-dasharray="' + dash + '"' : '') + '/>';
+      }
       var refs = [{ R: P, n: 1 }, { R: W, n: 6 }].filter(function (o) { return o.n !== N; });
       refs.forEach(function (o) { s += line(o.R, "currentColor", 1, 0.3, "3 3"); });
       s += line(A, ACCENT, 1.7, 1);
-      s += '<circle cx="' + X(N + 1).toFixed(1) + '" cy="' + Y(A.cum[N + 1]).toFixed(1) + '" r="3" fill="' + ACCENT + '"/>';
-      s += txt(X(N + 1), Y(A.cum[N + 1]) - 7, "first decisions", 9.5, { fill: ACCENT, anchor: "start" });
-      var marks = refs.map(function (o) { return { y: Y(o.R.total), val: gbpBig(o.R.total), band: plural(o.n, "month"), accent: false }; });
-      marks.push({ y: Y(A.total), val: gbpBig(A.total), band: plural(N, "month"), accent: true });
-      var used = [];
-      marks.slice().sort(function (a, b) { return (b.accent ? 1 : 0) - (a.accent ? 1 : 0); }).forEach(function (mk) {
-        var cands = [mk.y, mk.y - 30, mk.y + 30, mk.y - 60, mk.y + 60];
-        for (var ci = 0; ci < cands.length; ci++) {
-          var yy = Math.min(Y1 - 18, Math.max(Y0 + 8, cands[ci]));
-          if (used.some(function (u) { return Math.abs(u - yy) < 30; })) continue;
-          used.push(yy);
-          s += txt(X1 + 5, yy, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
-          s += txt(X1 + 5, yy + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
-          return;
+      if (T >= N + 1) {
+        s += '<circle cx="' + X(N + 1).toFixed(1) + '" cy="' + Y(A.cum[N + 1]).toFixed(1) + '" r="3" fill="' + ACCENT + '"/>';
+        /* mid-run the mark keeps its name only until the head has moved on, because the
+           running figure then wants the same corner */
+        if (full || T < N + 5) s += txt(X(N + 1), Y(A.cum[N + 1]) - 7, "first decisions", 9.5, { fill: ACCENT, anchor: "start" });
+      }
+      if (full) {
+        var marks = refs.map(function (o) { return { y: Y(o.R.total), val: gbpBig(o.R.total), band: plural(o.n, "month"), accent: false }; });
+        marks.push({ y: Y(A.total), val: gbpBig(A.total), band: plural(N, "month"), accent: true });
+        var used = [];
+        marks.slice().sort(function (a, b) { return (b.accent ? 1 : 0) - (a.accent ? 1 : 0); }).forEach(function (mk) {
+          var cands = [mk.y, mk.y - 30, mk.y + 30, mk.y - 60, mk.y + 60];
+          for (var ci = 0; ci < cands.length; ci++) {
+            var yy = Math.min(Y1 - 18, Math.max(Y0 + 8, cands[ci]));
+            if (used.some(function (u) { return Math.abs(u - yy) < 30; })) continue;
+            used.push(yy);
+            s += txt(X1 + 5, yy, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
+            s += txt(X1 + 5, yy + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
+            return;
+          }
+        });
+      } else {
+        /* mid-run the totals are not known yet, so each line carries its own moving head
+           instead of the figure it is going to reach */
+        refs.forEach(function (o) {
+          var q = pts(o.R); if (!q.length) return;
+          s += '<circle cx="' + X(q[q.length - 1][0]).toFixed(1) + '" cy="' + Y(q[q.length - 1][1]).toFixed(1) + '" r="2.2" fill="currentColor" opacity="0.4"/>';
+        });
+        var qa = pts(A);
+        if (qa.length) {
+          var hm = qa[qa.length - 1][0], hx = X(hm), hy = Y(qa[qa.length - 1][1]);
+          s += '<circle cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="3.2" fill="' + ACCENT + '"/>';
+          /* the running figure rides the head of the line. It waits until the head has
+             cleared the first-decisions label, which occupies the same corner. */
+          if (hm >= N + 5) s += txt(Math.min(X1, hx + 6), Math.max(Y0 + 6, hy - 7), gbpBig(SA.cum), 10, { fill: ACCENT, weight: 600, anchor: "start" });
         }
-      });
+      }
       s += "</svg>"; $("cycleSvg").innerHTML = s;
+
+      function v(now, ref) { return Math.round(now) + (same ? "" : ' <span class="was">against ' + Math.round(ref) + "</span>"); }
+      ticker("cycleTick", [
+        ["Revenue won", gbpBig(SA.cum) + (same ? "" : ' <span class="was">against ' + gbpBig(SP.cum) + "</span>"), "acc"],
+        ["Deals in flight", v(SA.flight, SP.flight)],
+        ["Lost while waiting", v(SA.lost, SP.lost)]
+      ]);
+      $("cyClock").textContent = "month " + Math.floor(T) + " of " + H;
+      $("cyRun").textContent = playing ? "Pause" : (T > 0 && !full ? "Keep going" : "Run the clock");
+      $("cyReset").textContent = full ? "Back to the start" : "Show the finish";
+      if (live) return;
+
+      $("cyLenOut").textContent = plural(N, "month");
+      working("cycleW", [
+        "each month a live deal has a " + pct1(A.d * 100) + " chance of dying while it waits: the champion moves on, the budget goes elsewhere, a rival gets there first; survival to decision = (1 − " + pct1(A.d * 100) + ")^" + N + " = " + pct1(A.surv * 100),
+        "won a month = leads × survival × win rate = " + fmtNum(A.L, 0) + " × " + pct1(A.surv * 100) + " × " + pct1(A.w * 100) + " = " + f1(A.perMonth),
+        "deals in flight = leads × (1 + (1 − d) + (1 − d)² …) over the " + plural(N, "month") + " = " + Math.round(A.wip) + " <i>(Little's law, with the leak)</i>",
+        "the line adds won × " + gbpBig(A.deal) + " from month " + (N + 1) + ", when the first cohort reaches a decision; the one-month line is the fixed reference and the frame doesn't rescale"
+      ], C.essay);
+      spine("cycleSpine", "What a month produces", [
+        ["New leads", fmtNum(A.L, 0)], "×",
+        ["Survive the wait", pct1(A.surv * 100)], "×",
+        ["Win rate", pct1(A.w * 100)], "=",
+        ["Deals won a month", f1(A.perMonth), "out"]
+      ]);
+      $("cycleCard").innerHTML = tile("New leads a month", fmtNum(A.L, 0), "unchanged", "flat") + tile("Pipeline", Math.round(A.wip) + " deals", gbpBig(A.wip * A.deal) + " in flight", N > 1 ? "good" : "flat") + stamp("Sales review", N >= 3 ? "Strong pipeline" : "On track", "good", N >= 3 ? "coverage up, decisions slow" : "decisions coming through");
       var lost = 1 - A.surv, r, sub;
       function deals(x) { return x >= 10 ? String(Math.round(x)) : f1(x); }
       if (N === 1) {
@@ -296,7 +435,28 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       }
       $("cycleRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
     }
-    on(["cyLen"], render); render();
+
+    function stop() { playing = false; lastTs = 0; if (timer) { clearInterval(timer); timer = null; } }
+    /* A timer rather than requestAnimationFrame. rAF stops dead in a tab the browser is
+       not painting, which would leave the button reading Pause over a frozen chart; a
+       timer only slows down. The step is clamped so a tab that was throttled or asleep
+       resumes where it was instead of jumping a year. */
+    function frame() {
+      if (!playing) return;
+      var ts = (window.performance && performance.now) ? performance.now() : Date.now();
+      if (!lastTs) lastTs = ts;
+      T += Math.min(0.12, (ts - lastTs) / 1000) * speed(); lastTs = ts;
+      if (T >= H) { T = H; stop(); render(); return; }
+      render(true);
+    }
+    $("cyRun").addEventListener("click", function () {
+      if (playing) { stop(); render(); return; }
+      if (T >= H - 1e-9) T = 0;
+      playing = true; lastTs = 0; timer = setInterval(frame, 33); render(true);
+    });
+    $("cyReset").addEventListener("click", function () { stop(); T = (T >= H - 1e-9) ? 0 : H; render(); });
+    onRadios("cySpeed", function () { lastTs = 0; });
+    on(["cyLen"], function () { render(); }); render();
   })();
 
   /* tell the page that embeds this how tall to make the frame */
