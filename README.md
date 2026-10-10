@@ -1,6 +1,6 @@
 # Instruments
 
-Five thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
+Six thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
 
 | File | Tool | Note that explains it |
 |---|---|---|
@@ -9,6 +9,7 @@ Five thinking tools. Each one works two ways: embedded by iframe inside the note
 | `the-cycle.html` | What a slow cycle costs | Waiting |
 | `what-a-slip-costs.html` | What a slip costs | Waiting |
 | `road-by-road.html` | Spread thin | Building density |
+| `checking-in.html` | Who you still check on | Checking in |
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
@@ -58,6 +59,7 @@ Remeasured 2026-10-10 twice: once after the spine, ticker and run clock went in,
 | `margin-or-growth.html` | 1575 | 1780 | 1660 |
 | `road-by-road.html` | 863 | 980 | 1020 |
 | `the-cycle.html` | 1065 | 1200 | 1040 |
+| `checking-in.html` | 948 | 1080 | new |
 
 The net of the day's two changes is close to nothing, and `road-by-road` ends shorter than it started. The prose that came out paid for the spine that went in.
 
@@ -82,6 +84,8 @@ Three things it deliberately does not do. It never autoplays, because these sit 
 **Margin or growth** compares a cost programme with an expansion on a Gordon-growth perpetuity. Its controls are the four numbers the note says the case rests on: the growth rate, the return the new capital earns, how long the faster growth lasts, and the hurdle the new market has to clear. The last discounts only the cash the expansion adds, over the business as it is, at the higher rate, so the core keeps its own value; it starts level with the core's hurdle, which is the kind case, and at 12% on the defaults the expansion is worth £164m against the cost programme's £162m. For ever is the perpetuity; the finite settings run the faster growth and the new-market return for that many years, then fall back to today's growth at the core's return and discount the rest. On the defaults the expansion is worth £250m for ever and £144m if 8% lasts five years, against a £162m cost programme, and it takes about sixteen years of 8% to draw level.
 
 **Spread thin** (`road-by-road.html`) keeps your total customers fixed and spreads them across one to ten equal patches against a rival who keeps twenty in one. A switch sets what the customers in a patch share. On a route, the default, it measures ground covered per customer, which scales with the square root of area over customers (the travelling-salesman result), so your ground per customer against the rival's is the square root of (rival's customers ÷ your customers per patch): 0.45 at one patch, 1.0 at five, 1.41 at ten. It bounds the driving and nothing else; time at the door is the same for everyone. On a fixed cost the cost per customer falls one for one, so yours against the rival's is simply rival's customers ÷ yours per patch: 0.2 at one patch, level at five, twice at ten. The total never enters except through how thinly it is spread. The wording is deliberately generic (customers, patches, ground or cost) rather than vans and roads, so the lesson travels; the filename keeps its old name for URL stability.
+
+**Who you still check on** (`checking-in.html`, 2026-10-10) prices the note's own worked example and lets a reader put their own numbers through it. Everyone gets a one-to-one; the ones you still check on weekly, the rest fortnightly, which is the cadence the note gives for a trusted report on familiar work. Monthly reviews run across all reports and the group meetings are flat, so the bill never falls to nothing however much you trust people. The chart stacks those four parts rather than drawing the total alone, because a total line left most of the frame empty above a floor it never approached. Defaults are the note's own: nine reports, 45-minute one-to-ones, hour-long monthly reviews, three hours of group meetings and a 45-hour week, which comes to 11.9 hours and 26% of the week against the note's "around twelve hours" and "more than a quarter". Every figure shown is the sum of the figures above it, so each part is rounded to a tenth and the total is what those rounded parts come to, rather than the true total rounded separately: nine 45-minute one-to-ones read 6.8h, which is what a reader checking the arithmetic gets.
 
 **The cycle** charges one cost of a slow sales process: a live deal has a fixed chance of dying each month it waits (15% by default), so survival to decision is (1 − d)^N. Won a month = leads × survival × win rate; deals in flight = leads × (1 + (1 − d) + …) over N months; the line is cumulative revenue from month N + 1 over two years against a fixed one-month reference. Defaults: 100 leads, 25% win rate, £20k a deal. At three months that is 39% of deals lost, about 15 won a month against 21 (the readout rounds deal counts to whole numbers), £6.4m against £9.8m over two years, and 257 in flight against 100.
 
