@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>What a slow cycle costs</title>
-<meta name="description" content="Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate and losses.">
+<meta name="description" content="Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate, deal size and monthly losses.">
 <script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -111,7 +111,8 @@ input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(
 .seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
 .readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
 .readout .n { font-weight: 600; }
-.readout .sub { display: block; color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.25rem; }
+/* a readout that only restates numbers already on screen is kept for screen readers and hidden from sight (AP, 2026-10-10: keep text inside the tools to a minimum) */
+.readout.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
 .btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
 /* funnel stages */
@@ -148,7 +149,6 @@ details.working[open] summary::before { content: "−"; }
 details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
 details.working .w p { margin: 0 0 0.5rem; }
 details.working .w p:last-child { margin: 0; }
-details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 /* the spine: the one line of arithmetic the tool turns on, kept in the open rather
    than folded into the working. Every term is named in words and carries its live
    number, so a reader who never opens the drawer still sees what drives the answer.
@@ -195,7 +195,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 </head>
 <body>
 <div class="sheet">
-<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>What a slow cycle costs</h1><p class="standfirst">Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate and losses.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Waiting" target="_top">Waiting</a>.</p></header>
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>What a slow cycle costs</h1><p class="standfirst">Live deals die while they wait for a decision, so a slower sales cycle wins less from the same leads even as the pipeline looks healthier. Put in your own leads, win rate, deal size and monthly losses.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Waiting" target="_top">Waiting</a>.</p></header>
 <section id="cycle">
     <div class="layer"><div class="card c3" id="cycleCard"></div></div>
     <div class="layer">
@@ -213,7 +213,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
           <div class="control"><label for="cyLen">From first conversation to a decision takes <output id="cyLenOut" aria-live="off"></output></label><input type="range" id="cyLen" min="1" max="6" step="1" value="3" aria-label="Months from first conversation to a decision"></div>
         </div>
         <div class="spine" id="cycleSpine"></div>
-        <p class="readout" id="cycleRead" aria-live="polite"></p>
+        <p class="readout sr" id="cycleRead" aria-live="polite"></p>
       </div>
     </div>
     <details class="working"><summary>The working</summary><div class="w" id="cycleW"></div></details>
@@ -224,8 +224,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 (function () {
   var CASE = {
 
-    cycle:  { leads: 100, win: 25, deal: 20, decay: 15, len: 3, horizon: 24,
-              essay: "Stalk and Hout's claim, in Competing Against Time, is that elapsed time is mostly waiting and that waiting costs more than it looks. This charges only one cost, the deals that die in the queue. They add faster learning and earlier cash, which are real and not modelled here." }
+    cycle:  { leads: 100, win: 25, deal: 20, decay: 15, len: 3, horizon: 24 }
   };
 
   /* ---------- helpers ---------- */
@@ -244,7 +243,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.abs(v); if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
   function pct1(x) { var v = Math.round(x * 10) / 10; return (v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
   function gbp(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-  function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
+  function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + f1(a / 1e6) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
   function f1(x) { var v = Math.round(x * 10) / 10; return v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1); }
   var WORDS = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
   function word(n) { return n >= 0 && n <= 12 && n === Math.round(n) ? WORDS[n] || "no" : String(n); }
@@ -265,7 +264,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
   function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
   function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
-  function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  function working(id, lines) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join(""); }
   /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
      a third member is a class, and "out" marks the answer the equation arrives at.
      Labels and numbers only: the argument belongs in the Note, not in the tool. */
@@ -412,28 +411,21 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
 
       $("cyLenOut").textContent = plural(N, "month");
       working("cycleW", [
-        "each month a live deal has a " + pct1(A.d * 100) + " chance of dying while it waits: the champion moves on, the budget goes elsewhere, a rival gets there first; survival to decision = (1 − " + pct1(A.d * 100) + ")^" + N + " = " + pct1(A.surv * 100),
+        "d = live deals lost a month while waiting = " + pct1(A.d * 100),
+        "survival to decision = (1 − d)^" + N + " = " + pct1(A.surv * 100),
         "won a month = leads × survival × win rate = " + fmtNum(A.L, 0) + " × " + pct1(A.surv * 100) + " × " + pct1(A.w * 100) + " = " + f1(A.perMonth),
-        "deals in flight = leads × (1 + (1 − d) + (1 − d)² …) over the " + plural(N, "month") + " = " + Math.round(A.wip) + " <i>(Little's law, with the leak)</i>",
-        "the line adds won × " + gbpBig(A.deal) + " from month " + (N + 1) + ", when the first cohort reaches a decision; the one-month line is the fixed reference and the frame doesn't rescale"
-      ], C.essay);
+        "deals in flight = leads × (1 + (1 − d) + (1 − d)² …) over the " + plural(N, "month") + " = " + Math.round(A.wip),
+        "revenue a month = won a month × " + gbpBig(A.deal) + ", from month " + (N + 1)
+      ]);
       spine("cycleSpine", "What a month produces", [
         ["New leads", fmtNum(A.L, 0)], "×",
         ["Survive the wait", pct1(A.surv * 100)], "×",
         ["Win rate", pct1(A.w * 100)], "=",
         ["Deals won a month", f1(A.perMonth), "out"]
       ]);
-      $("cycleCard").innerHTML = tile("New leads a month", fmtNum(A.L, 0), "unchanged", "flat") + tile("Pipeline", Math.round(A.wip) + " deals", gbpBig(A.wip * A.deal) + " in flight", N > 1 ? "good" : "flat") + stamp("Sales review", N >= 3 ? "Strong pipeline" : "On track", "good", N >= 3 ? "coverage up, decisions slow" : "decisions coming through");
-      var lost = 1 - A.surv, r, sub;
-      function deals(x) { return x >= 10 ? String(Math.round(x)) : f1(x); }
-      if (N === 1) {
-        r = "A one-month cycle loses <span class=\"n\">" + Math.round(lost * 100) + "%</span> of deals to waiting and wins about " + deals(A.perMonth) + " a month, <span class=\"n\">" + gbpBig(A.total) + "</span> over two years.";
-        sub = "";
-      } else {
-        r = "A " + word(N) + "-month cycle loses <span class=\"n\">" + Math.round(lost * 100) + "%</span> of deals to waiting, so you win about " + deals(A.perMonth) + " a month against " + deals(P.perMonth) + " on a one-month cycle. Over two years that is <span class=\"n\">" + gbpBig(A.total) + "</span> against " + gbpBig(P.total) + ".";
-        sub = "Meanwhile the pipeline holds " + Math.round(A.wip) + " deals instead of " + Math.round(P.wip) + ", from the same sellers at the same win rate.";
-      }
-      $("cycleRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
+      $("cycleCard").innerHTML = tile("New leads a month", fmtNum(A.L, 0), "unchanged", "flat") + tile("Pipeline", Math.round(A.wip) + " deals", gbpBig(A.wip * A.deal) + " in flight", N > 1 ? "good" : "flat") + stamp("Sales review", N >= 3 ? "Strong pipeline" : "On track", "good", N >= 3 ? "coverage up" : "decisions coming through");
+      var lost = (1 - A.surv) * 100;
+      $("cycleRead").innerHTML = "A " + word(N) + "-month cycle loses " + (lost > 0 ? '<span class="n">' + Math.round(lost) + "%</span> of deals" : "no deals") + ' to waiting and wins <span class="n">' + gbpBig(A.total) + "</span> over two years" + (same ? "" : " against " + gbpBig(P.total) + " on a one-month cycle") + ".";
     }
 
     function stop() { playing = false; lastTs = 0; if (timer) { clearInterval(timer); timer = null; } }

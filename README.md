@@ -49,15 +49,17 @@ Once `publish.js` is live the host sets the height from what the frame reports, 
 
 The floors are the tallest measured embedded render, a 351px column on a phone, with headroom. Remeasure any file whose rows change before pushing, and update this table and the note's `height` together.
 
-Remeasured 2026-10-10 after the spine, ticker and run clock, in a 351px iframe on the build machine, sweeping every tab, band, segment and slider end. Those renders come out a few per cent under a real phone's, which is why the attribute carries about 12% over the figure beside it.
+Remeasured 2026-10-10 twice: once after the spine, ticker and run clock went in, and again after the readouts were cut back and the guides and working-panel essays came out. The figures below are the second pass, in a 351px iframe on the build machine, sweeping every tab, band, segment and both ends of every slider. Those renders come out a few per cent under a real phone's, which is why the attribute carries about 12% over the figure beside it.
 
-| File | 351px | Attribute |
-|---|---|---|
-| `five-shapes.html` | 1325 | 1500 |
-| `what-a-slip-costs.html` | 1241 | 1400 |
-| `margin-or-growth.html` | 1664 | 1880 |
-| `road-by-road.html` | 1111 | 1260 |
-| `the-cycle.html` | 1268 | 1440 |
+| File | 351px | Attribute | Was |
+|---|---|---|---|
+| `five-shapes.html` | 1124 | 1280 | 1240 |
+| `what-a-slip-costs.html` | 1072 | 1220 | 1220 |
+| `margin-or-growth.html` | 1575 | 1780 | 1660 |
+| `road-by-road.html` | 863 | 980 | 1020 |
+| `the-cycle.html` | 1065 | 1200 | 1040 |
+
+The net of the day's two changes is close to nothing, and `road-by-road` ends shorter than it started. The prose that came out paid for the spine that went in.
 
 ## The spine, the ticker and the clock (2026-10-10)
 

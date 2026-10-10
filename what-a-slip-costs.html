@@ -111,7 +111,6 @@ input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(
 .seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
 .readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
 .readout .n { font-weight: 600; }
-.readout .sub { display: block; color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.25rem; }
 .btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
 .btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
 /* funnel stages */
@@ -148,7 +147,7 @@ details.working[open] summary::before { content: "−"; }
 details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
 details.working .w p { margin: 0 0 0.5rem; }
 details.working .w p:last-child { margin: 0; }
-details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
+details.working .w i { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 /* the spine: the one line of arithmetic the tool turns on, kept in the open rather
    than folded into the working. Every term is named in words and carries its live
    number, so a reader who never opens the drawer still sees what drives the answer.
@@ -204,7 +203,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         <div id="windowSvg"></div>
         <div class="controls">
           <div class="control"><label id="cCycLbl">How often customers can buy</label><div class="seg" role="radiogroup" aria-labelledby="cCycLbl" id="cCycSeg"></div></div>
-          <div class="control"><label for="cSlip">The build slips by <output id="cSlipOut" aria-live="off"></output></label><input type="range" id="cSlip" aria-label="Months the build slips"></div>
+          <div class="control"><label for="cSlip">The build is <output id="cSlipOut" aria-live="off"></output></label><input type="range" id="cSlip" aria-label="Months the build slips"></div>
         </div>
         <div class="spine" id="windowSpine"></div>
         <p class="readout" id="windowRead" aria-live="polite"></p>
@@ -219,8 +218,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   var CASE = {
 
     window: { cost: 1200, build: 9, benefit: 900, slip: 4, slipRange: [0, 12, 1], ramp: [0.4, 0.75, 1], horizon: 60,
-              cycles: [["1", "Monthly"], ["3", "Quarterly"], ["12", "Yearly"], ["36", "Every 3 years"]], cycleDefault: "12",
-              essay: "The example is an annual budget round. A maintenance contract, a school year, a licence renewal and a fleet replacement are the same mechanism at four different lengths." },
+              cycles: [["1", "Monthly"], ["3", "Quarterly"], ["12", "Yearly"], ["36", "Every three years"]], cycleDefault: "12" },
   };
 
   /* ---------- helpers ---------- */
@@ -260,7 +258,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
   function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
   function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
-  function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  function working(id, lines) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join(""); }
   /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
      a third member is a class, and "out" marks the answer the equation arrives at.
      Labels and numbers only: the argument belongs in the Note, not in the tool. */
@@ -305,19 +303,19 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       for (var m = 1; m <= H; m++) { if (m <= ready) c -= spend; if (m > win) c += ben / 12 * (C.ramp[Math.floor((m - win - 1) / 12)] || 1); cum.push(c); if (payback === null && m > ready && c >= 0) payback = m; }
       return { cum: cum, ready: ready, win: win, five: c, payback: payback };
     }
-    function cycName(cyc) { return cyc === 1 ? "every month" : cyc === 3 ? "every quarter" : cyc === 12 ? "once a year" : "every " + (cyc / 12) + " years"; }
+    function cycName(cyc) { return cyc === 1 ? "every month" : cyc === 3 ? "every quarter" : cyc === 12 ? "once a year" : "every " + word(cyc / 12) + " years"; }
     function render() {
       cost = CU.get("cost"); build = CU.get("build"); ben = CU.get("ben");
       var cyc = parseFloat(radio("cCycle")) || 12, slip = +$("cSlip").value, SMAX = C.slipRange[1];
-      $("cSlipOut").textContent = plural(slip, "month");
+      $("cSlipOut").textContent = slip === 0 ? "on time" : plural(slip, "month") + " late";
       working("windowW", [
         "the case: a " + gbpBig(cost * 1000) + " build over " + plural(build, "month") + ", worth " + gbpBig(ben * 1000) + " a year at full adoption",
-        "customers buy " + cycName(cyc) + ", so the build earns nothing until the first buying moment at or after it's ready",
+        "customers buy " + cycName(cyc) + "; benefit starts at the first buying moment at or after the build is ready",
         "cash by month, undiscounted; build cost spread evenly over the build",
-        "adoption ramps " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → ") + " by year <i>(a five-year curve, stylised)</i>",
+        "adoption in years one, two and three after launch: " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → "),
         "the chart keeps one scale across the whole slip slider"
-      ], C.essay);
-      var P = run(cyc, 0), A = run(cyc, slip), Wst = run(cyc, SMAX), same = A.win === P.win;
+      ]);
+      var P = run(cyc, 0), A = run(cyc, slip), Wst = run(cyc, SMAX);
       $("windowCard").innerHTML = tile("Schedule", slip === 0 ? "On plan" : cap(plural(slip, "month")) + " late", slip === 0 ? "ready month " + A.ready : "ready month " + A.ready + ", plan " + P.ready, slip === 0 ? "good" : slip <= 2 ? "flat" : "bad") + tile("Budget", "On budget", gbpBig(cost * 1000) + ", no overrun", "good") + stamp("RAG", slip === 0 ? "Green" : "Amber", slip === 0 ? "good" : "warn", slip === 0 ? "delivery on track" : "schedule recovery plan in place");
       var all = P.cum.concat(Wst.cum).concat(A.cum).concat([0]), lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.12 || 100; lo -= pad; hi += pad;
       var X0 = 14, X1 = 262, Y0 = 24, Y1 = 132;
@@ -351,18 +349,10 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         }
       });
       s += "</svg>"; $("windowSvg").innerHTML = s;
-      function pb(R) { return R.payback === null ? "not inside five years" : "month " + R.payback; }
-      var slack = P.win - A.ready, lost = A.win - P.win;
-      var r, sub;
-      if (slip === 0) { r = "Customers buy <span class=\"n\">" + cycName(cyc) + "</span>. The build is ready in month " + A.ready + " and the first chance to sell it is month <span class=\"n\">" + P.win + "</span>, worth " + poundsK(P.five) + " over five years."; var slack0 = P.win - P.ready; sub = slack0 > 0 ? "There " + (slack0 === 1 ? "is " : "are ") + plural(slack0, "month") + " of slack before the build misses that window, and once it does the wait is for the next buying moment." : cyc === 1 ? "Customers can buy in any month, so each month of slip costs a month of benefit." : "The build is ready in the window month itself, so the first month of slip misses it and the wait is for the next buying moment."; }
-      else if (same) { r = "A " + word(slip) + "-month slip and the build still makes the same window in month <span class=\"n\">" + P.win + "</span>. Five-year cash unchanged at <span class=\"n\">" + poundsK(P.five) + "</span>."; sub = "The five-year cash hasn't moved, because the window hasn't been missed. " + (slack === 0 ? "One more month and it drops to the line below." : "There " + (slack === 1 ? "is" : "are") + " " + plural(slack, "month") + " of slack left, then it drops to the line below."); }
-      else if (cyc === 1) { r = "Customers can buy in any month, so the build starts earning the month after it's ready. A " + word(slip) + "-month slip costs " + plural(slip, "month") + " of benefit and no more: five-year cash falls from " + poundsK(P.five) + " to <span class=\"n\">" + poundsK(A.five) + "</span>."; sub = "On a monthly cycle " + plural(slip, "month") + " late is the whole of the cost. " + (A.payback === null ? "Payback still doesn't arrive inside five years." : "Payback moves from " + pb(P) + " to " + pb(A) + ".") + " Nothing compounds, because there's never a wait for the next chance to sell."; }
-      else { r = "The " + word(slip) + "-month slip misses the window in month " + P.win + ", so customers commit in month <span class=\"n\">" + A.win + "</span> instead, " + (lost === 12 ? "a year" : lost >= 24 ? f1(lost / 12) + " years" : plural(lost, "month")) + " later. Five-year cash falls from " + poundsK(P.five) + " to <span class=\"n\">" + poundsK(A.five) + "</span>."; var past = A.ready - P.win, absorbed = slip - past; sub = "The build landed " + plural(past, "month") + " past the window" + (absorbed > 0 ? ", and the other " + plural(absorbed, "month") + " of the slip " + (absorbed === 1 ? "was" : "were") + " absorbed by slack that was already there. " : ". ") + (P.payback === null && A.payback === null ? "Neither version pays back inside five years." : A.payback === null ? "Payback moves from month " + P.payback + " to beyond five years." : "Payback moves from " + pb(P) + " to " + pb(A) + "."); }
-      if (cyc > 1 && slip > 0) {
-        var m1 = run(1, slip), p1 = run(1, 0), monthlyCost = Math.max(0, p1.five - m1.five), hereCost = Math.max(0, P.five - A.five);
-        if (hereCost < 5) sub += " On a monthly cycle the same slip would have cost " + gbpBig(monthlyCost * 1000) + " already; here nothing is lost until the window is missed.";
-        else sub += " If the same customers could buy every month, the same slip would cost " + (monthlyCost < 5 ? "almost nothing" : gbpBig(monthlyCost * 1000)) + " rather than " + gbpBig(hereCost * 1000) + ".";
-      }
+      /* the readout carries only what the spine doesn't: the plan to compare against. On plan there is nothing to add */
+      function cash(v) { var a = poundsK(v).slice(1); return v < 0 ? "a " + a + " loss" : a; }
+      var r = slip === 0 ? ""
+        : "On plan, customers buy in month " + P.win + " and five-year cash is <span class=\"n\">" + cash(P.five) + "</span>.";
       spine("windowSpine", "When the money actually starts", [
         ["Build takes", plural(build, "month")], "+",
         ["Slip", slip === 0 ? "none" : plural(slip, "month")], "=",
@@ -370,7 +360,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         ["Customers can buy", "month " + A.win], "=",
         ["Five-year cash", poundsK(A.five), "out"]
       ]);
-      $("windowRead").innerHTML = r + "<span class=\"sub\">" + sub + "</span>";
+      $("windowRead").innerHTML = r; $("windowRead").hidden = !r;
     }
     on(["cSlip"], render); onRadios("cCycle", render); render();
   })();

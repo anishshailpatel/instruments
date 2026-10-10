@@ -111,7 +111,6 @@ input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(
 .seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
 .readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
 .readout .n { font-weight: 600; }
-.readout .sub { display: block; color: var(--ink-soft); font-size: 0.98rem; margin-top: 0.25rem; }
 .btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
 .btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
 /* funnel stages */
@@ -148,7 +147,6 @@ details.working[open] summary::before { content: "−"; }
 details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
 details.working .w p { margin: 0 0 0.5rem; }
 details.working .w p:last-child { margin: 0; }
-details.working .w i, details.working .w .essay { font-family: var(--sans); font-style: normal; color: var(--ink-mute); }
 /* the spine: the one line of arithmetic the tool turns on, kept in the open rather
    than folded into the working. Every term is named in words and carries its live
    number, so a reader who never opens the drawer still sees what drives the answer.
@@ -206,7 +204,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         <div class="controls">
           <div class="control"><label for="g2">The expansion lifts growth from <span id="marginG0Note"></span> to <output id="g2Out" aria-live="off"></output></label><input type="range" id="g2" aria-label="Growth after the expansion"></div>
           <div class="control"><label for="rn">The new market earns <output id="rnOut" aria-live="off"></output> on capital <span class="aside" id="marginCoreNote"></span></label><input type="range" id="rn" aria-label="Return on the new capital"></div>
-          <div class="control"><label for="hx">The new market has to clear <output id="hxOut" aria-live="off"></output> <span class="aside" id="marginHurdleNote"></span></label><input type="range" id="hx" aria-label="The hurdle the expansion has to clear, over the core's"></div>
+          <div class="control"><label for="hx">The new market has to clear <output id="hxOut" aria-live="off"></output> <span class="aside" id="marginHurdleNote"></span></label><input type="range" id="hx" aria-label="Points above the core's hurdle"></div>
           <div class="control"><label id="mDurLbl">The faster growth lasts</label><div class="seg" role="radiogroup" aria-labelledby="mDurLbl" id="mDurSeg"></div></div>
         </div>
         <div class="spine" id="marginSpine"></div>
@@ -222,8 +220,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   var CASE = {
 
     margin: { profit: 10, roic: 0.16, r: 0.10, g0: 0.05, save: 1.25, g2: 0.08, g2Range: [5.5, 8.5, 0.25], rn: 0.16, rnRange: [10, 24, 0.5], hx: 0, hxRange: [0, 10, 0.5],
-              durs: [["0", "For ever"], ["20", "20 years"], ["10", "10 years"], ["5", "5 years"]], durDefault: "0",
-              essay: "The curve treats every pound reinvested from here as new-market money earning the second slider's rate, which is the cautious reading. For ever is the Gordon perpetuity; the shorter settings let the faster growth run for that long and then fall back to today's rate, with the new capital earning what the core earns. The last slider prices the new market as riskier than the core: only the cash the expansion adds is discounted at its higher hurdle, so the business as it is keeps its own value." },
+              durs: [["0", "For ever"], ["20", "20 years"], ["10", "10 years"], ["5", "5 years"]], durDefault: "0" },
   };
 
   /* ---------- helpers ---------- */
@@ -263,7 +260,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
   function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
   function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
   function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
-  function working(id, lines, essay) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join("") + (essay ? '<p class="essay">' + esc(essay) + "</p>" : ""); }
+  function working(id, lines) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join(""); }
   /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
      a third member is a class, and "out" marks the answer the equation arrives at.
      Labels and numbers only: the argument belongs in the Note, not in the tool. */
@@ -314,7 +311,15 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var Vas = value(profit, g0, roic, r), Vm = value(profit2, g0, roic2, r), ymax = Math.max(Vm, Vas) * 3;
       var g2hi = Math.max(g0 * 100 + 1, Math.round((r * 100 - 1.5) * 4) / 4); syncRange("g2", Math.round((g0 * 100 + 0.5) * 4) / 4, g2hi, 0.25); syncRange("rn", Math.round(r * 100 * 2) / 2, Math.max(roic * 100 + 8, r * 100 + 4), 0.5);
       $("marginG0Note").textContent = pct1(g0 * 100); $("marginCoreNote").textContent = "(the core earns " + pct1(roic * 100) + ")";
-      working("marginW", ["value = profit × (1 − g ÷ R) ÷ (r − g) <i>(Gordon growth; reinvestment = growth ÷ return on the new capital R; r = what investors need; profit is after tax)</i>", "for a finite run: the faster growth and the new-market return hold for N years, then growth falls back to today's rate at the core's return, and the rest is the same perpetuity discounted back", "the cost programme keeps the capital where it is and takes " + poundsM1(save) + " a year out of the cost base, so profit becomes " + poundsM1(profit2) + " and the return on that capital becomes " + pct1(roic2 * 100), (+$("hx").value > 0 || +radio("mDur") ? "the growth rate at which the two are worth the same is found by search, since a finite run or a separate hurdle has no closed form" : "the two are worth the same at g* = (V_cost × r − profit) ÷ (V_cost − profit ÷ R)"), "the new market's hurdle h: the cash the expansion adds over the business as it is, year by year, is discounted at h while the business as it is stays at r, so the expansion is worth as is + (expansion at h − as is at h); with h = r this is the plain perpetuity", "the case: " + poundsM(profit) + " of profit, " + pct1(roic * 100) + " return on capital, investors needing " + pct1(r * 100) + ", growing " + pct1(g0 * 100) + " a year; as is " + poundsM(Vas) + ", cost programme " + poundsM(Vm)], C.essay);
+      working("marginW", [
+        "value = profit × (1 − g ÷ R) ÷ (r − g)",
+        "g = growth; R = return on new capital; r = what investors need; reinvestment = g ÷ R; profit is after tax",
+        "the curve prices all reinvestment at R, including what today's growth needs",
+        "finite run: g and R hold for N years, then growth falls back to today's rate at the core's return",
+        "cost programme: profit + annual saving, on the same capital",
+        "expansion = as is + (expansion at h − as is at h), where h = the new market's hurdle and the business as it is stays at r",
+        (+$("hx").value > 0 || +radio("mDur") ? "same value: g* found by search" : "same value: g* = (V_cost × r − profit) ÷ (V_cost − profit ÷ R)")
+      ]);
       var g2 = +$("g2").value / 100, rn = +$("rn").value / 100, N = +radio("mDur") || 0;
       var hp = +$("hx").value / 100, r2 = r + hp, VbaseH = value(profit, g0, roic, r2);
       /* the expansion is the business as it is plus the cash it adds, and only the added cash carries the higher hurdle */
@@ -322,7 +327,7 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       var yrsMatch = function (target) { for (var n = 1; n <= 60; n++) if (Vx(g2, n) >= target) return n; return null; };
       $("g2Out").textContent = pct1(g2 * 100); $("rnOut").textContent = pct1(rn * 100); $("hxOut").textContent = pct1(r2 * 100); $("marginHurdleNote").textContent = hp > 1e-9 ? "(" + f1(hp * 100) + (Math.abs(hp * 100 - 1) < 1e-9 ? " point" : " points") + " over the core's " + pct1(r * 100) + ")" : "(the same as the core's)";
       var V = function (g) { return Vx(g, N); };
-      var Vg = V(g2), createdG = Vg - Vas, createdM = Vm - Vas;
+      var Vg = V(g2);
       $("marginCard").innerHTML = tile("Option A · cost programme", poundsM1(save) + " saved", "straight to profit, year one", "good") + tile("Option B · expansion", pct1(g0 * 100) + " → " + pct1(g2 * 100) + " growth", "£" + f1(profit * (g2 - g0) / roic) + "m a year more reinvested", "flat") + stamp("Board recommendation", "Option A", "good", "bankable, in the run rate; B unproven");
       var gStar = null;
       if (!N && hp < 1e-9) { var denom = Vm - profit / rn; if (Math.abs(denom) > 1e-9) { gStar = (Vm * r - profit) / denom; if (!(gStar > 0 && gStar < r)) gStar = null; } }
@@ -330,7 +335,6 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
         var glo = g0 + 1e-4, ghi = r - 0.005;
         if (V(glo) < Vm && V(ghi) > Vm) { for (var bi = 0; bi < 60; bi++) { var gm = (glo + ghi) / 2; if (V(gm) < Vm) glo = gm; else ghi = gm; } gStar = (glo + ghi) / 2; }
       }
-      var flat = !N && Math.abs(rn - r2) < 1e-9, Vflat = Vas + profit / r2 - VbaseH;
       var rows = [
         ["Profit a year", poundsM1(profit), poundsM1(profit2), poundsM1(profit)],
         ["Growing at", pct1(g0 * 100), pct1(g0 * 100), pct1(g2 * 100)],
@@ -361,21 +365,16 @@ details.working .w i, details.working .w .essay { font-family: var(--sans); font
       if (!shiftLeft && (gStar === null || gStar > gHi || X(gStar) - X0 > 80)) s += txt(X0, Y1 + 14, pct1(g0 * 100), 9.5, { opacity: 0.6 });
       if (!shiftRight && !(Math.abs(valY - (Y1 + 14)) < 18 && X(g2) > X1 - 130)) s += txt(X1, Y1 + 14, "growth → " + pct1(+$("g2").max), 10.5, { opacity: 0.6, anchor: "end" }); s += txt(X0, 13, "what the business is worth at each growth rate", 10.5, { opacity: 0.6 });
       s += "</svg>"; $("marginSvg").innerHTML = s;
-      var diff = Vg - Vm, line1;
-      if (Math.abs(diff) < 0.5) line1 = "Growth to <span class=\"n\">" + pct1(g2 * 100) + "</span> and the cost programme are worth the same, <span class=\"n\">" + poundsM(Vg) + "</span>.";
-      else if (diff > 0) line1 = "The expansion, growth to <span class=\"n\">" + pct1(g2 * 100) + "</span>, creates <span class=\"n\">" + poundsM(createdG) + "</span> of value over the business as it is. The cost programme creates " + poundsM(createdM) + ". Growth wins by <span class=\"n\">" + poundsM(diff) + "</span>.";
-      else line1 = "The expansion, growth to <span class=\"n\">" + pct1(g2 * 100) + "</span>, " + (createdG < 0 ? "destroys " + poundsM(-createdG) + " of value" : "creates " + poundsM(createdG) + " of value") + " against the business as it is. The cost programme creates " + poundsM(createdM) + " and wins by <span class=\"n\">" + poundsM(-diff) + "</span>.";
-      var line2 = flat ? "New capital earning exactly the hurdle it has to clear adds nothing: the curve is flat at " + poundsM(Vflat) + " whatever the growth." : gStar === null ? (Vg > Vm ? "Growth wins from today's rate onward at these returns." : "No growth rate on the slider beats the cost programme at these returns.") : gStar <= g0 ? "Growth wins from today's rate onward at these returns." : "The two are worth the same at " + pct1(gStar * 100) + " growth, and below that the cost programme is the better call" + (rn < roic - 1e-9 ? ", because the new capital earns " + pct1(rn * 100) + " against the core's " + pct1(roic * 100) : "") + ".";
-      if (N) { var yrs = yrsMatch(Vm), Vfor = Vx(g2, 0); line2 += " For ever, the same growth would be worth " + poundsM(Vfor) + "." + (yrs === null ? " No run of years on this model gets it level with the cost programme." : yrs <= N ? "" : " It needs about " + yrs + " years at " + pct1(g2 * 100) + " to draw level with the cost programme."); }
-      else if (Vg > Vm + 0.5) { var yrs0 = yrsMatch(Vm); if (yrs0 !== null && yrs0 > 3) line2 += " That assumes the faster growth lasts for ever. It needs about " + yrs0 + " years at " + pct1(g2 * 100) + " to draw level with the cost programme at all."; }
-      if (hp > 1e-9) { var createdKind = value2(profit, g2, rn, r, N, g0, roic) - Vas; line2 = "At the core's " + pct1(r * 100) + " hurdle the same expansion would " + (createdKind < 0 ? "destroy " + poundsM(-createdKind) : "create " + poundsM(createdKind)) + ". " + line2; }
+      var createdG = Vg - Vas, createdM = Vm - Vas;
+      var line = "Against the business as it is, the expansion " + (createdG < 0 ? "destroys" : "creates") + ' <span class="n">' + poundsM(createdG) + '</span> and the cost programme ' + (createdG < 0 ? "creates " : "") + '<span class="n">' + poundsM(createdM) + "</span>";
+      if (Vx(g2, 0) > Vm + 0.5) { var yrs = yrsMatch(Vm); if (yrs !== null && yrs > Math.max(N, 3)) line += "; " + pct1(g2 * 100) + " growth has to last about " + word(yrs) + " years to match the cost programme"; }
       spine("marginSpine", "What a business is worth, before either option", [
         ["Profit after tax", poundsM(profit)], "×",
         ["Left after reinvestment", pct1((1 - g0 / roic) * 100)], "÷",
         ["Investors' return less growth", pct1((r - g0) * 100)], "=",
         ["The business as is", poundsM(Vas), "out"]
       ]);
-      $("marginRead").innerHTML = line1 + "<span class=\"sub\">" + line2 + "</span>";
+      $("marginRead").innerHTML = line + ".";
     }
     on(["g2", "rn", "hx"], render); onRadios("mDur", render); render();
   })();
