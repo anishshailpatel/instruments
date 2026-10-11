@@ -371,16 +371,16 @@ details.working .w p:last-child { margin: 0; }
       $("spanSvg").innerHTML = s;
 
       ticker("spanTick", [
-        ["Checking, polled", f1(SH.polled) + "h", "acc"],
+        ["Scheduled checking", f1(SH.polled) + "h", "acc"],
         ["Of your week", Math.round(share) + "%"],
         ["Found nothing", Math.round(wasted) + "%"],
         ["If raised instead", f1(SH.interrupt) + "h"]
       ]);
 
       spine("spanSpine", "What a week of checking buys", [
-        ["Scheduled checks", f1(M.n)], "−",
+        ["Scheduled checks a week", f1(M.n)], "−",
         ["That find something", f1(round1(M.hit))], "=",
-        ["Paid for nothing", f1(round1(M.n - M.hit)), "out"]
+        ["That find nothing", f1(round1(M.n - M.hit)), "out"]
       ]);
 
       $("spanCard").innerHTML =
@@ -390,7 +390,7 @@ details.working .w p:last-child { margin: 0; }
           wasted >= 50 ? "most checks find nothing" : "most checks find something");
 
       working("spanW", [
-        "polling charges every scheduled check whether or not anything has changed: " + M.n + " × " + CU.get("oto") + "min = " + f1(round1(M.n * M.oto)) + "h, plus the monthly reviews and the group meetings",
+        "a scheduled check is charged whether or not anything has changed: " + M.n + " × " + CU.get("oto") + "min = " + f1(round1(M.n * M.oto)) + "h, plus the monthly reviews and the group meetings",
         "a person has something worth raising about " + (M.rate === 1 ? "once" : f1(M.rate) + " times") + " a month, so in any week that is " + Math.round(M.p * 100) + "% of them: " + f1(round1(M.hit)) + " of " + M.n + " checks land on something and " + f1(round1(M.miss)) + " do not",
         "raised instead of scheduled, you pay for the " + f1(round1(M.hit)) + " and nothing for the rest, which is " + f1(SH.interrupt) + "h against " + f1(SH.polled) + "h",
         "a raised item is charged at a full one-to-one, which overstates it, and the monthly reviews come off the interrupt week because the pack read properly covers everyone at once",
