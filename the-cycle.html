@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
-  --paper: #faf8f4; --panel: #fffefb; --ink: #1d1d1b; --ink-soft: #5a5850; --ink-faint: #67645c; --ink-mute: #6f6c64; --rule: #e2ded6; --rule-firm: #cfcac0; --field: #fffefb;
+  --paper: #faf8f4; --panel: #fffefb; --ink: #1d1d1b; --ink-heading: #4f4a42; --ink-soft: #5a5850; --ink-faint: #67645c; --ink-mute: #6f6c64; --rule: #e2ded6; --rule-firm: #cfcac0; --field: #fffefb;
   --accent: #c8503a; --accent-text: #b4452f; --accent-soft: rgba(200, 80, 58, 0.12); --thumb-ring: #faf8f4;
   /* the pack's own colours: duller than the accent so they read as quoted, not endorsed */
   --good: #4a7a5c; --bad: #96604f; --warn: #7d6220; --good-bg: rgba(74, 122, 92, 0.09); --bad-bg: rgba(150, 96, 79, 0.09); --warn-bg: rgba(190, 150, 50, 0.14);
@@ -21,20 +21,24 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
+    --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-heading: #c6c2ba; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
     --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #17181b;
     --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
   }
 }
 :root[data-theme="dark"] {
-  --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
+  --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-heading: #c6c2ba; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
   --accent: #e0745e; --accent-text: #e88a76; --accent-soft: rgba(224, 116, 94, 0.16); --thumb-ring: #17181b;
   --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 .sheet { max-width: 42rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
-h1 { font-weight: 600; font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.6rem; text-wrap: balance; }
+/* The tool's own title sits back from its content, matching the notes: the site softened
+   its headings on 2026-10-13 and a tool opened on its own should not be louder than the
+   piece it came from. Only the solo header has a heading at all; every label inside an
+   embedded tool already sits on --ink-mute. */
+h1 { font-weight: 500; color: var(--ink-heading); font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.6rem; text-wrap: balance; }
 .standfirst { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
 nav.contents { margin-top: 1.4rem; font-family: var(--sans); font-size: 0.9rem; }
 nav.contents ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
