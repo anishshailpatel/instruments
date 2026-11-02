@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Spread thin</title>
-<meta name="description" content="Spread your customers across more patches while a rival keeps theirs in one. On a shared route your ground per customer falls with the square root of how many share a patch; on a shared fixed cost your cost per customer falls one for one.">
+<meta name="description" content="Spread your customers across more areas while a rival keeps theirs in one, and see what each of you carries per customer, on a route or on a fixed cost.">
 <script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -199,22 +199,20 @@ details.working .w p:last-child { margin: 0; }
 </head>
 <body>
 <div class="sheet">
-<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Spread thin</h1><p class="standfirst">Spread your customers across more patches while a rival keeps theirs in one. On a shared route your ground per customer falls with the square root of how many share a patch; on a shared fixed cost your cost per customer falls one for one.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Building+density" target="_top">Building density</a>.</p></header>
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Spread thin</h1><p class="standfirst">Spread your customers across more areas while a rival keeps theirs in one, and see what each of you carries per customer, on a route or on a fixed cost.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Building+density" target="_top">Building density</a>.</p></header>
 <section id="density">
-    <div class="layer"><div class="card c3" id="densityCard"></div></div>
     <div class="layer">
       <div class="tool">
         <div class="case" id="densityCase"></div>
         <div id="densitySvg"></div>
         <div class="controls">
-          <div class="control"><label for="dPatches">Your customers are spread across <output id="dPatchesOut" aria-live="off"></output></label><input type="range" id="dPatches" min="1" max="10" step="1" value="1" aria-label="How many patches your customers are spread across"></div>
-          <div class="control"><label id="dModeLbl">What the customers in a patch share</label><div class="seg" role="radiogroup" aria-labelledby="dModeLbl" id="dModeSeg"></div></div>
+          <div class="control"><label for="dPatches">Your customers are spread across <output id="dPatchesOut" aria-live="off"></output></label><input type="range" id="dPatches" min="1" max="10" step="1" value="1" aria-label="How many areas your customers are spread across"></div>
+          <div class="control"><label id="dModeLbl">What the customers in an area share</label><div class="seg" role="radiogroup" aria-labelledby="dModeLbl" id="dModeSeg"></div></div>
         </div>
         <div class="spine" id="densitySpine"></div>
         <p class="readout sr" id="densityRead" aria-live="polite"></p>
       </div>
     </div>
-    <details class="working"><summary>The working</summary><div class="w" id="densityW"></div></details>
   </section>
 </div>
 <script>(function () { var root = document.documentElement; function apply(t) {  if (t !== "dark" && t !== "light") return;  root.setAttribute("data-theme", t);  root.classList.add("hosted"); } addEventListener("message", function (e) { if (e.data && e.data.publishTheme) apply(e.data.publishTheme); }); try { var m = /[?&]theme=(dark|light)/.exec(location.search); if (m) apply(m[1]); } catch (e) {} try { parent.postMessage({ instrumentReady: true }, "*"); } catch (e) {}})();</script>
@@ -295,34 +293,21 @@ details.working .w p:last-child { margin: 0; }
     var C = CASE.density;
     var CU = caseUI("densityCase", [
       { k: "stops", label: "Your customers", v: C.stops, min: 10, max: 100000, step: 10 },
-      { k: "rival", label: "Rival's customers, one patch", v: C.rival, min: 5, max: 100000, step: 5 }
+      { k: "rival", label: "Rival's customers, one area", v: C.rival, min: 5, max: 100000, step: 5 }
     ], function () { render(); });
     $("dPatches").value = C.patches;
     seg("dModeSeg", "dMode", [["route", "A route"], ["fixed", "A fixed cost"]], "route");
     function dots(x0, y0, size, n) {
-      /* a square patch with up to 400 stops drawn as dots; past that the count under the square carries it */
+      /* a square area with up to 400 stops drawn as dots; past that the count under the square carries it */
       var shown = Math.min(n, 400), g = Math.max(1, Math.ceil(Math.sqrt(shown))), step = size / g, r = Math.min(1.8, step * 0.32), out = "";
       out += '<rect x="' + x0 + '" y="' + y0 + '" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>';
       for (var i = 0; i < shown; i++) { var cx = x0 + step * (i % g) + step / 2, cy = y0 + step * Math.floor(i / g) + step / 2; out += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + r.toFixed(2) + '" fill="currentColor" opacity="0.8"/>'; }
       return out;
     }
     function render() {
-      var S = CU.get("stops"), R = CU.get("rival"), k = +$("dPatches").value, per = S / k, fixedMode = radio("dMode") === "fixed", ratio = fixedMode ? R / per : Math.sqrt(R / per), mult = S / R;
-      $("dPatchesOut").textContent = plural(k, "patch", "patches");
-      var perW = fmtNum(per, per < 10 ? 1 : 0);
-      working("densityW", fixedMode ? [
-        "cost carried per customer in a patch ∝ 1 ÷ customers in that patch",
-        "your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + perW + "; the rival's = " + fmtNum(R, 0),
-        "your cost per customer against the rival's = " + fmtNum(R, 0) + " ÷ " + perW + " = " + ratio.toFixed(2)
-      ] : [
-        "ground covered per customer in a patch ∝ √(area ÷ customers in that patch)",
-        "your customers per patch = " + fmtNum(S, 0) + " ÷ " + k + " = " + perW + "; the rival's = " + fmtNum(R, 0),
-        "your ground per customer against the rival's = √(" + fmtNum(R, 0) + " ÷ " + perW + ") = " + ratio.toFixed(2)
-      ]);
-      $("densityCard").innerHTML = tile("Customers", fmtNum(S, 0), mult >= 1.05 ? f1(mult) + "× the rival" : mult <= 0.95 ? f1(1 / mult) + "× fewer than the rival" : "level with the rival", mult >= 1.05 ? "good" : mult <= 0.95 ? "bad" : "flat")
-        + tile("Markets served", String(k), k === 1 ? "one patch" : k + " patches", k > 1 ? "good" : "flat")
-        + stamp("Position", mult > 1 ? "Market leader" : "Challenger", mult > 1 ? "good" : "warn", k === 1 ? "expand into new patches" : "national footprint the rival lacks");
-      var sq = 24, gap = 4, x0 = 10, yTop = 30, s2 = '<svg viewBox="0 0 345 172" role="img" aria-label="Your customers spread across patches against a rival who keeps all of theirs in one, and the ' + (fixedMode ? "cost" : "ground") + ' per customer for each of you">';
+      var S = CU.get("stops"), R = CU.get("rival"), k = +$("dPatches").value, per = S / k, fixedMode = radio("dMode") === "fixed", ratio = fixedMode ? R / per : Math.sqrt(R / per);
+      $("dPatchesOut").textContent = plural(k, "area");
+      var sq = 24, gap = 4, x0 = 10, yTop = 30, s2 = '<svg viewBox="0 0 345 146" role="img" aria-label="Your customers spread across areas against a rival who keeps all of theirs in one, and the ' + (fixedMode ? "cost" : "ground") + ' per customer for each of you">';
       s2 += txt(x0, 18, "you: " + fmtNum(S, 0) + " customers", 10.5, { opacity: 0.7 }); s2 += txt(335, 18, "rival: " + fmtNum(R, 0), 10.5, { opacity: 0.7, anchor: "end" });
       for (var i = 0; i < k; i++) { var px = x0 + i * (sq + gap); s2 += dots(px, yTop, sq, Math.round(per)); s2 += txt(px + sq / 2, yTop + sq + 12, fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0), 10.5, { opacity: 0.6, anchor: "middle" }); }
       s2 += dots(335 - sq, yTop, sq, Math.round(R)); s2 += txt(335 - sq / 2, yTop + sq + 12, fmtNum(R, 0), 10.5, { opacity: 0.6, anchor: "middle" });
@@ -333,7 +318,6 @@ details.working .w p:last-child { margin: 0; }
       s2 += txt(bx, 96, fixedMode ? "fixed cost carried per customer" : "ground covered per customer", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + by + '" width="' + bw.toFixed(1) + '" height="' + bh + '" fill="currentColor" opacity="0.3"/>'; s2 += txt(bx + bw + 6, by + bh - 1, "rival", 10.5, { opacity: 0.7 });
       s2 += '<rect x="' + bx + '" y="' + (by + 18) + '" width="' + yw.toFixed(1) + '" height="' + bh + '" fill="' + ACCENT + '"/>'; s2 += txt(bx + yw + 6, by + 18 + bh - 1, youLbl, 10.5, { fill: ACCENT, weight: 600 });
-      s2 += txt(bx, 160, "equal patches; the number under each counts its customers", 10.5, { opacity: 0.6 });
       s2 += "</svg>"; $("densitySvg").innerHTML = s2;
       var perTxt = fmtNum(per, per < 10 && per !== Math.round(per) ? 1 : 0);
       var pc = Math.round(Math.abs(1 - ratio) * 100), verb = fixedMode ? "carry" : "cover", noun = fixedMode ? "cost" : "ground", m = f1(ratio), r;
@@ -341,15 +325,17 @@ details.working .w p:last-child { margin: 0; }
       else if (ratio < 1) r = "You " + verb + " " + pc + "% less " + noun + " per customer than the rival";
       else if (ratio < 1.995) r = "You " + verb + " " + pc + "% more " + noun + " per customer than the rival";
       else r = "You " + verb + " " + (m === "2" ? "twice" : (+m <= 12 && +m === Math.round(+m) ? word(+m) + " times" : m + " times")) + " the " + noun + " per customer the rival does";
+      /* The terms are shown exactly, as a division, so they always work out to the answer; the
+         answer is the same rounded figure the bar and the readout carry. */
+      var yoursTxt = per === Math.round(per) ? fmtNum(per, 0) : fmtNum(S, 0) + " ÷ " + k;
+      var vs = level ? "level" : ratio < 1 ? pct + "% less" : ratio < 1.995 ? pct + "% more" : "×" + f1(ratio);
       spine("densitySpine", fixedMode ? "What your cost per customer turns on" : "What your ground per customer turns on",
         (fixedMode ? [] : ["√("]).concat([
-          ["Rival's customers in a patch", fmtNum(R, 0)], "÷",
-          ["Yours in each patch", perTxt]
+          ["Rival's customers in its area", fmtNum(R, 0)], "÷",
+          ["Yours in each area", yoursTxt]
         ], fixedMode ? [] : [")"], [
-          "=", /* two decimals, not one: this ratio lives near 1, and at f1 the 0.45 at one patch
-               prints as 0.4, which no longer agrees with the 55% the readout works out
-               from the same unrounded number */
-          [fixedMode ? "Your cost per customer" : "Your ground per customer", ratio.toFixed(2) + "× theirs", "out"]
+          "=",
+          [fixedMode ? "Your cost per customer, against theirs" : "Your ground per customer, against theirs", vs, "out"]
         ]));
       $("densityRead").innerHTML = '<span class="n">' + r + "</span>.";
     }

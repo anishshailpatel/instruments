@@ -209,7 +209,6 @@ details.working .w p:last-child { margin: 0; }
         <div class="runbar">
           <button type="button" class="btn" id="cyRun">Run the clock</button>
           <button type="button" class="btn quiet" id="cyReset">Back to the start</button>
-          <div class="seg" id="cySpeedSeg" role="group" aria-label="How fast the clock runs"></div>
           <span class="clock" id="cyClock" aria-live="off"></span>
         </div>
         <div class="ticker" id="cycleTick"></div>
@@ -307,14 +306,13 @@ details.working .w p:last-child { margin: 0; }
       { k: "decay", label: "Live deals lost a month while waiting", v: C.decay, min: 0, max: 60, step: 1, suffix: "%" }
     ], function () { render(); });
     $("cyLen").value = C.len;
-    seg("cySpeedSeg", "cySpeed", [[1, "1×"], [4, "4×"], [12, "12×"]], 4);
 
     /* The clock. T is how many of the horizon's months have happened. It sits at the far
        end until a reader starts it, so the picture on arrival is the finished one and
        nothing has changed for a reader who never touches the button. Nothing autoplays:
        these sit inside a page somebody is reading, and motion they did not ask for is rude. */
     var T = H, playing = false, timer = null, lastTs = 0;
-    function speed() { return +radio("cySpeed") || 4; }
+    function speed() { return 4; }   /* months a second: two years in six seconds */
 
     function run(N) {
       var L = CU.get("leads"), w = CU.get("win") / 100, d = CU.get("decay") / 100, deal = CU.get("deal") * 1000;
@@ -337,6 +335,17 @@ details.working .w p:last-child { margin: 0; }
       var k = Math.min(H, Math.floor(t)), fr = Math.max(0, Math.min(1, t - k));
       var a = whole(R, N, k), b = whole(R, N, Math.min(H, k + 1));
       return { flight: a.flight + (b.flight - a.flight) * fr, lost: a.lost + (b.lost - a.lost) * fr, cum: a.cum + (b.cum - a.cum) * fr };
+    }
+
+    /* End labels keep the same top-to-bottom order as the line ends, so a label can never
+       sit against the wrong line. Each starts level with its own line and is nudged only as
+       far as the one above it needs; one that has moved gets a faint leader back. */
+    function placeLabels(marks, top, bot, gap) {
+      var m = marks.slice().sort(function (a, b) { return a.y - b.y; });
+      m.forEach(function (k) { k.p = Math.min(bot, Math.max(top, k.y)); });
+      for (var i = 1; i < m.length; i++) m[i].p = Math.max(m[i].p, m[i - 1].p + gap);
+      if (m.length && m[m.length - 1].p > bot) { m[m.length - 1].p = bot; for (var j = m.length - 2; j >= 0; j--) m[j].p = Math.min(m[j].p, m[j + 1].p - gap); }
+      return m;
     }
 
     function render(live) {
@@ -372,17 +381,10 @@ details.working .w p:last-child { margin: 0; }
       if (full) {
         var marks = refs.map(function (o) { return { y: Y(o.R.total), val: gbpBig(o.R.total), band: plural(o.n, "month"), accent: false }; });
         marks.push({ y: Y(A.total), val: gbpBig(A.total), band: plural(N, "month"), accent: true });
-        var used = [];
-        marks.slice().sort(function (a, b) { return (b.accent ? 1 : 0) - (a.accent ? 1 : 0); }).forEach(function (mk) {
-          var cands = [mk.y, mk.y - 30, mk.y + 30, mk.y - 60, mk.y + 60];
-          for (var ci = 0; ci < cands.length; ci++) {
-            var yy = Math.min(Y1 - 18, Math.max(Y0 + 8, cands[ci]));
-            if (used.some(function (u) { return Math.abs(u - yy) < 30; })) continue;
-            used.push(yy);
-            s += txt(X1 + 5, yy, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
-            s += txt(X1 + 5, yy + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
-            return;
-          }
+        placeLabels(marks, Y0 + 8, Y1 - 18, 30).forEach(function (mk) {
+          if (Math.abs(mk.p - 3.5 - mk.y) > 6) s += '<polyline points="' + (X1 + 1) + ',' + mk.y.toFixed(1) + ' ' + (X1 + 3.5) + ',' + (mk.p - 3.5).toFixed(1) + '" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>';
+          s += txt(X1 + 5, mk.p, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
+          s += txt(X1 + 5, mk.p + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
         });
       } else {
         /* mid-run the totals are not known yet, so each line carries its own moving head
@@ -451,7 +453,6 @@ details.working .w p:last-child { margin: 0; }
       playing = true; lastTs = 0; timer = setInterval(frame, 33); render(true);
     });
     $("cyReset").addEventListener("click", function () { stop(); T = (T >= H - 1e-9) ? 0 : H; render(); });
-    onRadios("cySpeed", function () { lastTs = 0; });
     on(["cyLen"], function () { render(); }); render();
   })();
 

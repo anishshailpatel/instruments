@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Checks that find nothing</title>
-<meta name="description" content="A scheduled check costs the same whether anything has changed or not. Put in how often something actually comes up, and see how much of the checking is paid for nothing.">
+<meta name="description" content="A scheduled check costs the same whether anything has changed or not. Put in how often something actually comes up, and see how many of the checks find nothing.">
 <script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -199,16 +199,15 @@ details.working .w p:last-child { margin: 0; }
 </head>
 <body>
 <div class="sheet">
-<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Checks that find nothing</h1><p class="standfirst">A scheduled check costs the same whether anything has changed or not. Put in how often something actually comes up, and see how much of the checking is paid for nothing.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Checking+in" target="_top">Checking in</a>.</p></header>
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Checks that find nothing</h1><p class="standfirst">A scheduled check costs the same whether anything has changed or not. Put in how often something actually comes up, and see how many of the checks find nothing.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Checking+in" target="_top">Checking in</a>.</p></header>
 <section id="span">
-    <div class="layer"><div class="card c3" id="spanCard"></div></div>
     <div class="layer">
       <div class="tool">
         <div class="case" id="spanCase"></div>
         <div id="spanSvg"></div>
         <div class="ticker" id="spanTick"></div>
         <div class="controls">
-          <div class="control"><label for="spRate">Something worth raising comes up, for each person, <output id="spRateOut" aria-live="off"></output></label><input type="range" id="spRate" min="0" max="8" step="0.5" value="1" aria-label="How often something worth raising comes up for each person, per month"></div>
+          <div class="control"><label for="spRate">Something worth raising comes up, for each person, <output id="spRateOut" aria-live="off"></output></label><input type="range" id="spRate" min="0" max="4" step="0.5" value="1" aria-label="How often something worth raising comes up for each person, per month"></div>
         </div>
         <div class="spine" id="spanSpine"></div>
         <p class="readout sr" id="spanRead" aria-live="polite"></p>
@@ -305,11 +304,11 @@ details.working .w p:last-child { margin: 0; }
     /* The note puts no number on how often something comes up; it says most weeks, for most
        of your people, nothing has. That is what a rate below one a week means, so the slider
        starts at one a month and the reader moves it. It is a property of the work, not of
-       the person: nothing here grades anybody.
+       the person: nothing here grades anybody. It stops at four a month, because past one a
+       week every check finds something and the picture stops changing.
 
-       A raised item is charged at the same length as a one-to-one. That is almost certainly
-       too generous to the interrupt side's cost, which is the safe direction to be wrong in:
-       if interrupts still come out cheaper on a conservative charge, the argument holds. */
+       There is deliberately no "if raised instead" total. The note keeps the one-to-ones and
+       sets their cadence per person; a figure for cancelling them all argued against it. */
     var WEEKS_PER_MONTH = 4.345;
     function model() {
       var n = CU.get("reports"), oto = CU.get("oto") / 60, group = CU.get("group");
@@ -320,35 +319,33 @@ details.working .w p:last-child { margin: 0; }
       return {
         n: n, p: p, rate: rate, hit: hit, miss: miss, oto: oto, reviews: reviews, group: group,
         hitH: hit * oto, missH: miss * oto,
-        polled: n * oto + reviews + group,                   /* check everyone, every week, whatever is happening */
-        interrupt: hit * oto + group                          /* pay only for what was actually raised */
+        polled: n * oto + reviews + group                    /* check everyone, every week, whatever is happening */
       };
     }
 
     function round1(v) { return Math.round(v * 10) / 10; }
-    function shown(M) {
-      var p = [round1(M.hitH), round1(M.missH), round1(M.reviews), round1(M.group)];
-      return { parts: p, polled: round1(p[0] + p[1] + p[2] + p[3]), interrupt: round1(p[0] + p[3]) };
-    }
+    /* The total is rounded once, from the true figure. It must not move when the rate does:
+       how often something comes up changes what the checks find, never what they cost. */
+    function shown(M) { return { polled: round1(M.polled) }; }
 
     function render() {
       var M = model(), SH = shown(M), week = CU.get("week");
-      var share = SH.polled / week * 100, saved = round1(SH.polled - SH.interrupt);
+      var share = SH.polled / week * 100;
       var wasted = M.n > 0 ? M.miss / M.n * 100 : 0;
-      $("spRateOut").textContent = M.rate === 0 ? "never" : (M.rate === 1 ? "once a month" : f1(M.rate) + " times a month");
+      var RATE_WORDS = { 0: "never", 0.5: "every two months", 1: "once a month", 2: "twice a month" };
+      $("spRateOut").textContent = RATE_WORDS[M.rate] || f1(M.rate) + " times a month";
 
       /* The week in half-hour slots. The pale cells are scheduled checks that found nothing,
          which is the whole of the polling argument: you pay for them either way. */
       var GAP = 2, X0 = 26, Y0 = 30, AVAIL = 313;
       var perDay = Math.max(8, Math.min(30, Math.round(week * 2 / 5)));
       var CELL = Math.max(5, Math.min(18, (AVAIL - (perDay - 1) * GAP) / perDay));
-      var vbH = Math.ceil(Y0 + 5 * CELL + 4 * GAP + 8);
+      var gridB = Y0 + 5 * CELL + 4 * GAP, vbH = Math.ceil(gridB + 26);
       function cellsFor(h) { return Math.max(0, Math.round(h * 2)); }
       var bands = [
         { n: cellsFor(M.hitH), op: 0.85 },      /* a check that found something */
         { n: cellsFor(M.missH), op: 0.28 },     /* a check that found nothing: paid for, and the point of the exhibit, so it has to stay clearly distinct from an empty slot */
-        { n: cellsFor(M.reviews), op: 0.45 },
-        { n: cellsFor(M.group), op: 0, flat: true }
+        { n: cellsFor(M.reviews + M.group), op: 0, flat: true }   /* the rest of the scheduled checking, in one grey, so the two one-to-one shades are the only accent */
       ];
       var order = [];
       for (var sl = 0; sl < perDay; sl++) for (var dy = 0; dy < 5; dy++) order.push([dy, sl]);
@@ -371,14 +368,21 @@ details.working .w p:last-child { margin: 0; }
           else s += box + 'fill="' + ACCENT + '" opacity="' + bd.op + '"/>';
         }
       }
+      /* the key: three swatches, no sentence */
+      var KEY = [["found something", ACCENT, 0.85], ["found nothing", ACCENT, 0.28], ["reviews, meetings", "currentColor", 0.15]];
+      var kx = X0, ky = gridB + 14;
+      KEY.forEach(function (k) {
+        s += '<rect x="' + kx + '" y="' + (ky - 7.5).toFixed(1) + '" width="8" height="8" rx="1.5" fill="' + k[1] + '" opacity="' + k[2] + '"/>';
+        s += txt(kx + 11, ky, k[0], 9, { opacity: 0.65 });
+        kx += 11 + k[0].length * 5.6 + 12;   /* txt() sets type at 10.5 at least; about 5.6 a character */
+      });
       s += "</svg>";
       $("spanSvg").innerHTML = s;
 
       ticker("spanTick", [
         ["Scheduled checking", f1(SH.polled) + "h", "acc"],
         ["Of your week", Math.round(share) + "%"],
-        ["Found nothing", Math.round(wasted) + "%"],
-        ["If raised instead", f1(SH.interrupt) + "h"]
+        ["Found nothing", Math.round(wasted) + "%"]
       ]);
 
       spine("spanSpine", "What a week of checking buys", [
@@ -387,19 +391,10 @@ details.working .w p:last-child { margin: 0; }
         ["That find nothing", f1(round1(M.n - M.hit)), "out"]
       ]);
 
-      $("spanCard").innerHTML =
-        tile("Direct reports", String(M.n), "unchanged", "flat") +
-        tile("Scheduled checking", f1(SH.polled) + "h", Math.round(share) + "% of the week", share >= 25 ? "bad" : "flat") +
-        stamp("The diary", share >= 25 ? "Full" : "Manageable", share >= 25 ? "warn" : "good",
-          wasted >= 50 ? "most checks find nothing" : "most checks find something");
-
       working("spanW", [
-        "a scheduled check is charged whether or not anything has changed: " + M.n + " × " + CU.get("oto") + "min = " + f1(round1(M.n * M.oto)) + "h, plus the monthly reviews and the group meetings",
-        "a person has something worth raising about " + (M.rate === 1 ? "once" : f1(M.rate) + " times") + " a month, so in any week that is " + Math.round(M.p * 100) + "% of them: " + f1(round1(M.hit)) + " of " + M.n + " checks land on something and " + f1(round1(M.miss)) + " do not",
-        "raised instead of scheduled, you pay for the " + f1(round1(M.hit)) + " and nothing for the rest, which is " + f1(SH.interrupt) + "h against " + f1(SH.polled) + "h",
-        "a raised item is charged at a full one-to-one, which overstates it, and the monthly reviews come off the interrupt week because the pack read properly covers everyone at once",
-        "the note puts no number on how often something comes up, only that most weeks, for most people, nothing has; the slider is yours to set",
-        "the grid is your week in half-hour slots, and where the cells fall is drawn for legibility rather than taken from a diary"
+        "every scheduled check is charged whether or not anything has changed: " + M.n + " × " + CU.get("oto") + "min = " + f1(round1(M.n * M.oto)) + "h, plus the monthly reviews and the group meetings",
+        "chance a person has something in a given week = " + f1(M.rate) + " a month ÷ " + WEEKS_PER_MONTH + " weeks = " + Math.round(M.p * 100) + "%, so " + f1(round1(M.hit)) + " of " + M.n + " checks find something and " + f1(round1(M.miss)) + " don't",
+        "the grid is your week in half-hour slots; where the cells fall is drawn for legibility, not taken from a diary"
       ], C.essay);
 
       $("spanRead").innerHTML = "Checking everyone every week costs <span class=\"n\">" + f1(SH.polled) + "h</span>, of which <span class=\"n\">" + Math.round(wasted) + "%</span> of the checks find nothing.";

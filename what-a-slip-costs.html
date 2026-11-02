@@ -213,7 +213,6 @@ details.working .w i { font-family: var(--sans); font-style: normal; color: var(
         <p class="readout" id="windowRead" aria-live="polite"></p>
       </div>
     </div>
-    <details class="working"><summary>The working</summary><div class="w" id="windowW"></div></details>
   </section>
 </div>
 <script>(function () { var root = document.documentElement; function apply(t) {  if (t !== "dark" && t !== "light") return;  root.setAttribute("data-theme", t);  root.classList.add("hosted"); } addEventListener("message", function (e) { if (e.data && e.data.publishTheme) apply(e.data.publishTheme); }); try { var m = /[?&]theme=(dark|light)/.exec(location.search); if (m) apply(m[1]); } catch (e) {} try { parent.postMessage({ instrumentReady: true }, "*"); } catch (e) {}})();</script>
@@ -238,7 +237,7 @@ details.working .w i { font-family: var(--sans); font-style: normal; color: var(
   function roundHalfEven(x) { x = Math.round(x * 1e6) / 1e6; var t = Math.trunc(x), f = Math.abs(x - t); if (Math.abs(f - 0.5) < 1e-9) return (t % 2 === 0) ? t : t + (x < 0 ? -1 : 1); return Math.round(x); }
   function poundsM1(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; if (a >= 100) return "£" + Math.round(a) + "m"; return "£" + f1(a) + "m"; }
   function poundsM(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; return "£" + roundHalfEven(a) + "m"; }
-  function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.abs(v); if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
+  function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.round(Math.abs(v)); /* whole £k first, so a value on a rounding boundary can't round differently in two places */ if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
   function pct1(x) { var v = Math.round(x * 10) / 10; return (v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
   function gbp(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
   function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
@@ -307,18 +306,21 @@ details.working .w i { font-family: var(--sans); font-style: normal; color: var(
       for (var m = 1; m <= H; m++) { if (m <= ready) c -= spend; if (m > win) c += ben / 12 * (C.ramp[Math.floor((m - win - 1) / 12)] || 1); cum.push(c); if (payback === null && m > ready && c >= 0) payback = m; }
       return { cum: cum, ready: ready, win: win, five: c, payback: payback };
     }
-    function cycName(cyc) { return cyc === 1 ? "every month" : cyc === 3 ? "every quarter" : cyc === 12 ? "once a year" : "every " + word(cyc / 12) + " years"; }
+    /* End labels keep the same top-to-bottom order as the line ends, so a label can never
+       sit against the wrong line. Each starts level with its own line and is nudged only as
+       far as the one above it needs; one that has moved gets a faint leader back. */
+    function placeLabels(marks, top, bot, gap) {
+      var m = marks.slice().sort(function (a, b) { return a.y - b.y; });
+      m.forEach(function (k) { k.p = Math.min(bot, Math.max(top, k.y)); });
+      for (var i = 1; i < m.length; i++) m[i].p = Math.max(m[i].p, m[i - 1].p + gap);
+      if (m.length && m[m.length - 1].p > bot) { m[m.length - 1].p = bot; for (var j = m.length - 2; j >= 0; j--) m[j].p = Math.min(m[j].p, m[j + 1].p - gap); }
+      return m;
+    }
+
     function render() {
       cost = CU.get("cost"); build = CU.get("build"); ben = CU.get("ben");
       var cyc = parseFloat(radio("cCycle")) || 12, slip = +$("cSlip").value, SMAX = C.slipRange[1];
       $("cSlipOut").textContent = slip === 0 ? "on time" : plural(slip, "month") + " late";
-      working("windowW", [
-        "the case: a " + gbpBig(cost * 1000) + " build over " + plural(build, "month") + ", worth " + gbpBig(ben * 1000) + " a year at full adoption",
-        "customers buy " + cycName(cyc) + "; benefit starts at the first buying moment at or after the build is ready",
-        "cash by month, undiscounted; build cost spread evenly over the build",
-        "adoption in years one, two and three after launch: " + C.ramp.map(function (x) { return Math.round(x * 100) + "%"; }).join(" → "),
-        "the chart keeps one scale across the whole slip slider"
-      ]);
       var P = run(cyc, 0), A = run(cyc, slip), Wst = run(cyc, SMAX);
       $("windowCard").innerHTML = tile("Schedule", slip === 0 ? "On plan" : cap(plural(slip, "month")) + " late", slip === 0 ? "ready month " + A.ready : "ready month " + A.ready + ", plan " + P.ready, slip === 0 ? "good" : slip <= 2 ? "flat" : "bad") + tile("Budget", "On budget", gbpBig(cost * 1000) + ", no overrun", "good") + stamp("RAG", slip === 0 ? "Green" : "Amber", slip === 0 ? "good" : "warn", slip === 0 ? "delivery on track" : "schedule recovery plan in place");
       var all = P.cum.concat(Wst.cum).concat(A.cum).concat([0]), lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), pad = (hi - lo) * 0.12 || 100; lo -= pad; hi += pad;
@@ -340,17 +342,10 @@ details.working .w i { font-family: var(--sans); font-style: normal; color: var(
       var marks = refs.filter(function (o) { return Math.abs(o.R.five - A.five) > 1; })
         .map(function (o) { return { y: Y(o.R.five), val: poundsK(o.R.five), band: slipLbl(o.slip), accent: false }; });
       marks.push({ y: Y(A.five), val: poundsK(A.five), band: slipLbl(slip), accent: true });
-      var used = [];
-      marks.slice().sort(function (a, b) { return (b.accent ? 1 : 0) - (a.accent ? 1 : 0); }).forEach(function (mk) {
-        var cands = [mk.y, mk.y - 30, mk.y + 30, mk.y - 60, mk.y + 60, mk.y - 90, mk.y + 90];
-        for (var ci = 0; ci < cands.length; ci++) {
-          var yy = Math.min(Y1 - 18, Math.max(Y0 + 8, cands[ci]));
-          if (used.some(function (u) { return Math.abs(u - yy) < 30; })) continue;
-          used.push(yy);
-          s += txt(X1 + 5, yy, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
-          s += txt(X1 + 5, yy + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
-          return;
-        }
+      placeLabels(marks, Y0 + 8, Y1 - 18, 30).forEach(function (mk) {
+        if (Math.abs(mk.p - 3.5 - mk.y) > 6) s += '<polyline points="' + (X1 + 1) + ',' + mk.y.toFixed(1) + ' ' + (X1 + 3.5) + ',' + (mk.p - 3.5).toFixed(1) + '" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.35"/>';
+        s += txt(X1 + 5, mk.p, mk.val, 10, mk.accent ? { fill: ACCENT, weight: 600 } : { opacity: 0.7 });
+        s += txt(X1 + 5, mk.p + 15, mk.band, 9.5, mk.accent ? { fill: ACCENT, opacity: 0.9 } : { opacity: 0.6 });
       });
       s += "</svg>"; $("windowSvg").innerHTML = s;
       /* the readout carries only what the spine doesn't: the plan to compare against. On plan there is nothing to add */
