@@ -1,6 +1,6 @@
 # Instruments
 
-Six thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
+Seven thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
 
 | File | Tool | Note that explains it |
 |---|---|---|
@@ -10,6 +10,7 @@ Six thinking tools. Each one works two ways: embedded by iframe inside the note 
 | `what-a-slip-costs.html` | What a slip costs | Waiting |
 | `road-by-road.html` | Spread thin | Building density |
 | `checking-in.html` | Checks that find nothing | Checking in |
+| `ten-projects.html` | Ten two-month projects | What estimates mean (built 2026-11-14; goes live when the note embeds it) |
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
@@ -60,6 +61,7 @@ Remeasured 2026-11-02 for the four embedded tools, after the cards, working pane
 | `road-by-road.html` | 632 | 710 | 980 |
 | `the-cycle.html` | 1072 | 1200 | 1200 |
 | `checking-in.html` | 802 | 900 | 1060 |
+| `ten-projects.html` | 595 | 670 | new |
 
 The net of the 2026-10-10 changes was close to nothing: the prose that came out paid for the spine that went in. The 2026-11-02 pass took a further 130 to 230px out of three of the four.
 
@@ -98,6 +100,12 @@ There is deliberately no "if raised instead" figure. Until 2026-11-02 the ticker
 The exhibit is the week itself, five day-rows of half-hour slots, on AP's steer towards squares and a pseudo-calendar over another chart. Strong cells are one-to-ones that found something, pale cells are ones that found nothing and are the point of the picture, grey is the reviews and group meetings, and the blanks are what is left; a three-swatch key under the grid says so. Where the cells fall is drawn for legibility and the working says so; the count is the reader's. The card that repeated the ticker came out on 2026-11-02.
 
 **The cycle** charges one cost of a slow sales process: a live deal has a fixed chance of dying each month it waits (15% by default), so survival to decision is (1 − d)^N. Won a month = leads × survival × win rate; deals in flight = leads × (1 + (1 − d) + …) over N months; the line is cumulative revenue from month N + 1 over two years against a fixed one-month reference. Defaults: 100 leads, 25% win rate, £20k a deal. At three months that is 39% of deals lost, about 15 won a month against 21 (the readout rounds deal counts to whole numbers), £6.4m against £9.8m over two years, and 257 in flight against 100.
+
+**Ten two-month projects** (`ten-projects.html`, 2026-11-14) is the first of the tools that is a simulation, not a calculator: the reader presses a button and a plan of projects plays out. It exists because the note's curves show the shape of the spread but not what it is like to plan inside it, which is the note's reason the board gets the mean: you can't know which project will run, only that across enough of them the total lands near 1.8 times the estimates. AP's test for a simulation (2026-11-14 session): the claim is counter-intuitive, it turns on chance or delay, and the reader's own click produces the result.
+
+Each project's length is drawn from a lognormal whose most likely value is the two-month estimate and whose mean is 1.8 times it, the same curve `_tools/skew-curves.py` draws in the note (s² = ln 1.8 ÷ 1.5). Ten of them average 36.0 months against 20 planned, and come in at or under 20 about four times in a thousand. Grey is the estimate and the accent is the overrun. The ticker carries planned, this run, and the average across runs once there are two; the spine is estimates × 1.8 = the mean, which the running average converges on.
+
+The rules it keeps, which any later simulation should keep too. It never autoplays. It opens on a fixed draw (seed 1821 + the number of projects, which at ten gives 1.5, 2.1, 10.2, 3.5, 1.7, 2.3, 4.2, 3.1, 4.0, 3.4, exactly 36.0), so the page looks the same on every arrival and the note can quote it; every run after that is a fresh draw. Lengths are rounded to a tenth as they are drawn, so the figures beside the bars add up to the total. With reduced motion a run lands at once. It carries labels and numbers only. Moving the slider (one to twenty projects) keeps the projects already on the page and adds or drops the last ones, and restarts the count of runs. The height above is the default; at twenty projects it is 726.
 
 ## Sized for the note column, not the phone
 
