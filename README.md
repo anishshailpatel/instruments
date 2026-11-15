@@ -1,6 +1,6 @@
 # Instruments
 
-Seven thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
+Eight thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
 
 | File | Tool | Note that explains it |
 |---|---|---|
@@ -10,7 +10,8 @@ Seven thinking tools. Each one works two ways: embedded by iframe inside the not
 | `what-a-slip-costs.html` | What a slip costs | Waiting |
 | `road-by-road.html` | Spread thin | Building density |
 | `checking-in.html` | Checks that find nothing | Checking in |
-| `ten-projects.html` | Ten two-month projects | What estimates mean (built 2026-11-14; goes live when the note embeds it) |
+| `ten-projects.html` | Ten two-month projects | What estimates mean (built 2026-11-14, embedded 2026-11-14) |
+| `one-person.html` | The pile in front of one person | Human bottlenecks (built 2026-11-15; goes live when the note embeds it) |
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
@@ -62,6 +63,7 @@ Remeasured 2026-11-02 for the four embedded tools, after the cards, working pane
 | `the-cycle.html` | 1072 | 1200 | 1200 |
 | `checking-in.html` | 802 | 900 | 1060 |
 | `ten-projects.html` | 595 | 670 | new |
+| `one-person.html` | 726 | 815 | new |
 
 The net of the 2026-10-10 changes was close to nothing: the prose that came out paid for the spine that went in. The 2026-11-02 pass took a further 130 to 230px out of three of the four.
 
@@ -106,6 +108,20 @@ The exhibit is the week itself, five day-rows of half-hour slots, on AP's steer 
 Each project's length is drawn from a lognormal whose most likely value is the two-month estimate and whose mean is 1.8 times it, the same curve `_tools/skew-curves.py` draws in the note (s² = ln 1.8 ÷ 1.5). Ten of them average 36.0 months against 20 planned, and come in at or under 20 about four times in a thousand. Grey is the estimate and the accent is the overrun. The ticker carries planned, this run, and the average across runs once there are two; the spine is estimates × 1.8 = the mean, which the running average converges on.
 
 The rules it keeps, which any later simulation should keep too. It never autoplays. It opens on a fixed draw (seed 1821 + the number of projects, which at ten gives 1.5, 2.1, 10.2, 3.5, 1.7, 2.3, 4.2, 3.1, 4.0, 3.4, exactly 36.0), so the page looks the same on every arrival and the note can quote it; every run after that is a fresh draw. Lengths are rounded to a tenth as they are drawn, so the figures beside the bars add up to the total. With reduced motion a run lands at once. It carries labels and numbers only. Moving the slider (one to twenty projects) keeps the projects already on the page and adds or drops the last ones, and restarts the count of runs. The height above is the default; at twenty projects it is 726.
+
+**The pile in front of one person** (`one-person.html`, 2026-11-15) is the second simulation, for *Human bottlenecks*, which had no visual. It is not the five-step factory line first proposed to AP. The note gives Goldratt's factory one paragraph and spends the rest on where a person differs from a machine, so the tool draws the person: their week as forty hour-squares, and under it the days of work waiting for them, a bar a week for a year. Three switches carry the note's three headings, in its order: clear their desk, let other work wait, add a second person. Pressing one plays the year; so does the button.
+
+Nothing is drawn at random, because the note's claims here turn on delay, not chance. The figures are for illustration and the note quotes none of them: a 40-hour week with 16 hours on the work only they can do, 3 days of that work arriving a week, 10 days waiting at the start. Left alone the pile grows a day a week, to 62 days.
+
+- **Clear their desk** moves 8 hours a week onto the work, which is exactly enough to stop the pile growing. Unless the second switch is on, those hours come back at an hour a fortnight (the note's "drifts back onto the bottleneck's desk"), and the year ends at 54 days: about two months bought.
+- **Let other work wait** keeps the hours cleared, so the pile holds at 10. The counter beside it shows the price, 8 hours a week of other work held up. The switch is disabled until the desk is cleared, because there is nothing to hold before then.
+- **Add a second person** costs the first person 8 hours a week of showing for six months, taken from their hours on the work, while the second person's share builds from nothing to 2 days a week. On its own the pile peaks at 35 days and is back to 9 by the year end, and for the first 24 weeks it stands above the do-nothing line, which is the only place the accent appears in the bars. After the other two switches it peaks at 16 and is gone by week 31. That gap is the note's reason for the order.
+
+Once the pile is gone and the first person has hours to spare, the work that was left to wait comes back before any hour stands free, so the tool never shows other work held up beside an empty desk.
+
+The week fills a row at a time, so a day of the work reads as a row. The ticker's first counter keeps a row to itself on a narrow column, because it grows a note mid-run ("35 at its worst") and nothing below it should move while a run plays. The spine follows the week on screen and its answer is worked from the terms as shown, to a tenth, so the row always adds up. Every figure is in hours or in days of work; nothing rates the person, and the labels say "the work only they can do", "everything else" and "showing the second person".
+
+It keeps the simulation rules above. Its opening picture is the finished year with no switch on, and the height is the same whichever switches are on.
 
 ## Sized for the note column, not the phone
 
