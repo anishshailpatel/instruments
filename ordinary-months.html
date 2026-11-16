@@ -362,7 +362,7 @@ details.working .w p:last-child { margin: 0; }
       var LX = 6, CX = 81, CW = 56, CP = 60, SX = 266, SW = 75, RY = 30, RP = 24, RH = 20;
       var QX = 6, QP = 28.5, SQ = 6.2, SP = 7.4, QY = 178, QW = 2 * SP + SQ, QH = 4 * SP + SQ, vbH = QY + QH + 18;
 
-      var LABEL = "this month's pack, each line against budget, prior month and prior year and inside its normal range, and the same cells for every month of the year";
+      var LABEL = "this month's pack, each row against budget, prior month and prior year and inside its normal range, and the same cells for every month of the year";
       var s = '<svg viewBox="0 0 345 ' + vbH.toFixed(0) + '" role="img" aria-label="' + LABEL + '">';
 
       /* The pack: the note's five lines and its three comparisons. A red cell is filled and a
@@ -426,7 +426,7 @@ details.working .w p:last-child { margin: 0; }
     function settle() {
       draw(); tick();
       working("omW", [
-        "for illustration: nothing in this business changes. Each line keeps the same average and the same month-to-month spread all year, and the budget is that average",
+        "for illustration: nothing in this business changes. Each row keeps the same average and the same month-to-month spread all year, and the budget is that average",
         ROWS.map(function (r) { return r.name.toLowerCase() + " " + fmtNum(r.mean, r.dp) + ", spread " + fmtNum(r.sd, r.dp); }).join("; "),
         "the normal range runs three spreads either side of the average, and no month is drawn outside it"
       ]);

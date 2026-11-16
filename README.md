@@ -12,7 +12,7 @@ Nine thinking tools. Each one works two ways: embedded by iframe inside the note
 | `checking-in.html` | Checks that find nothing | Checking in |
 | `ten-projects.html` | Ten two-month projects | What estimates mean (built 2026-11-14, embedded 2026-11-14) |
 | `one-person.html` | The pile in front of one person | Human bottlenecks (built 2026-11-15, embedded 2026-11-15) |
-| `ordinary-months.html` | Twelve ordinary months | Reading the numbers (built 2026-11-16; goes live when the note embeds it) |
+| `ordinary-months.html` | Twelve ordinary months | Reading the numbers (built 2026-11-16, embedded 2026-11-16) |
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
@@ -137,7 +137,7 @@ The normal range is three spreads either side of the average, and no month is dr
 
 It opens on a fixed year (seed 910): 85 red cells and 86 green, and a month-twelve pack with new bookings and revenue red in every column (−7.8%, −8.0%, −18.0% and −4.3%, −4.5%, −4.0%), gross margin down 0.2 and 0.6 points and up 0.1, and overheads and debtor days green throughout. Every run after that is a fresh draw, played a month at a time in about five seconds. A red cell is filled and a green one is pale, so the two differ in weight as well as hue for a reader who cannot tell red from green. There is no spine: the tool turns on no line of arithmetic, and boxes saying 5 × 3 × 12 = 180 would be text for its own sake.
 
-It keeps the simulation rules above, and its height is the same at every point in a run.
+It keeps the simulation rules above, and its height is the same at every point in a run. Its reader-facing copy says rows, the note's word for the pack; in the note a line is the run chart's.
 
 ## Sized for the note column, not the phone
 
