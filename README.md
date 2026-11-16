@@ -1,6 +1,6 @@
 # Instruments
 
-Eight thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
+Nine thinking tools. Each one works two ways: embedded by iframe inside the note on anishpatel.co that explains it, and on its own, opened directly, where it carries its own name, the question it answers and a link to that note (AP's call, 2026-09-29: the tools should make sense in isolation, so they can be reused or gathered into a library of thinking tools later). They are the only files that ever go to the public origin.
 
 | File | Tool | Note that explains it |
 |---|---|---|
@@ -11,7 +11,8 @@ Eight thinking tools. Each one works two ways: embedded by iframe inside the not
 | `road-by-road.html` | Spread thin | Building density |
 | `checking-in.html` | Checks that find nothing | Checking in |
 | `ten-projects.html` | Ten two-month projects | What estimates mean (built 2026-11-14, embedded 2026-11-14) |
-| `one-person.html` | The pile in front of one person | Human bottlenecks (built 2026-11-15; goes live when the note embeds it) |
+| `one-person.html` | The pile in front of one person | Human bottlenecks (built 2026-11-15, embedded 2026-11-15) |
+| `ordinary-months.html` | Twelve ordinary months | Reading the numbers (built 2026-11-16; goes live when the note embeds it) |
 
 Filenames are stable and no longer match the tools' names, because the embed URLs had to keep working through renames. The link in each file's header is the thing that tracks the note.
 
@@ -64,6 +65,7 @@ Remeasured 2026-11-02 for the four embedded tools, after the cards, working pane
 | `checking-in.html` | 802 | 900 | 1060 |
 | `ten-projects.html` | 595 | 670 | new |
 | `one-person.html` | 726 | 815 | new |
+| `ordinary-months.html` | 456 | 515 | new |
 
 The net of the 2026-10-10 changes was close to nothing: the prose that came out paid for the spine that went in. The 2026-11-02 pass took a further 130 to 230px out of three of the four.
 
@@ -122,6 +124,20 @@ Once the pile is gone and the first person has hours to spare, the work that was
 The week fills a row at a time, so a day of the work reads as a row. The ticker's first counter keeps a row to itself on a narrow column, because it grows a note mid-run ("35 at its worst") and nothing below it should move while a run plays. The spine follows the week on screen and its answer is worked from the terms as shown, to a tenth, so the row always adds up. Every figure is in hours or in days of work; nothing rates the person, and the labels say "the work only they can do", "everything else" and "showing the second person".
 
 It keeps the simulation rules above. Its opening picture is the finished year with no switch on, and the height is the same whichever switches are on.
+
+**Twelve ordinary months** (`ordinary-months.html`, 2026-11-16) is the third simulation, for *Reading the numbers*. AP took `five-shapes.html` out of that note on 2026-10-25 in favour of two static run charts, and this does not put it back: it re-displays nothing the charts show. It carries the note's first claim, which had no visual, that a pack always has a movement to explain because there is always a variance against something. The reader presses the button and a business in which nothing changes runs another year of monthly packs. Building it reopened the static decision, so it waited for AP's explicit word, which came on 2026-11-16 ("build the reading the numbers one next").
+
+The exhibit is the note's own pack: its five lines against budget, prior month and prior year, fifteen cells, red where the move is the bad way and green where it is the good way (a cost or a debtor day falling is green). Beside each line is a strip: its normal range with the average marked, and a dot for each month so far, the month on show drawn strong. Under the pack the same fifteen cells are drawn small for every month of the year, twelve packs in a row, on AP's steer towards squares and a pseudo-calendar. The ticker counts red cells, green cells and months outside the normal range.
+
+Every figure is for illustration and the note quotes none of them. Each line keeps one average and one spread (a standard deviation) all year: new bookings 1,350 and 110, revenue 4,180 and 240, gross margin 62.5 and 0.2, overheads 1,750 and 20, debtor days 45 and 2. The averages are the budgets in the vault's `_tools/pack-table.py`. The spreads for revenue, margin and overheads are near what the first eight months of that script's series show; debtor days is a little wider, so it moves by more than a day, and bookings is made lumpier than the note's series, which is flat apart from one big deal. The budget is the average, which is the kind case for a budget. Twelve earlier months are drawn unseen so that month one has a prior month and a prior year. Variances are worked from the figures as a pack would print them, so a whole-day or one-decimal line is sometimes level with what it is compared with; that cell is left hollow and counted as neither colour.
+
+Across many years a year averages 84 red cells and 84 green out of 180, with about 12 level, and in 78% of months at least one line is red in every column, which is what the note says of revenue in its own table.
+
+The normal range is three spreads either side of the average, and no month is drawn outside it: a draw beyond three is thrown away and drawn again. Left alone, chance would put one month in 370 outside, which across five lines is about one year in seven, and the tool would then show a flagged month in a business it says has not changed. Explaining that takes a paragraph on false alarms, a technical argument the tools are not there to have (AP, 2026-10-18). So the third counter always reads "none", and the working panel says no month is drawn outside the range.
+
+It opens on a fixed year (seed 910): 85 red cells and 86 green, and a month-twelve pack with new bookings and revenue red in every column (−7.8%, −8.0%, −18.0% and −4.3%, −4.5%, −4.0%), gross margin down 0.2 and 0.6 points and up 0.1, and overheads and debtor days green throughout. Every run after that is a fresh draw, played a month at a time in about five seconds. A red cell is filled and a green one is pale, so the two differ in weight as well as hue for a reader who cannot tell red from green. There is no spine: the tool turns on no line of arithmetic, and boxes saying 5 × 3 × 12 = 180 would be text for its own sake.
+
+It keeps the simulation rules above, and its height is the same at every point in a run.
 
 ## Sized for the note column, not the phone
 

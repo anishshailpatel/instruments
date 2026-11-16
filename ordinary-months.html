@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Twelve ordinary months</title>
+<meta name="description" content="Nothing in this business changes all year, and its monthly pack still comes out red and green. Run another year and watch the cells.">
+<script>if (window.top === window.self || /[?&]solo=1/.test(location.search)) document.documentElement.classList.add("solo");</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --paper: #faf8f4; --panel: #fffefb; --ink: #1d1d1b; --ink-heading: #4f4a42; --ink-soft: #5a5850; --ink-faint: #67645c; --ink-mute: #6f6c64; --rule: #e2ded6; --rule-firm: #cfcac0; --field: #fffefb;
+  --accent: #b8323a; --accent-text: #a8232b; --accent-soft: rgba(184, 50, 58, 0.10); --thumb-ring: #faf8f4;
+  /* the pack's own colours: duller than the accent so they read as quoted, not endorsed */
+  --good: #4a7a5c; --bad: #96604f; --warn: #7d6220; --good-bg: rgba(74, 122, 92, 0.09); --bad-bg: rgba(150, 96, 79, 0.09); --warn-bg: rgba(190, 150, 50, 0.14);
+  /* the host site runs on Inter, so the exhibits do too */
+  --serif: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-heading: #c6c2ba; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
+    --accent: #f79491; --accent-text: #f79491; --accent-soft: rgba(247, 148, 145, 0.14); --thumb-ring: #17181b;
+    --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17181b; --panel: #1d1f23; --ink: #e6e5e1; --ink-heading: #c6c2ba; --ink-soft: #a8a59d; --ink-faint: #9a978f; --ink-mute: #918e86; --rule: #2e3035; --rule-firm: #3d4047; --field: #1f2125;
+  --accent: #f79491; --accent-text: #f79491; --accent-soft: rgba(247, 148, 145, 0.14); --thumb-ring: #17181b;
+  --good: #7d9d88; --bad: #b08d80; --warn: #c2a25a; --good-bg: rgba(125, 157, 136, 0.12); --bad-bg: rgba(176, 141, 128, 0.12); --warn-bg: rgba(194, 162, 90, 0.14);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.sheet { max-width: 42rem; margin: 0 auto; padding: 2.2rem 1.25rem 4rem; }
+/* The tool's own title sits back from its content, matching the notes: the site softened
+   its headings on 2026-10-13 and a tool opened on its own should not be louder than the
+   piece it came from. Only the solo header has a heading at all; every label inside an
+   embedded tool already sits on --ink-mute. */
+h1 { font-weight: 500; color: var(--ink-heading); font-size: 1.9rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 0.6rem; text-wrap: balance; }
+.standfirst { margin: 0; color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+nav.contents { margin-top: 1.4rem; font-family: var(--sans); font-size: 0.9rem; }
+nav.contents ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
+nav.contents li { margin: 0.15rem 0; break-inside: avoid; }
+nav.contents a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+nav.contents a:hover { color: var(--accent-text); border-color: var(--accent); }
+nav.contents small { color: var(--ink-mute); }
+@media (max-width: 480px) { nav.contents ol { columns: 1; } }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+section { display: flex; flex-direction: column; gap: 1rem; }
+.eyebrow { margin: 0; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.eyebrow b { color: var(--ink-soft); font-weight: 600; }
+h2 { margin: 0; font-weight: 600; font-size: 1.32rem; line-height: 1.25; text-wrap: balance; }
+p { margin: 0; }
+.claim { color: var(--ink); font-size: 1.05rem; }
+.close { color: var(--ink-soft); font-size: 1rem; max-width: 36em; }
+
+/* the three layers: the card, the tool, the working. No labels and no stamp; the dashed border and the duller colours are what say quoted */
+.layer { display: flex; flex-direction: column; gap: 0.6rem; }
+
+/* layer one: the pack, quoted rather than endorsed */
+.card { display: grid; gap: 0.6rem 1rem; padding: 0.9rem 1rem; background: var(--panel); border: 1px dashed var(--rule-firm); border-radius: 6px; font-family: var(--sans); max-width: 430px; }
+.card.c2 { grid-template-columns: 1fr 1fr; } .card.c3 { grid-template-columns: 1fr 1fr 1fr; } .card.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+@media (max-width: 480px) { .card.c4 { grid-template-columns: 1fr 1fr; } }
+.card .k { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.15rem; }
+.card .v { display: block; font-size: 1.35rem; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; color: var(--ink); }
+.card .d { display: inline-block; margin-top: 0.25rem; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.card .d.good { color: var(--good); background: var(--good-bg); } .card .d.bad { color: var(--bad); background: var(--bad-bg); } .card .d.flat { color: var(--ink-soft); background: var(--rule); }
+.card .tag { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 3px; }
+.card .tag.good { color: var(--good); background: var(--good-bg); } .card .tag.warn { color: var(--warn); background: var(--warn-bg); } .card .tag.bad { color: var(--bad); background: var(--bad-bg); }
+.card .row { grid-column: 1 / -1; overflow-x: auto; }
+.card table { border-collapse: collapse; font-size: 0.78rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card table th { font-weight: 500; color: var(--ink-mute); padding: 0 0.45rem 0.15rem 0; text-align: right; }
+.card table td { padding: 0 0.45rem 0 0; text-align: right; color: var(--ink); }
+.card table th:first-child, .card table td:first-child { text-align: left; }
+.card .note { display: block; margin-top: 0.25rem; font-size: 0.78rem; color: var(--ink-soft); }
+
+/* layer two: the instrument. The case strip carries the tool's own parameters, essay figures as defaults */
+.case { display: flex; flex-wrap: wrap; gap: 0.45rem 0.9rem; align-items: flex-end; font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); padding: 0.6rem 0.75rem 0.65rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+.case .case-label { flex-basis: 100%; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.case .cf { display: flex; flex-direction: column; gap: 0.15rem; }
+.case .cf > span:first-child { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-mute); line-height: 1.2; }
+.case .in { display: flex; align-items: center; gap: 0.2rem; }
+.case .in b { font-weight: 500; color: var(--ink-mute); }
+.case input, .stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 5.6em; min-height: 36px; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.case input::-webkit-inner-spin-button, .stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.case input:focus-visible, .stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.case .reset { margin-left: auto; align-self: flex-end; font: inherit; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; color: var(--ink-soft); background: none; border: 1px solid var(--rule); border-radius: 4px; padding: 0.35rem 0.7rem; min-height: 36px; cursor: pointer; }
+.case .reset:hover { color: var(--accent-text); border-color: var(--accent); }
+.case .derived { flex-basis: 100%; font-size: 0.78rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.stage input { width: 100%; text-align: center; padding: 0.3rem 0.2rem; }
+@media (max-width: 480px) { .case input, .stage input { font-size: 16px; } .stage input { text-align: right; } }
+.tool { display: flex; flex-direction: column; gap: 0.9rem; max-width: 430px; }
+.tool svg { width: 100%; height: auto; display: block; color: var(--ink); overflow: hidden; }
+.tool svg text { font-family: var(--sans); }
+button:focus-visible, nav.contents a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.controls { display: flex; flex-direction: column; gap: 0.4rem; }
+.control { display: flex; flex-direction: column; gap: 0.3rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); }
+.control label output, .control label b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.control .aside { color: var(--ink-mute); }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; margin-top: -11.5px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 3px solid var(--thumb-ring); box-shadow: 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible { outline: none; }
+input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--accent-soft), 0 0 0 1px var(--accent); }
+.seg { display: flex; flex-wrap: wrap; gap: 0.35rem; font-family: var(--sans); font-size: 0.85rem; }
+.seg label { border: 1px solid var(--rule); border-radius: 4px; padding: 0.5rem 0.75rem; cursor: pointer; color: var(--ink-soft); min-height: 44px; display: flex; align-items: center; background: var(--field); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg input:checked + span { color: var(--ink); font-weight: 600; }
+.seg label:has(input:checked) { border-color: var(--accent); color: var(--ink); box-shadow: inset 0 0 0 1px var(--accent); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* the last counter is the long one: on a narrow column it keeps a row to itself, so the others growing a digit mid-run never push it down */
+@media (max-width: 520px) { #omTick > div:last-child { flex-basis: 100%; } }
+.readout { font-family: var(--serif); font-size: 1.05rem; line-height: 1.55; color: var(--ink); font-variant-numeric: tabular-nums; border-left: 2px solid var(--accent); padding-left: 0.85rem; }
+.readout .n { font-weight: 600; }
+/* a readout that only restates numbers already on screen is kept for screen readers and hidden from sight (AP, 2026-10-10: keep text inside the tools to a minimum) */
+.readout.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.btn { font: inherit; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: var(--accent-text); background: none; border: 1px solid var(--accent); border-radius: 4px; padding: 0.55rem 0.8rem; min-height: 44px; cursor: pointer; }
+.btn.quiet { color: var(--ink-soft); border-color: var(--rule); }
+/* funnel stages */
+.stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; font-family: var(--sans); font-size: 0.8rem; }
+.stage { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 0.5rem; align-items: end; min-width: 0; }
+.stage .nm { grid-column: 1 / -1; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stage .fld { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.stage .fld > span { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.25; color: var(--ink-mute); text-wrap: balance; }
+.stage .fld .in { display: flex; align-items: center; gap: 0.2rem; }
+.stage .fld b { font-size: 0.7rem; font-weight: 500; color: var(--ink-mute); white-space: nowrap; }
+.stage-note { margin: 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.45; color: var(--ink-soft); }
+.stage-note b { color: var(--ink); font-weight: 600; }
+.stage input { font: inherit; font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); background: var(--field); border: 1px solid var(--rule); border-radius: 4px; padding: 0.3rem 0.4rem; width: 100%; min-width: 0; min-height: 36px; font-variant-numeric: tabular-nums; text-align: right; -moz-appearance: textfield; }
+.stage input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.stage input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media (max-width: 480px) { .stages { grid-template-columns: 1fr; gap: 0.7rem; } .stage input { font-size: 16px; } }
+.gate-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+
+.board { overflow-x: auto; font-family: var(--sans); font-size: 0.8rem; max-width: 430px; }
+.board table { border-collapse: collapse; width: 100%; min-width: 330px; font-variant-numeric: tabular-nums; }
+.board th, .board td { padding: 0.3rem 0.4rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--rule); }
+.board th:first-child, .board td:first-child { text-align: left; color: var(--ink-mute); font-weight: 500; padding-left: 0; }
+.board thead th { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-mute); border-bottom: 1px solid var(--rule-firm); }
+.board thead th.on { color: var(--accent-text); }
+.board tr.worth td { font-weight: 600; font-size: 0.95rem; border-bottom: 0; padding-top: 0.45rem; }
+.board td.on { color: var(--accent-text); }
+
+/* layer three: the working */
+details.working { border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); max-width: 430px; font-family: var(--sans); }
+details.working summary { cursor: pointer; padding: 0.7rem 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); list-style: none; }
+details.working summary::-webkit-details-marker { display: none; }
+details.working summary::before { content: "+"; display: inline-block; width: 1.2em; color: var(--accent-text); font-weight: 600; }
+details.working[open] summary::before { content: "−"; }
+details.working .w { padding: 0 1rem 0.9rem; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--ink-soft); }
+details.working .w p { margin: 0 0 0.5rem; }
+details.working .w p:last-child { margin: 0; }
+/* the spine: the one line of arithmetic the tool turns on, kept in the open rather
+   than folded into the working. Every term is named in words and carries its live
+   number, so a reader who never opens the drawer still sees what drives the answer.
+   Taken from john.fun/elevators, whose scoring panel does the same for its optimiser. */
+.spine { max-width: 430px; font-family: var(--sans); border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); padding: 0.7rem 0.85rem 0.75rem; }
+.spine .lbl { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.5rem; }
+.spine .row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.3rem; }
+.spine .term { display: flex; flex-direction: column; justify-content: center; gap: 0.1rem; padding: 0.3rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); min-width: 0; }
+.spine .term .t { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.03em; line-height: 1.2; color: var(--ink-mute); }
+.spine .term .v { font-size: 0.92rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spine .op { align-self: center; font-size: 0.9rem; font-weight: 500; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.spine .term.out { border-color: var(--accent); background: var(--accent-soft); }
+.spine .term.out .t, .spine .term.out .v { color: var(--accent-text); }
+
+/* the ticker: counters that move while the clock runs, so a figure arrives as
+   something the reader watched accumulate rather than a number already on the page */
+.ticker { display: flex; flex-wrap: wrap; gap: 0.55rem 1.2rem; max-width: 430px; font-family: var(--sans); }
+.ticker > div { display: flex; flex-direction: column; gap: 0.05rem; min-width: 0; }
+.ticker .k { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-mute); white-space: nowrap; }
+.ticker .v { font-size: 1.05rem; font-weight: 600; line-height: 1.2; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ticker .v.acc { color: var(--accent-text); }
+.ticker .v .was { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); }
+
+/* the clock: user-started, never autoplaying, because these sit inside somebody's reading */
+.runbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; max-width: 430px; font-family: var(--sans); font-size: 0.85rem; color: var(--ink-soft); }
+.runbar .btn { min-height: 40px; padding: 0.45rem 0.9rem; }
+.runbar .seg label { min-height: 40px; padding: 0.4rem 0.6rem; }
+.runbar .clock { margin-left: auto; font-variant-numeric: tabular-nums; }
+@media (max-width: 430px) {
+  .spine { padding: 0.6rem 0.65rem 0.65rem; }
+  .spine .lbl { margin-bottom: 0.4rem; }
+  .spine .row { gap: 0.25rem; }
+  .spine .term { padding: 0.25rem 0.4rem; }
+  .spine .term .t { font-size: 0.6rem; }
+  .spine .term .v { font-size: 0.86rem; }
+  .ticker { gap: 0.45rem 0.9rem; }
+  .ticker .v { font-size: 0.98rem; }
+  .runbar { gap: 0.35rem; }
+  .runbar .btn { padding: 0.45rem 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<style>html.hosted body { background: transparent; } html:not(.hosted) .sheet { padding: 0.9rem 0.85rem 1rem; } .sheet { padding: 0.2rem 0 0.4rem; max-width: none; } section { gap: 0.9rem; } .card, .board, .tool, details.working, .case, .stages, .stage-note { max-width: none; } .tool > div[id$="Svg"] { max-width: 560px; } .controls, .control, .seg, .readout, .spine, .ticker, .runbar { max-width: 620px; } @media (max-width: 560px) { .tool > div[id$="Svg"] { max-width: none; } } .solo-head { display: none; } html.solo .solo-head { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.5rem; } html.solo .sheet { max-width: 42rem; margin: 0 auto; padding: 1.75rem 1.1rem 3rem; } .solo-head h1 { margin: 0; } .solo-head .from { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); } .solo-head .from a { color: var(--accent-text); text-decoration: none; border-bottom: 1px solid var(--accent-soft); } .solo-head .from a:hover { border-color: var(--accent); } .solo-head a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; } .card .row, .board { scrollbar-width: thin; scrollbar-color: var(--rule-firm) transparent; }</style>
+</head>
+<body>
+<div class="sheet">
+<header class="solo-head"><p class="eyebrow">Thinking tool</p><h1>Twelve ordinary months</h1><p class="standfirst">Nothing in this business changes all year, and its monthly pack still comes out red and green. Run another year and watch the cells.</p><p class="from">The thinking behind it is in <a href="https://anishpatel.co/Notes/Reading+the+numbers" target="_top">Reading the numbers</a>.</p></header>
+<section id="om">
+    <div class="layer">
+      <div class="tool">
+        <div id="omSvg"></div>
+        <div class="ticker" id="omTick"></div>
+        <div class="runbar">
+          <button type="button" class="btn" id="omRun">Run another year</button>
+          <span class="clock" id="omClock"></span>
+        </div>
+        <p class="readout sr" id="omRead" aria-live="polite"></p>
+      </div>
+    </div>
+    <details class="working"><summary>The working</summary><div class="w" id="omW"></div></details>
+  </section>
+</div>
+<script>(function () { var root = document.documentElement; function apply(t) {  if (t !== "dark" && t !== "light") return;  root.setAttribute("data-theme", t);  root.classList.add("hosted"); } addEventListener("message", function (e) { if (e.data && e.data.publishTheme) apply(e.data.publishTheme); }); try { var m = /[?&]theme=(dark|light)/.exec(location.search); if (m) apply(m[1]); } catch (e) {} try { parent.postMessage({ instrumentReady: true }, "*"); } catch (e) {}})();</script>
+<script>
+(function () {
+  var CASE = {
+
+    pack: { months: 12, limit: 3, seed: 910, against: ["budget", "prior month", "prior year"],
+            rows: [
+              { name: "New bookings", mean: 1350, sd: 110, dp: 0, kind: "pct" },
+              { name: "Revenue", mean: 4180, sd: 240, dp: 0, kind: "pct" },
+              { name: "Gross margin", mean: 62.5, sd: 0.2, dp: 1, kind: "pts" },
+              { name: "Overheads", mean: 1750, sd: 20, dp: 0, kind: "pct", down: true },
+              { name: "Debtor days", mean: 45, sd: 2, dp: 0, kind: "days", down: true }
+            ] }
+  };
+
+  /* ---------- helpers ---------- */
+  var ACCENT = "var(--accent)";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function txt(x, y, s, size, o) {
+    o = o || {}; size = Math.max(size, 10.5); if (o.opacity && o.opacity < 0.6) o.opacity = 0.6;
+    return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" font-size="' + size + '"' + (o.weight ? ' font-weight="' + o.weight + '"' : '') +
+      ' fill="' + (o.fill || 'currentColor') + '"' + (o.opacity ? ' opacity="' + o.opacity + '"' : '') + (o.anchor ? ' text-anchor="' + o.anchor + '"' : '') + '>' + esc(s) + '</text>';
+  }
+  function setRange(id, range, value) { var el = $(id); el.min = range[0]; el.max = range[1]; el.step = range[2]; el.value = value; }
+  function roundHalfEven(x) { x = Math.round(x * 1e6) / 1e6; var t = Math.trunc(x), f = Math.abs(x - t); if (Math.abs(f - 0.5) < 1e-9) return (t % 2 === 0) ? t : t + (x < 0 ? -1 : 1); return Math.round(x); }
+  function poundsM1(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; if (a >= 100) return "£" + Math.round(a) + "m"; return "£" + f1(a) + "m"; }
+  function poundsM(v) { var a = Math.abs(v); if (a >= 1000) return "£" + (Math.round(a / 100) / 10).toFixed(1) + "bn"; return "£" + roundHalfEven(a) + "m"; }
+  function poundsK(v) { var sign = v < 0 ? "−" : "+"; var a = Math.abs(v); if (a >= 1000) return sign + "£" + (Math.round(a / 100) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a / 10) * 10 + "k"; }
+  function pct1(x) { var v = Math.round(x * 10) / 10; return (v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
+  function gbp(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e6) return sign + "£" + (Math.round(a / 1e5) / 10).toFixed(1) + "m"; return sign + "£" + Math.round(a).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function gbpBig(v) { var sign = v < 0 ? "−" : ""; var a = Math.abs(v); if (a >= 1e8) return sign + "£" + Math.round(a / 1e6) + "m"; if (a >= 1e6) return sign + "£" + f1(a / 1e6) + "m"; if (a >= 1e3) return sign + "£" + Math.round(a / 1e3) + "k"; return sign + "£" + Math.round(a); }
+  function f1(x) { var v = Math.round(x * 10) / 10; return v === Math.round(v) ? String(Math.round(v)) : v.toFixed(1); }
+  var WORDS = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+  function word(n) { return n >= 0 && n <= 12 && n === Math.round(n) ? WORDS[n] || "no" : String(n); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function plural(n, one, many) { many = many || one + "s"; var w = word(n); return (n === 0 ? "no" : w) + " " + (n === 1 ? one : many); }
+  function months(x) { if (x > 40 * 12) return "over 40 years"; if (x >= 24) { var yv = Math.round(x / 6) / 2; return (yv === Math.round(yv) ? String(Math.round(yv)) : yv.toFixed(1)) + " years"; } if (x < 0.25) return "under a week"; if (x < 0.75) return "about a fortnight"; if (x < 1) return "under a month"; if (x >= 9.95) return Math.round(x) + " months"; var r = Math.round(x * 10) / 10; var s = Math.abs(r - Math.round(r)) < 1e-9 ? String(Math.round(r)) : r.toFixed(1); return s + (s === "1" ? " month" : " months"); }
+  function chance(p) { if (p >= 0.5) return "more often than not"; if (p < 0.005) return "less than one time in 200"; var d = 1 / p; d = d > 20 ? Math.round(d / 10) * 10 : Math.round(d); return "about one time in " + (d <= 12 ? WORDS[d] : d); }
+  function makeRng(seed) { var a = seed >>> 0; return function () { a += 0x6D2B79F5; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function normal(rng) { var u1 = rng() || 1e-12, u2 = rng(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+  var LF = [0, 0];
+  function lnfact(n) { while (LF.length <= n) LF.push(LF[LF.length - 1] + Math.log(LF.length)); return LF[n]; }
+  function binomPmf(n, k, p) { if (p <= 0) return k === 0 ? 1 : 0; if (p >= 1) return k === n ? 1 : 0; return Math.exp(lnfact(n) - lnfact(k) - lnfact(n - k) + k * Math.log(p) + (n - k) * Math.log(1 - p)); }
+  function fmtNum(x, dp) { var s = x.toFixed(dp); var parts = s.split("."); parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","); return parts.join("."); }
+  function on(ids, fn) { ids.forEach(function (id) { $(id).addEventListener("input", fn); }); }
+  function onRadios(name, fn) { document.querySelectorAll('input[name="' + name + '"]').forEach(function (el) { el.addEventListener("change", fn); }); }
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+  function seg(id, name, items, checked) { $(id).innerHTML = items.map(function (it) { return '<label><input type="radio" name="' + name + '" value="' + it[0] + '"' + (String(it[0]) === String(checked) ? " checked" : "") + '><span>' + it[1] + '</span></label>'; }).join(""); }
+  function tile(k, v, d, cls) { return '<div><span class="k">' + k + '</span><span class="v">' + v + '</span>' + (d ? '<span class="d ' + (cls || "flat") + '">' + d + '</span>' : '') + '</div>'; }
+  function tag(t, cls) { return '<span class="tag ' + cls + '">' + t + '</span>'; }
+  function stamp(k, t, cls, note) { return '<div><span class="k">' + k + '</span><span class="v">' + tag(t, cls) + '</span>' + (note ? '<span class="note">' + note + '</span>' : '') + '</div>'; }
+  function working(id, lines) { $(id).innerHTML = lines.map(function (l) { return "<p>" + l + "</p>"; }).join(""); }
+  /* the spine. Terms in order: a string is an operator, a pair is [name, live value],
+     a third member is a class, and "out" marks the answer the equation arrives at.
+     Labels and numbers only: the argument belongs in the Note, not in the tool. */
+  function spine(id, label, terms) {
+    var h = '<p class="lbl">' + label + '</p><div class="row">';
+    terms.forEach(function (t) {
+      if (typeof t === "string") { h += '<span class="op">' + t + '</span>'; return; }
+      h += '<span class="term' + (t[2] ? " " + t[2] : "") + '"><span class="t">' + t[0] + '</span><span class="v">' + t[1] + '</span></span>';
+    });
+    $(id).innerHTML = h + '</div>';
+  }
+  function ticker(id, items) {
+    $(id).innerHTML = items.map(function (it) {
+      return '<div><span class="k">' + it[0] + '</span><span class="v' + (it[2] ? " " + it[2] : "") + '">' + it[1] + '</span></div>';
+    }).join("");
+  }
+  function caseUI(id, defs, onChange) {
+    var box = $(id), html = '<span class="case-label">The case</span>';
+    defs.forEach(function (d) { html += '<label class="cf"><span>' + d.label + '</span><span class="in">' + (d.prefix ? '<b>' + d.prefix + '</b>' : '') + '<input type="number" inputmode="decimal" data-k="' + d.k + '" value="' + d.v + '" min="' + d.min + '" max="' + d.max + '" step="' + (d.step || "any") + '" aria-label="' + d.label + '">' + (d.suffix ? '<b>' + d.suffix + '</b>' : '') + '</span></label>'; });
+    html += '<button type="button" class="reset">Reset</button><span class="derived" hidden></span>';
+    box.innerHTML = html;
+    var inputs = {}; box.querySelectorAll("input").forEach(function (el) { inputs[el.getAttribute("data-k")] = el; el.addEventListener("input", onChange); el.addEventListener("blur", function () { el.value = get(el.getAttribute("data-k")); onChange(); }); });
+    box.querySelector(".reset").addEventListener("click", function () { defs.forEach(function (d) { inputs[d.k].value = d.v; }); onChange(); });
+    function get(k) { var el = inputs[k], v = parseFloat(el.value); if (isNaN(v)) v = +el.defaultValue; return Math.min(+el.max, Math.max(+el.min, v)); }
+    return { get: get, derived: function (s) { var el = box.querySelector(".derived"); el.hidden = !s; el.textContent = s || ""; } };
+  }
+  function hatch(id, color) { return '<defs><pattern id="' + id + '" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="' + color + '" stroke-width="1" opacity="0.5"/></pattern></defs>'; }
+
+  /* ================= Twelve ordinary months ================= */
+  (function () {
+    var C = CASE.pack, ROWS = C.rows, MONTHS = C.months, SPEED = 2.2;   /* months a second: a year in about five */
+    var GOOD = "var(--good)";
+
+    /* One year of monthly packs for a business in which nothing changes. Each line has a fixed
+       average and a fixed spread; every month is a fresh draw around that average, and the
+       budget is the average itself. Twelve earlier months are drawn too, unseen, so the first
+       pack has a prior month and a prior year to be compared with.
+
+       No draw falls outside three spreads of the average, which is the line's normal range.
+       Chance alone would put a month outside it about once in 370, and a tool that says
+       nothing changed can't then show a month that looks as if something did. */
+    function draw1(rng) { var z; do { z = normal(rng); } while (Math.abs(z) > C.limit); return z; }
+    function deal(rng) {
+      return ROWS.map(function (r) {
+        var p = Math.pow(10, r.dp), v = [];
+        for (var i = 0; i < 2 * MONTHS; i++) v.push(Math.round((r.mean + r.sd * draw1(rng)) * p) / p);
+        return v;
+      });
+    }
+
+    /* One cell: this month against a base, in the line's own units, worked from the figures as
+       a pack would print them. Tone is 1 for a move the good way, -1 for the bad way, and 0 for
+       a cell level with what it is compared with. */
+    function cell(r, now, base) {
+      var d, s;
+      if (r.kind === "pts") { d = Math.round((now - base) * 10) / 10; s = Math.abs(d).toFixed(1) + "pts"; }
+      else if (r.kind === "days") { d = Math.round(now - base); s = Math.abs(d) + (Math.abs(d) === 1 ? " day" : " days"); }
+      else { d = Math.round((now / base - 1) * 1000) / 10; s = Math.abs(d).toFixed(1) + "%"; }
+      return { s: (d > 0 ? "+" : d < 0 ? "−" : "") + s, tone: d === 0 ? 0 : ((d < 0) === !!r.down ? 1 : -1) };
+    }
+
+    function year(rng) {
+      var D = deal(rng), out = [];
+      for (var m = 1; m <= MONTHS; m++) {
+        var i = MONTHS + m - 1, mo = { cells: [], pos: [], red: 0, green: 0, outside: 0 };
+        ROWS.forEach(function (r, k) {
+          var now = D[k][i], row = [cell(r, now, r.mean), cell(r, now, D[k][i - 1]), cell(r, now, D[k][i - MONTHS])];
+          row.forEach(function (c) { if (c.tone < 0) mo.red++; else if (c.tone > 0) mo.green++; });
+          var at = (now - r.mean) / r.sd;                 /* where the month sits, in spreads from the average */
+          if (Math.abs(at) > C.limit + 1e-6) mo.outside++;
+          mo.cells.push(row); mo.pos.push(at);
+        });
+        out.push(mo);
+      }
+      return out;
+    }
+
+    var Y = year(makeRng(C.seed)), timer = null, T = MONTHS;
+    var still = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+    function shown() { return Math.max(1, Math.min(MONTHS, Math.floor(T + 1e-9))); }
+    function tally(n) {
+      var t = { red: 0, green: 0, outside: 0 };
+      for (var m = 0; m < n; m++) { t.red += Y[m].red; t.green += Y[m].green; t.outside += Y[m].outside; }
+      return t;
+    }
+
+    function draw() {
+      var n = shown(), cur = Y[n - 1];
+      var LX = 6, CX = 81, CW = 56, CP = 60, SX = 266, SW = 75, RY = 30, RP = 24, RH = 20;
+      var QX = 6, QP = 28.5, SQ = 6.2, SP = 7.4, QY = 178, QW = 2 * SP + SQ, QH = 4 * SP + SQ, vbH = QY + QH + 18;
+
+      var LABEL = "this month's pack, each line against budget, prior month and prior year and inside its normal range, and the same cells for every month of the year";
+      var s = '<svg viewBox="0 0 345 ' + vbH.toFixed(0) + '" role="img" aria-label="' + LABEL + '">';
+
+      /* The pack: the note's five lines and its three comparisons. A red cell is filled and a
+         green one is pale, so the two differ in weight as well as in hue. */
+      s += txt(CX + (2 * CP + CW) / 2, 10, "month " + n + ", against", 10.5, { opacity: 0.6, anchor: "middle" });
+      C.against.forEach(function (h, j) { s += txt(CX + j * CP + CW / 2, 23, h, 10.5, { opacity: 0.6, anchor: "middle" }); });
+      s += txt(SX + SW / 2, 23, "normal range", 10.5, { opacity: 0.6, anchor: "middle" });
+
+      ROWS.forEach(function (r, k) {
+        var y = RY + k * RP, mid = y + RH / 2, base = mid + 3.7;
+        s += txt(LX, base, r.name, 10.5, { opacity: 0.85 });
+        cur.cells[k].forEach(function (c, j) {
+          var x = CX + j * CP, box = '<rect x="' + x + '" y="' + y + '" width="' + CW + '" height="' + RH + '" rx="2" ';
+          if (c.tone < 0) s += box + 'fill="' + ACCENT + '" opacity="0.92"/>' + txt(x + CW / 2, base, c.s, 10.5, { fill: "var(--paper)", anchor: "middle", weight: 500 });
+          else if (c.tone > 0) s += box + 'fill="' + GOOD + '" opacity="0.4"/>' + txt(x + CW / 2, base, c.s, 10.5, { anchor: "middle", opacity: 0.9 });
+          else s += box + 'fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>' + txt(x + CW / 2, base, c.s, 10.5, { anchor: "middle", opacity: 0.6 });
+        });
+
+        /* The line's normal range, its average, and where each month so far has sat in it. The
+           edge of the shading is the edge of the range, less the width of a dot. */
+        var cx = SX + SW / 2, half = (SW - 10) / 2;
+        s += '<rect x="' + (cx - half) + '" y="' + (mid - 6) + '" width="' + (2 * half) + '" height="12" rx="2" fill="currentColor" opacity="0.08"/>';
+        s += '<line x1="' + cx + '" y1="' + (mid - 6) + '" x2="' + cx + '" y2="' + (mid + 6) + '" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.45"/>';
+        for (var m = 1; m <= n; m++) {
+          var at = Y[m - 1].pos[k], out = Math.abs(at) > C.limit + 1e-6, px = cx + Math.max(-1.2, Math.min(1.2, at / C.limit)) * (half - 3);
+          if (m < n) s += '<circle cx="' + px.toFixed(1) + '" cy="' + mid + '" r="1.7" fill="' + (out ? ACCENT : "currentColor") + '" opacity="' + (out ? 1 : 0.3) + '"/>';
+          else s += '<circle cx="' + px.toFixed(1) + '" cy="' + mid + '" r="2.8" fill="' + (out ? ACCENT : "currentColor") + '"/>';
+        }
+      });
+
+      /* The year: the same fifteen cells for each month, a small pack a month, laid out as the
+         pack above is. The month on show has a frame round it. */
+      s += txt(QX, QY - 10, "the same fifteen cells, month by month", 10.5, { opacity: 0.6 });
+      for (var q = 1; q <= MONTHS; q++) {
+        var qx = QX + (q - 1) * QP;
+        for (var k = 0; k < ROWS.length; k++) for (var j = 0; j < 3; j++) {
+          var c = q <= n ? Y[q - 1].cells[k][j] : null;
+          var sq = '<rect x="' + (qx + j * SP).toFixed(1) + '" y="' + (QY + k * SP).toFixed(1) + '" width="' + SQ + '" height="' + SQ + '" rx="1" ';
+          if (!c || !c.tone) s += sq + 'fill="none" stroke="currentColor" stroke-width="0.5" opacity="' + (c ? 0.5 : 0.2) + '"/>';
+          else s += sq + 'fill="' + (c.tone < 0 ? ACCENT : GOOD) + '" opacity="' + (c.tone < 0 ? 0.92 : 0.6) + '"/>';
+        }
+        if (q === n) s += '<rect x="' + (qx - 3).toFixed(1) + '" y="' + (QY - 3) + '" width="' + (QW + 6).toFixed(1) + '" height="' + (QH + 6).toFixed(1) + '" rx="2.5" fill="none" stroke="currentColor" stroke-width="0.9" opacity="0.6"/>';
+        s += txt(qx + QW / 2, QY + QH + 14, String(q), 10.5, { opacity: q === n ? 0.95 : 0.6, anchor: "middle", weight: q === n ? 600 : null });
+      }
+      s += "</svg>";
+      $("omSvg").innerHTML = s;
+    }
+
+    /* what moves while the clock runs: the counters and the clock */
+    function tick() {
+      var n = shown(), t = tally(n);
+      ticker("omTick", [
+        ["Red cells", String(t.red), "acc"],
+        ["Green cells", String(t.green)],
+        ["Outside the normal range", t.outside ? String(t.outside) : "none"]
+      ]);
+      $("omClock").textContent = "month " + n + " of " + MONTHS;
+    }
+
+    /* everything that only changes when a run finishes */
+    function settle() {
+      draw(); tick();
+      working("omW", [
+        "for illustration: nothing in this business changes. Each line keeps the same average and the same month-to-month spread all year, and the budget is that average",
+        ROWS.map(function (r) { return r.name.toLowerCase() + " " + fmtNum(r.mean, r.dp) + ", spread " + fmtNum(r.sd, r.dp); }).join("; "),
+        "the normal range runs three spreads either side of the average, and no month is drawn outside it"
+      ]);
+      var t = tally(MONTHS);
+      $("omRead").innerHTML = "Over the year <span class=\"n\">" + t.red + "</span> of the pack's cells were red and <span class=\"n\">" + t.green + "</span> were green, and " + (t.outside ? plural(t.outside, "month") + " fell" : "no month fell") + " outside its normal range.";
+    }
+
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function clock() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+
+    /* A run is another year of the same business, played a month at a time from month one.
+       Nothing plays until the reader presses the button, and with reduced motion the year
+       lands at once. A timer, not requestAnimationFrame, which stops dead in a tab that is
+       not painting. */
+    function run() {
+      stop(); Y = year(makeRng((Math.random() * 4294967296) >>> 0));
+      if (still) { T = MONTHS; settle(); return; }
+      var last = clock(), seen = 1;
+      T = 1;
+      timer = setInterval(function () {
+        var t = clock(); T += Math.min(0.1, (t - last) / 1000) * SPEED; last = t;
+        if (T >= MONTHS) { T = MONTHS; stop(); settle(); return; }
+        if (shown() !== seen) { seen = shown(); draw(); tick(); }
+      }, 33);
+      draw(); tick();
+    }
+
+    $("omRun").addEventListener("click", run);
+    settle();
+  })();
+
+  /* tell the page that embeds this how tall to make the frame */
+  (function () {
+    var last = 0;
+    function report() {
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      if (h && Math.abs(h - last) > 2) { last = h; try { parent.postMessage({ instrument: "ordinary-months", height: h }, "*"); } catch (e) {} }
+    }
+    window.addEventListener("load", report);
+    window.addEventListener("resize", report);
+    if (window.ResizeObserver) new ResizeObserver(report).observe(document.body);
+    setTimeout(report, 120); setTimeout(report, 600);
+  })();
+})();
+</script>
+</body>
+</html>
